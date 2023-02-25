@@ -1,4 +1,4 @@
-# TuxStore
+![Erd](modeling/logo_512.png)
 
 ### Academic work
 
