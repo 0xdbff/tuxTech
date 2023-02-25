@@ -1,4 +1,4 @@
-![Erd](modeling/logo_512.png)
+![Erd](modeling/logo_256.png)
 
 ### Academic work
 
