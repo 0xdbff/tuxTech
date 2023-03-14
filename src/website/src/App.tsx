@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
     return (
         <div className="App">
             <div className="ads-container">
-                <div className="ad"><img src="amd.jpg"></img></div>
-                <div className="ad"><img src="amd.jpg"></img></div>
+                <div>
+                    <img src="amd.jpg"></img>
+                </div>
+                <div>
+                    TEXT IN THE MIDDLE
+                </div>
+                <div>
+                    <img src="amd.jpg"></img>
+                </div>
             </div>
         </div>
     );
@@ -28,4 +35,3 @@ function App() {
 //     </a>
 // </header>
 export default App;
-
