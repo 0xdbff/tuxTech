@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,8 +36,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # API
+    # Installed
     "rest_framework",
+    "cacheops",
     # Functional apps
     "store",
     "users",
@@ -95,6 +95,19 @@ DATABASES = {
         "HOST": "localhost",
         "PORT": "5432",
     }
+}
+
+CACHEOPS_REDIS = {
+    "host": "localhost",  # Redis server address
+    "port": 6379,  # Redis server port
+    "db": 0,  # Redis database number
+}
+
+CACHEOPS = {
+    "products.producttemplate": {
+        "ops": "get",
+        "timeout": 60 * 15,
+    },  # Cache get queries for 15 minutes
 }
 
 # Password validation
