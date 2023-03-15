@@ -1,5 +1,11 @@
 from django.test import TestCase
-from ..models import Specification, Categorie, Brand, ProductInfo, Product
+
+from ..models.info import Info
+from ..models.categorie import Categorie
+from ..models.unit import Unit
+from ..models.brand import Brand
+from ..models.specification import Specification
+
 
 class SpecificationModelTests(TestCase):
     def test_specification_creation(self):
@@ -26,7 +32,7 @@ class ProductInfoModelTests(TestCase):
         self.brand = Brand.objects.create(name="AMD")
 
     def test_product_info_creation(self):
-        product_info = ProductInfo.objects.create(
+        product_info = Info.objects.create(
             sku="123456789",
             name="Test Product",
             description="Test product description",
@@ -46,7 +52,7 @@ class ProductModelTests(TestCase):
     def setUp(self):
         self.category = Categorie.objects.create(name="Computers")
         self.brand = Brand.objects.create(name="AMD")
-        self.product_info = ProductInfo.objects.create(
+        self.product_info = Info.objects.create(
             sku="123456789",
             name="Test Product",
             description="Test product description",
@@ -56,5 +62,5 @@ class ProductModelTests(TestCase):
         )
 
     def test_product_creation(self):
-        product = Product.objects.create(type=self.product_info)
+        product = Unit.objects.create(type=self.product_info)
         self.assertEqual(product.type, self.product_info)
