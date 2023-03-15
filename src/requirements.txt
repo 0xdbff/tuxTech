@@ -1,3 +1,5 @@
 django
 django-rest-framework
+django-cacheops
+django-stubs
 psycopg2
