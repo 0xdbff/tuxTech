@@ -24,6 +24,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: ./src/website/package-lock.json
       - name: Install dependencies
+        run: |
+          npm ci
+        working-directory: ./src/website
       - name: Build
         run: |
           CI=false npm run build --if-present
