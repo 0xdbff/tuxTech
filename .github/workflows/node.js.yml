@@ -23,10 +23,10 @@ jobs:
           cache: "npm"
       - run: |
           npm ci && npm install
-          working-directory: scripts
+          working-directory: ./src/website
       - run: |
           npm run build --if-present
-          working-directory: scripts
+          working-directory: ./src/website
       - run: |
           npm test
-          working-directory: scripts
+          working-directory: ./src/website
