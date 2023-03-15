@@ -68,7 +68,7 @@ class ProductInfo(models.Model):
         editable=False,
         null=False,
     )
-    specifications = models.ManyToManyField(Specification, null=False)
+    specifications = models.ManyToManyField(Specification)
     image_url = models.URLField(blank=True, null=True)
 
     def __str__(self):

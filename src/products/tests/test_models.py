@@ -37,7 +37,7 @@ class ProductInfoModelTests(TestCase):
         self.assertEqual(product_info.sku, "123456789")
         self.assertEqual(product_info.name, "Test Product")
         self.assertEqual(product_info.description, "Test product description")
-        self.assertEqual(product_info.price, 100.00)
+        self.assertEqual(float(product_info.price), 100.00)
         self.assertEqual(product_info.category, self.category)
         self.assertEqual(product_info.brand, self.brand)
 
