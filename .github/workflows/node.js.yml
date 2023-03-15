@@ -5,7 +5,6 @@ on:
     branches: ["main", "dev", "impl_vAlpha0.1"]
   pull_request:
     branches: ["main", "dev", "impl_vAlpha0.1"]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,10 +15,6 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - name: Detecting source dir
-        run: |
-          cd ./src/website
-          ls | grep package-lock.json
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -27,11 +22,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: |
-          cd ./src/website
-          npm ci
+          npm ci && npm install
+          working-directory: scripts
       - run: |
-          cd ./src/website
           npm run build --if-present
+          working-directory: scripts
       - run: |
-          cd ./src/website
           npm test
+          working-directory: scripts
