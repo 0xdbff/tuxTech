@@ -14,6 +14,17 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9]
 
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 123
+          POSTGRES_DB: djangodev
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -28,6 +39,14 @@ jobs:
           cd ./src
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Run makemigrations
+        run: |
+          cd ./src
+          python manage.py makemigrations
+      - name: Run migrate
+        run: |
+          cd ./src
+          python manage.py migrate
       - name: Run Tests
         run: |
           cd ./src
