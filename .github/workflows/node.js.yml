@@ -5,6 +5,7 @@ on:
     branches: ["main", "dev", "impl_vAlpha0.1"]
   pull_request:
     branches: ["main", "dev", "impl_vAlpha0.1"]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,12 +22,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: |
+      - name: Install dependencies
+        run: |
           npm ci && npm install
-          working-directory: ./src/website
-      - run: |
+        working-directory: ./src/website
+      - name: Build
+        run: |
           npm run build --if-present
-          working-directory: ./src/website
-      - run: |
+        working-directory: ./src/website
+      - name: Test
+        run: |
           npm test
-          working-directory: ./src/website
+        working-directory: ./src/website
