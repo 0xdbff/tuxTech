@@ -1,6 +1,10 @@
 from django.core.management.base import BaseCommand
 import random
-from ...models import Brand, Categorie, Specification, ProductInfo
+from ...models.brand import Brand
+from ...models.info import Info
+from ...models.unit import Unit
+from ...models.categorie import Categorie
+from ...models.specification import Specification
 
 
 class Command(BaseCommand):
@@ -51,7 +55,7 @@ def create_sample_data():
     ]
 
     for product_data in products:
-        product_info = ProductInfo(**product_data)
+        product_info = Info(**product_data)
         product_info.save()
 
         for spec_data in random.sample(
