@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # Functional apps
     "store",
     "users",
-    "products",
+    "product",
     "enterpriseStore",
     "supply",
     "support",
