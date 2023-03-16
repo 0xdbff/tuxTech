@@ -1,9 +1,10 @@
-""" Product models"""
+"""  """
 from django.db import models
 from .categorie import Categorie
 from .brand import Brand
 from .specification import Specification
 from .unit import Unit
+from .option import Option
 
 
 class Info(models.Model):
@@ -15,7 +16,8 @@ class Info(models.Model):
     sku = models.CharField(max_length=32, primary_key=True, editable=False)
     name = models.TextField(null=False)
     description = models.TextField(null=False)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    price_lowest = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    price_highest = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     category = models.ForeignKey(
         Categorie, on_delete=models.CASCADE, related_name="product_info"
     )
@@ -27,6 +29,7 @@ class Info(models.Model):
         null=False,
     )
     specifications = models.ManyToManyField(Specification)
+    options = models.ManyToManyField(Option)
     image_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
@@ -37,6 +40,6 @@ class Info(models.Model):
     def stock(self):
         return Unit.objects.filter(type=self).count()
 
-    @property
-    def stock_value(self):
-        return self.stock * self.price
+    # @property
+    # def stock_value(self):
+    #     return self.stock * self.price_lowest
