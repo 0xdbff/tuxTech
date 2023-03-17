@@ -8,8 +8,8 @@ class Unit(models.Model):
     Product model to represent individual instances of a specific product.
     """
 
-    type = models.ForeignKey(
-        "Info",
+    variant_id = models.ForeignKey(
+        "Variant",
         on_delete=models.CASCADE,
         related_name="instances",
         null=False,
@@ -19,4 +19,4 @@ class Unit(models.Model):
 
     def __str__(self):
         """Instance name"""
-        return f"{self.type.name} - ({self.id})"
+        return f"{self.variant_id.name} - ({self.id})"
