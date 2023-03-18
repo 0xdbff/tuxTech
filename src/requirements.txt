@@ -2,4 +2,7 @@ django
 django-rest-framework
 django-cacheops
 django-stubs
+python-barcode
+qrcode
+pillow
 psycopg2
