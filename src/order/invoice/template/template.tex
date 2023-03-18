@@ -1,54 +1,24 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Minimal Invoice
-% LaTeX Template
-% Version 1.1 (April 22, 2022)
-%
-% This template originates from:
-% https://www.LaTeXTemplates.com
-%
-% Author:
-% Vel (vel@latextemplates.com)
-%
-% License:
-% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%----------------------------------------------------------------------------------------
-%	CLASS, PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
 \RequirePackage{graphicx}
 \documentclass[
 	a4paper, % Paper size, use 'a4paper' for A4 or 'letterpaper' for US letter
 	9pt, % Default font size, available sizes are: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt
 ]{CSMinimalInvoice}
-\taxrate{12.5}
+\taxrate{23}
 
 % \usepackage{auto-pst-pdf}
 % \usepackage{pstool}
 % \usepackage{pstricks}
 \usepackage{qrcode}
+\usepackage{pstricks}
+\usepackage{pst-barcode}
+\usepackage{fancyhdr}
 % \usepackage{pst-barcode}
-
-% The currency code (e.g. USD is United States Dollars), do one of the following:
-% 1) Enter a 3 letter code to have it appear at the bottom of the invoice
-% 2) Leave the command empty (i.e. \currencycode{}) if you don't want the code to appear on the invoice
-\currencycode{USD}
-
-% The default currency symbol for the invoice is the dollar sign, if you would like to change this, do one of the following:
-% 1) Uncomment the line below and enter one of the following currency codes to change it to the corresponding symbol for that currency: GBP, CNY, JPY, EUR, BRL or INR
-%\determinecurrencysymbol{GBP}
-% 2) Uncomment the line below and leave it blank for no currency symbol or use another character/symbol for your currency
-%\renewcommand{\currencysymbol}{}
-
-% The invoice number, do one of the following:
-% 1) Enter an invoice number, it may include any text you'd like such as '13-A'
-% 2) Leave command empty (i.e. \invoicenumber{}) and no invoice number will be output in the invoice
+\currencycode{EUR}
 \invoicenumber{40}
 
-%---------------------------------------------------------------------------------
-%	ADVANCED INVOICE SETTINGS
-%---------------------------------------------------------------------------------
+\setlength{\footskip}{30pt} % Adjust the value to control the height of the footer
+\addtolength{\textheight}{-50pt} % Reduce the text height by the same amount to accommodate the increased footer size
+
 
 \roundcurrencytodecimals{2} % The number of decimal places to round currency numbers
 \roundquantitytodecimals{2} % The number of decimal places to round quantity numbers
@@ -64,36 +34,26 @@
 
 \begin{document}
 
-\setstretch{1.2} % Increase line spacing
+\pagestyle{fancy}
+\fancyhf{} % Clear header and footer
+\renewcommand{\headrulewidth}{0pt} % Remove the header line
 
-%---------------------------------------------------------------------------------
-%	INVOICE HEADER
-%---------------------------------------------------------------------------------
+\setstretch{1.2} % Increase line spacing
 
 \outputheader{Invoice}{\today} % Output the invoice title (automatically all caps) and date (can be empty if not needed)
 
-%---------------------------------------------------------------------------------
-%	INVOICE AND PAYEE INFORMATION
-%---------------------------------------------------------------------------------
-\begin{center}
-  \includegraphics[width=0.8\textwidth, height=0.2\textheight]{barcode_image.png}
-  \\[1ex]
-\end{center}
+%
+% \begin{pspicture}(50mm,30mm)
+% \psbarcode{Hello world}{includetext}{code128}
+% \end{pspicture}
 
-
-\begin{center}
-  \begin{minipage}{0.5\textwidth}
-    \centering
-    \qrcode{Your QR Code Data}
-    \\[1ex]
-    ATCUD code
-  \end{minipage}
-\end{center}
+\begin{pspicture}(10mm,10mm)
+  \psbarcode[scalex=0.6,scaley=0.3]{INVOICE_NUMBER_123}{}{code128}
+\end{pspicture}
 
 
 \outputinvoicenum % Output the invoice number if one has been set
 
-% Invoice information section
 \begin{minipage}[t]{0.5\textwidth}
 	\textbf{Due:} \duedatedays{30} % Use the \duedatedays{<number>} command to automatically determine the date when the invoice is due using the number of days from today in the single parameter to the command, or remove it and enter a due date manually
 	
@@ -140,7 +100,6 @@
 	\invoiceitem{ACME Consulting: project planning and pest control ornithologist consulting}{23.5}{120}{}
 \end{invoicetable}
 
-%---------------------------------------------------------------------------------
 
 \vfill\vfill % Vertical alignment whitespace
 
@@ -154,8 +113,9 @@
 %	MERCHANT (YOUR) INFORMATION
 %---------------------------------------------------------------------------------
 
-% Company/individual name and address section
-\begin{minipage}[t]{0.3\textwidth}
+
+\fancyfoot[C]{%
+\begin{minipage}[t]{0.25\textwidth}
 	\itshape % Italic text
 	
 	\textbf{ACME Corporation} % Company/individual name
@@ -164,12 +124,10 @@
 	Fairfield, NJ 07004 \\
 	United States \\
 \end{minipage}
-% Fixed minimum horizontal whitespace between sections
-\begin{minipage}[t]{0.03\textwidth}
+\begin{minipage}[t]{0.01\textwidth}
 	~ % Populate the minipage with a dummy space so it is spaced correctly
-\end{minipage} % Add this missing line
-% Merchant contact information section
-\begin{minipage}[t]{0.3\textwidth}
+\end{minipage}
+\begin{minipage}[t]{0.25\textwidth}
 	\itshape % Italic text
 	
 	\textbf{Contact}
@@ -177,20 +135,18 @@
 	\href{https://www.latextemplates.com}{ACME.com} \\ % Merchant contact information lines
 	\href{mailto:sales@acme.com}{sales@acme.com} \\
 \end{minipage}
-% Fixed minimum horizontal whitespace between sections
-\begin{minipage}[t]{0.03\textwidth}
+\begin{minipage}[t]{0.01\textwidth}
 	~ % Populate the minipage with a dummy space so it is spaced correctly
 \end{minipage}
-% Merchant payment information
-\begin{minipage}[t]{0.3\textwidth}
-	\itshape % Italic text
-	
-	\textbf{Payment}
-	
-	Bank of the United States \\ % Payment information lines
-	Sort Code: 010-110 \\
-	Account: 10011001110 \\
-\end{minipage}
+\begin{minipage}[t]{0.26\textwidth}
+    \centering
+    \raisebox{-0.6cm}{\qrcode[height=1.5cm]{Your QR Code Data}}
+    \\[1ex]
+    ATCUD code
+\end{minipage}%
+}
+
+
 %---------------------------------------------------------------------------------
 
 \end{document}
