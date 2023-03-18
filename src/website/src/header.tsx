@@ -30,15 +30,15 @@
 // };
 //
 // export default StoreHeader;
-import React, { useState } from "react";
-import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import React, {useState} from "react";
+import {FaSearch, FaUserCircle, FaBars, FaTimes} from "react-icons/fa";
 import "./header.css";
 
 interface StoreHeaderProps {
     logoUrl: string;
 }
 
-const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
+const StoreHeader: React.FC<StoreHeaderProps> = ({logoUrl}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -60,24 +60,24 @@ const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
     const renderSearchBar = () => {
         return (
             <div className="search">
-                <FaSearch className="searchIcon" />
-                <input type="text" placeholder="Search products" />
+                <FaSearch className="searchIcon"/>
+                <input type="text" placeholder="Search products"/>
             </div>
         );
     };
 
     const renderUserIcon = () => {
-        return <FaUserCircle className="userIcon" />;
+        return <FaUserCircle className="userIcon"/>;
     };
 
     return (
         <header className="header">
             <div className="container">
                 <div className="logoContainer">
-                    <img src={logoUrl} alt="Store logo" className="logo" />
+                    <img src={logoUrl} alt="Store logo" className="logo"/>
                 </div>
                 <div className="menuIcon" onClick={toggleMenu}>
-                    {isMenuOpen ? <FaTimes /> : <FaBars />}
+                    {isMenuOpen ? <FaTimes/> : <FaBars/>}
                 </div>
                 {renderMenu()}
                 <div className="login">

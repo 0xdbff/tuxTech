@@ -1,7 +1,7 @@
 [
-  { "name": "Cor", "value": "Cinzento" },
-  { "name": "Cor", "value": "Branco" },
-  { "name": "Cor", "value": "Azul" },
-  { "name": "Cor", "value": "Vermelho" },
-  { "name": "Cor", "value": "Cinzento cideral" }
+  { "key": "Cor", "value": "Cinzento" },
+  { "key": "Cor", "value": "Branco" },
+  { "key": "Cor", "value": "Azul" },
+  { "key": "Cor", "value": "Vermelho" },
+  { "key": "Cor", "value": "Cinzento cideral" }
 ]
