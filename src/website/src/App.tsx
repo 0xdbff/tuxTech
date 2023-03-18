@@ -1,37 +1,22 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+// src/App.tsx
+import React, { useEffect } from "react";
+import { useTheme } from "./themeContext";
 import "./App.css";
 
-function App() {
-    return (
-        <div className="App">
-            <div className="ads-container">
-                <div>
-                    <img src="amd.jpg"></img>
-                </div>
-                <div>
-                    TEXT IN THE MIDDLE
-                </div>
-                <div>
-                    <img src="amd.jpg"></img>
-                </div>
-            </div>
-        </div>
-    );
-}
+const App: React.FC = () => {
+    const { lightMode } = useTheme();
 
-// <header className="App-header">
-//     <img src={logo} className="App-logo" alt="logo" />
-//     <p>
-//         Edit <code>src/App.tsx</code> and save to reload.
-//     </p>
-//     <a
-//         className="App-link"
-//         href="https://reactjs.org"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//     >
-//         Learn React
-//     </a>
-// </header>
+    useEffect(() => {
+        if (lightMode) {
+            document.body.classList.add("light-mode");
+            document.body.classList.remove("dark-mode");
+        } else {
+            document.body.classList.add("dark-mode");
+            document.body.classList.remove("light-mode");
+        }
+    }, [lightMode]);
+
+    return <div className="App">{}</div>;
+};
+
 export default App;
