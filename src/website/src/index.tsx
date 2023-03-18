@@ -12,8 +12,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <StoreHeader logoUrl={logoUrl} />
-        <App />
+        <StoreHeader logoUrl={logoUrl}/>
+        <App/>
     </React.StrictMode>
 );
 
