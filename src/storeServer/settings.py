@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Installed
     "rest_framework",
+    "corsheaders",  # DEV
     "cacheops",
     # Functional apps
     "store",
@@ -58,12 +59,6 @@ REST_FRAMEWORK = {
     )
 }
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
-}
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -73,7 +68,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # dev
+    "corsheaders.middleware.CorsMiddleware",
 ]
+
+#dev 
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = "storeServer.urls"
 
