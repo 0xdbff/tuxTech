@@ -1,0 +1,196 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Minimal Invoice
+% LaTeX Template
+% Version 1.1 (April 22, 2022)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	CLASS, PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\RequirePackage{graphicx}
+\documentclass[
+	a4paper, % Paper size, use 'a4paper' for A4 or 'letterpaper' for US letter
+	9pt, % Default font size, available sizes are: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt
+]{CSMinimalInvoice}
+\taxrate{12.5}
+
+% \usepackage{auto-pst-pdf}
+% \usepackage{pstool}
+% \usepackage{pstricks}
+\usepackage{qrcode}
+% \usepackage{pst-barcode}
+
+% The currency code (e.g. USD is United States Dollars), do one of the following:
+% 1) Enter a 3 letter code to have it appear at the bottom of the invoice
+% 2) Leave the command empty (i.e. \currencycode{}) if you don't want the code to appear on the invoice
+\currencycode{USD}
+
+% The default currency symbol for the invoice is the dollar sign, if you would like to change this, do one of the following:
+% 1) Uncomment the line below and enter one of the following currency codes to change it to the corresponding symbol for that currency: GBP, CNY, JPY, EUR, BRL or INR
+%\determinecurrencysymbol{GBP}
+% 2) Uncomment the line below and leave it blank for no currency symbol or use another character/symbol for your currency
+%\renewcommand{\currencysymbol}{}
+
+% The invoice number, do one of the following:
+% 1) Enter an invoice number, it may include any text you'd like such as '13-A'
+% 2) Leave command empty (i.e. \invoicenumber{}) and no invoice number will be output in the invoice
+\invoicenumber{40}
+
+%---------------------------------------------------------------------------------
+%	ADVANCED INVOICE SETTINGS
+%---------------------------------------------------------------------------------
+
+\roundcurrencytodecimals{2} % The number of decimal places to round currency numbers
+\roundquantitytodecimals{2} % The number of decimal places to round quantity numbers
+
+% Advanced settings for changing how numbers are output
+\sisetup{group-minimum-digits=4} % Delimit numbers (e.g. 4000 -> 4,000) when there are this number of digits or more
+\sisetup{group-separator={,}} % Character to use for delimiting digit groups
+\sisetup{output-decimal-marker={.}} % Character to use for specifying decimals
+
+\currencysuffix{} % Some currencies output the currency symbol after the number, such as Sweden's krona specified with a 'kr' suffix. Specify a suffix here if required, otherwise leave this command empty.
+
+%---------------------------------------------------------------------------------
+
+\begin{document}
+
+\setstretch{1.2} % Increase line spacing
+
+%---------------------------------------------------------------------------------
+%	INVOICE HEADER
+%---------------------------------------------------------------------------------
+
+\outputheader{Invoice}{\today} % Output the invoice title (automatically all caps) and date (can be empty if not needed)
+
+%---------------------------------------------------------------------------------
+%	INVOICE AND PAYEE INFORMATION
+%---------------------------------------------------------------------------------
+\begin{center}
+  \includegraphics[width=0.8\textwidth, height=0.2\textheight]{barcode_image.png}
+  \\[1ex]
+\end{center}
+
+
+\begin{center}
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \qrcode{Your QR Code Data}
+    \\[1ex]
+    ATCUD code
+  \end{minipage}
+\end{center}
+
+
+\outputinvoicenum % Output the invoice number if one has been set
+
+% Invoice information section
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Due:} \duedatedays{30} % Use the \duedatedays{<number>} command to automatically determine the date when the invoice is due using the number of days from today in the single parameter to the command, or remove it and enter a due date manually
+	
+	\textbf{Project:} Pest control % Project name
+	
+	\textbf{Description:} Consulting and supplies for the eradication of unwanted birds % Project description
+\end{minipage}
+% Fixed minimum horizontal whitespace between sections
+\begin{minipage}[t]{0.03\textwidth}
+	~ % Populate the minipage with a dummy space so it is spaced correctly
+\end{minipage}
+% Payee information section
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Wile E. Coyote} % Payee name
+	
+	1 Monument Valley \\ % Payee contact lines
+	Arizona, United States \\
+	\href{mailto:wile.e.coyote@latextemplates.com}{wile.e.coyote@latextemplates.com} % Payee email
+\end{minipage}
+
+%---------------------------------------------------------------------------------
+
+\setstretch{1} % Restore single line spacing
+
+\vfill % Vertical alignment whitespace
+
+%---------------------------------------------------------------------------------
+%	INVOICE ITEMS TABLE
+%---------------------------------------------------------------------------------
+
+% Use the \invoiceitem command to output invoice items. It requires 4 parameters described below:
+% 1) Item description; this should be kept reasonably short so as not to span too many lines
+% 2) Item quantity (or hours); this should be a positive number (with no commas or other symbols) and decimals are allowed
+% 3) Item unit price (or hourly rate); this should be a positive or negative number (with no commas or other symbols) and decimals are allowed
+% 4) Item note; this can be left empty but, if used, it should be kept very short
+
+\begin{invoicetable}
+	\invoiceitem{Heavy wrought anvil}{1}{5600}{}
+	\invoiceitem{Dynamite (6pk)}{25}{24.99}{}
+	\invoiceitem{ACME TNT detonator}{1}{0}{Complimentary}
+	\invoiceitem{Hi-speed tonic}{10}{102.99}{}
+	\invoiceitem{Do-it yourself tornado kit}{1}{3495}{}
+	\invoiceitem{Refund for defective rocket}{1}{-1000}{Final settlement}
+	\invoiceitem{ACME Consulting: project planning and pest control ornithologist consulting}{23.5}{120}{}
+\end{invoicetable}
+
+%---------------------------------------------------------------------------------
+
+\vfill\vfill % Vertical alignment whitespace
+
+%---------------------------------------------------------------------------------
+%	INVOICE CONDITIONS
+%---------------------------------------------------------------------------------
+
+\invoiceconditions{Terms and Conditions: Products sold by ACME Corporation come with no guarantees or warranties of any kind, expressed or implied. ACME specifically disclaims all implied warranties of any kind or nature, including any implied warranty of merchantability and/or any implied warranty of fitness for a particular purpose.} % Leave command empty (i.e. \invoiceconditions{}) if not required
+
+%---------------------------------------------------------------------------------
+%	MERCHANT (YOUR) INFORMATION
+%---------------------------------------------------------------------------------
+
+% Company/individual name and address section
+\begin{minipage}[t]{0.3\textwidth}
+	\itshape % Italic text
+	
+	\textbf{ACME Corporation} % Company/individual name
+	
+	2295 Horseneck Road \\ % Merchant address lines
+	Fairfield, NJ 07004 \\
+	United States \\
+\end{minipage}
+% Fixed minimum horizontal whitespace between sections
+\begin{minipage}[t]{0.03\textwidth}
+	~ % Populate the minipage with a dummy space so it is spaced correctly
+\end{minipage} % Add this missing line
+% Merchant contact information section
+\begin{minipage}[t]{0.3\textwidth}
+	\itshape % Italic text
+	
+	\textbf{Contact}
+	
+	\href{https://www.latextemplates.com}{ACME.com} \\ % Merchant contact information lines
+	\href{mailto:sales@acme.com}{sales@acme.com} \\
+\end{minipage}
+% Fixed minimum horizontal whitespace between sections
+\begin{minipage}[t]{0.03\textwidth}
+	~ % Populate the minipage with a dummy space so it is spaced correctly
+\end{minipage}
+% Merchant payment information
+\begin{minipage}[t]{0.3\textwidth}
+	\itshape % Italic text
+	
+	\textbf{Payment}
+	
+	Bank of the United States \\ % Payment information lines
+	Sort Code: 010-110 \\
+	Account: 10011001110 \\
+\end{minipage}
+%---------------------------------------------------------------------------------
+
+\end{document}
