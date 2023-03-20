@@ -1,40 +1,19 @@
 @import "./variables.css";
 
-.dark-mode {
-  --bg-color: var(--color-bg);
-  --text-color: var(--color-fg);
-}
-
-.light-mode {
-  --bg-color: var(--color-bg);
-  --text-color: var(--color-fg);
-}
-
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--color-bg);
+  color: var(--color-fg);
   transition: background-color 1s ease, color 1s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-color);
-}
-
-.App-link {
-  /* color: var(--info-color); */
-}
-
 .ads-container {
+  height: 100%;
+  width: auto;
+  display: flex;
+}
+
+.add {
+  height: 162%;
+  width: auto;
   display: flex;
 }

@@ -114,8 +114,40 @@
 %---------------------------------------------------------------------------------
 
 
+% \fancyfoot[C]{%
+% \begin{minipage}[t]{0.25\textwidth}
+% 	\itshape % Italic text
+% 	
+% 	\textbf{ACME Corporation} % Company/individual name
+% 	
+% 	2295 Horseneck Road \\ % Merchant address lines
+% 	Fairfield, NJ 07004 \\
+% 	United States \\
+% \end{minipage}
+% \begin{minipage}[t]{0.01\textwidth}
+% 	~ % Populate the minipage with a dummy space so it is spaced correctly
+% \end{minipage}
+% \begin{minipage}[t]{0.25\textwidth}
+% 	\itshape % Italic text
+% 	
+% 	\textbf{Contact}
+% 	
+% 	\href{https://www.latextemplates.com}{ACME.com} \\ % Merchant contact information lines
+% 	\href{mailto:sales@acme.com}{sales@acme.com} \\
+% \end{minipage}
+% \begin{minipage}[t]{0.01\textwidth}
+% 	~ % Populate the minipage with a dummy space so it is spaced correctly
+% \end{minipage}
+% \begin{minipage}[t]{0.26\textwidth}
+%     \centering
+%     \raisebox{-0.6cm}{\qrcode[height=1.5cm]{Your QR Code Data}}
+%     \\[1ex]
+%     ATCUD code
+% \end{minipage}%
+% }
 \fancyfoot[C]{%
-\begin{minipage}[t]{0.25\textwidth}
+\parbox{\textwidth}{%
+\begin{minipage}[t]{0.32\textwidth}
 	\itshape % Italic text
 	
 	\textbf{ACME Corporation} % Company/individual name
@@ -127,7 +159,7 @@
 \begin{minipage}[t]{0.01\textwidth}
 	~ % Populate the minipage with a dummy space so it is spaced correctly
 \end{minipage}
-\begin{minipage}[t]{0.25\textwidth}
+\begin{minipage}[t]{0.32\textwidth}
 	\itshape % Italic text
 	
 	\textbf{Contact}
@@ -138,14 +170,14 @@
 \begin{minipage}[t]{0.01\textwidth}
 	~ % Populate the minipage with a dummy space so it is spaced correctly
 \end{minipage}
-\begin{minipage}[t]{0.26\textwidth}
+\begin{minipage}[t]{0.34\textwidth}
     \centering
     \raisebox{-0.6cm}{\qrcode[height=1.5cm]{Your QR Code Data}}
     \\[1ex]
     ATCUD code
 \end{minipage}%
-}
-
+} % End of parbox
+} % End of fancyfoot
 
 %---------------------------------------------------------------------------------
 
