@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -20,5 +23,4 @@
     {1}{72.55157pt}}
 \HyPL@Entry{0<</S/D>>}
 \ifx\qr@savematrix\@undefined\def\qr@savematrix{\begingroup\let\do\@makeother\dospecials\catcode`\{=1\catcode`\}=2\relax \qr@savematrix@int}\def\qr@savematrix@int#1#2#3#4{\endgroup}\fi
-\qr@savematrix{YourQRCodeData}{1}{0}{111111100111101111111100000100011101000001101110100110101011101101110100000001011101101110100010101011101100000101110001000001111111101010101111111000000000100000000000100101101111110100000110111011001101110111011001100011100101001100111010100001011001110101101101100011000000000001000110110010111111100100100110110100000101100000110011101110100110110001000101110101110101000011101110100001111110001100000100101010010000111111101010100010110}
-\gdef \@abspage@last{2}
+\gdef \@abspage@last{1}

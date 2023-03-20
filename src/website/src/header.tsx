@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
+    FaHeart,
+    FaShoppingCart,
     FaSearch,
     FaUserCircle,
     FaBars,
@@ -15,7 +17,40 @@ interface StoreHeaderProps {
     logoUrl: string;
 }
 
-const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
+const useHideHeaderOnScroll = () => {
+    const headerRef = useRef<HTMLDivElement | null>(null);
+    const lastScrollPosition = useRef(0);
+    const [isHeaderVisible] = useState(true);
+
+    const handleScroll = () => {
+        const currentScrollPosition = window.pageYOffset;
+        const headerElement = headerRef.current;
+
+        if (headerElement) {
+            if (currentScrollPosition < lastScrollPosition.current - 20) {
+                headerElement.classList.remove("hidden");
+                headerElement.style.top = "0px";
+            } else if (currentScrollPosition > lastScrollPosition.current + 20) {
+                headerElement.classList.add("hidden");
+                headerElement.style.top = "-60px";
+            }
+        }
+
+        lastScrollPosition.current = currentScrollPosition;
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    return { headerRef, isHeaderVisible };
+};
+
+const StoreHeader: React.FC<StoreHeaderProps> = () => {
+    const { headerRef, isHeaderVisible } = useHideHeaderOnScroll();
     const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lightMode, toggleDarkMode } = useTheme();
@@ -57,10 +92,26 @@ const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
         );
     };
 
+    const renderFavIcon = () => {
+        return (
+            <div onClick={toggleLoginForm}>
+                <FaHeart className="icon" />
+            </div>
+        );
+    };
+
+    const renderCartIcon = () => {
+        return (
+            <div onClick={toggleLoginForm}>
+                <FaShoppingCart className="icon" />
+            </div>
+        );
+    };
+
     const renderUserIcon = () => {
         return (
             <div onClick={toggleLoginForm}>
-                <FaUserCircle className="userIcon" />
+                <FaUserCircle className="icon" />
             </div>
         );
     };
@@ -94,45 +145,33 @@ const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
         };
     }, [isLoginFormOpen]);
 
-    // return (
-    //     <header className="header">
-    //         <div className="container">
-    //             <div className="logoContainer">
-    //                 <img src={logoUrl} alt="Store logo" className="logo" />
-    //             </div>
-    //             <div className="menuIcon" onClick={toggleMenu}>
-    //                 {isMenuOpen ? <FaTimes /> : <FaBars />}
-    //             </div>
-    //             {renderMenu()}
-    //             <div className="login">
-    //                 {renderMenu()}
-    //                 {renderSearchBar()}
-    //                 {renderDarkModeToggle()}
-    //                 {renderUserIcon()}
-    //                 {renderLoginForm()}
-    //             </div>
-    //         </div>
-    //     </header>
-    // );
-
     return (
-        <header className="header">
+        <header
+            className={`header ${isHeaderVisible ? "" : "hidden"}`}
+            ref={headerRef}
+        >
             <div className="container">
-                <div className="logoContainer">
-                    <img src={logoUrl} alt="Store logo" className="logo" />
-                </div>
                 <div className="menuIcon" onClick={toggleMenu}>
                     {isMenuOpen ? <FaTimes /> : <FaBars />}
                 </div>
                 {renderMenu()}
-                <div className="login">
-                    <div className="icons">
-                        {renderSearchBar()}
-                        {renderDarkModeToggle()}
-                        {renderUserIcon()}
-                    </div>
-                    {renderLoginForm()}
+                <div className="logoContainer">
+                    <img src="l.svg" alt="Store logo" className="logo" />
                 </div>
+                <div className="icons">
+                    {renderSearchBar()}
+                    <a href="/link1" className="link">
+                        TuxTech
+                    </a>
+                    <a href="/link2" className="link">
+                        Novidades
+                    </a>
+                    {renderDarkModeToggle()}
+                    {renderFavIcon()}
+                    {renderCartIcon()}
+                    {renderUserIcon()}
+                </div>
+                {renderLoginForm()}
             </div>
         </header>
     );
