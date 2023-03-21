@@ -1,19 +1,75 @@
 @import "./variables.css";
 
+/* .middle-content { */
+/*   /* Firefox */
+*/
+/*   scrollbar-width: thin; */
+/*   scrollbar-color: #888 #f1f1f1; */
+/**/
+/*   /* Chrome, Safari, and Opera */ */
+/*   overflow-y: auto; */
+/* } */
+/**/
+/* .middle-content::-webkit-scrollbar { */
+/*   width: 10px; */
+/* } */
+/**/
+/* .middle-content::-webkit-scrollbar-track { */
+/*   background: #f1f1f1; */
+/*   border-radius: 10px; */
+/* } */
+/**/
+/* .middle-content::-webkit-scrollbar-thumb { */
+/*   background: #888; */
+/*   border-radius: 10px; */
+/* } */
+/**/
+/* .middle-content::-webkit-scrollbar-thumb:hover { */
+/*   background: #555; */
+/* } */
+
 body {
   background-color: var(--color-bg);
   color: var(--color-fg);
   transition: background-color 1s ease, color 1s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 }
 
 .ads-container {
-  height: 100%;
-  width: auto;
+  height: 100vh; /* Set height to the full height of the viewport */
+  width: 100%; /* Set width to full width */
   display: flex;
+  flex-wrap: nowrap; /* To prevent wrapping of the ads and content */
 }
 
 .add {
-  height: 162%;
-  width: auto;
-  display: flex;
+  display: none; /* Hide the ads by default */
+  flex: 0 0 auto; /* Set flex-grow to 0, flex-shrink to 0, and flex-basis to auto */
+}
+
+.middle-content {
+  flex: 1 1 auto; /* Set flex-grow to 1, flex-shrink to 1, and flex-basis to auto */
+  overflow-y: auto; /* To handle the scrolling of the middle content */
+}
+
+/* Media query to show the ads and use the available horizontal space */
+@media (min-width: 1024px) {
+  .add {
+    display: flex;
+    height: 100vh;
+  }
 }

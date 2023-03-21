@@ -1,3 +1,4 @@
+// index.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -5,6 +6,7 @@ import App from "./App";
 import { ThemeProvider } from "./themeContext";
 import reportWebVitals from "./reportWebVitals";
 import StoreHeader from "./header";
+import Footer from "./footer";
 
 const logoUrl = "https://example.com/logo.png";
 
@@ -16,6 +18,7 @@ root.render(
         <ThemeProvider>
             <StoreHeader logoUrl={logoUrl} />
             <App />
+            <Footer />
         </ThemeProvider>
     </React.StrictMode>
 );
