@@ -25,7 +25,8 @@ SECRET_KEY = "django-insecure-kluzk8h%5eq7$()&s_zn_@=is=#0i5r$ap0@gwj8(c^2_b7c2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["gldb.dev", "www.gldb.dev", "176.79.170.121"]
+ALLOWED_HOSTS = [ ]
 
 # Application definition
 
@@ -70,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # dev
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 # dev
@@ -159,7 +161,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATIC_ROOT = "/var/www/tuxTech/static/"
+STATIC_ROOT = "/var/www/tuxTech/static"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/build/static/"),
