@@ -6,5 +6,6 @@ django-stubs
 django-cors-headers
 python-barcode
 qrcode
+whitenoise
 pillow
 psycopg2

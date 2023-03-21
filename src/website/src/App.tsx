@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useTheme } from "./themeContext";
 import "./App.css";
 
@@ -17,37 +17,22 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
+            <div className="ad-left ad">
+            </div>
             <div className="content">
-                <div className="ads-container">
-                    <div className="add">
-                        <img
-                            src="amd.jpg"
-                            alt="ad"
-                            style={{ height: "100%", width: "100%" }}
-                        />
-                    </div>
-                    <div
-                        style={{
-                            paddingTop: "80px", // To accommodate the header's height when it's visible
-                            textAlign: "center",
-                            paddingBottom: "3000px", // To create a long scrolling area
-                        }}
-                    >
-                        <h1>Your Website Content</h1>
-                        <p>...</p>
-                    </div>
-                    <div className="add">
-                        <img
-                            src="amd.jpg"
-                            alt="ad"
-                            style={{
-                                height: "100%",
-                                width: "100%",
-                                transform: "rotate(180deg)",
-                            }}
-                        />
-                    </div>
+                <div
+                    style={{
+                        paddingTop: "80px",
+                        textAlign: "center",
+                        paddingBottom: "3000px",
+                    }}
+                >
+                    <h1>Website Content</h1>
+                    <p>...</p>
+                    <p>Contains bugs ATM, release expected 31/05!</p>
                 </div>
+            </div>
+            <div className="ad-right ad">
             </div>
         </div>
     );
