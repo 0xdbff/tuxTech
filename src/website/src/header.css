@@ -203,7 +203,6 @@
   align-items: center;
   justify-content: space-between;
   margin-left: 10px;
-  flex-grow: 1;
   max-width: calc(
     100% - 200px
   ); /* This will ensure the search bar has enough space */
