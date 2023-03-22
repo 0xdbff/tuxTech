@@ -25,8 +25,14 @@ SECRET_KEY = "django-insecure-kluzk8h%5eq7$()&s_zn_@=is=#0i5r$ap0@gwj8(c^2_b7c2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["gldb.dev", "www.gldb.dev", "176.79.170.121"]
-ALLOWED_HOSTS = [ ]
+ALLOWED_HOSTS = [
+    "gldb.dev",
+    "www.gldb.dev",
+    "176.79.170.121",
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -76,6 +82,8 @@ MIDDLEWARE = [
 
 # dev
 CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = ['https://gldb.dev:8443', 'https://www.gldb.dev:8443']
 
 ROOT_URLCONF = "storeServer.urls"
 
@@ -168,6 +176,28 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/build/static/"),
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "/var/www/log/django.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "INFO",
+        },
+        "storeServer": {
+            "handlers": ["file"],
+            "level": "INFO",
+        },
+    },
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
