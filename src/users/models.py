@@ -52,7 +52,7 @@ class CreditCard(models.Model):
 class CustomUserManager(BaseUserManager):
     """ """
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         """ """
         if not email:
             raise ValueError("The Email field must be set")
@@ -65,6 +65,7 @@ class CustomUserManager(BaseUserManager):
 
 class Client(AbstractBaseUser, PermissionsMixin):
     """ """
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
     email = models.EmailField(unique=True)
