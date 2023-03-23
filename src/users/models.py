@@ -137,6 +137,23 @@ class Admin(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    groups = models.ManyToManyField(
+        "auth.Group",
+        blank=True,
+        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+        related_name="admin_set",
+        related_query_name="admin",
+        verbose_name="groups",
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        blank=True,
+        help_text="Specific permissions for this user.",
+        related_name="admin_set",
+        related_query_name="admin",
+        verbose_name="user permissions",
+    )
+
     objects = CustomUserManager()
 
     REQUIRED_FIELDS = ["email", "username"]
