@@ -6,21 +6,9 @@
 
 ### Academic work
 
+# IMPORTANT
+
+Removed dual license (apache2, mit) due to project being re-licensed under the AGPLv3 License in accordance with project owner on Thu Mar 23 02:20:01 WET 2023, expect a commercial license (dual licenced with AGPLv3) in a near future!
+The software versions provided after Thu Mar 23 02:20:01 WET 2023 are no longer licensed in apache2 or mit.
+
 ## License
-
-Licensed under either of
-
- * Apache License, Version 2.0
-   ([LICENSE-APACHE](LICENSE-APACHE) available at http://www.apache.org/licenses/LICENSE-2.0)
- * MIT license
-   ([LICENSE-MIT](LICENSE-MIT) available at http://opensource.org/licenses/MIT)
-
-at your option.
-
-## Contribution
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
-
-![Erd](modeling/erd.png)
