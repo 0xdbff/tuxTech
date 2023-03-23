@@ -1,36 +1,112 @@
+@import "./variables.css";
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-gray-08);
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: top 0.3s ease-in-out; /* Add transition here */
+}
+
+.header.hidden {
+  top: -60px; /* Remove transform, add top */
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* You can adjust this value according to your preference */
+  padding: 0 16px;
+}
+
 .container {
   display: flex;
-  align-items: center;
-  background-color: #394551;
-  justify-content: space-between;
   padding: 6px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--color-gray-32);
+  /* filter: brightness(70%); */
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.link:hover {
+  color: var(--color-highlight);
+  text-decoration: underline;
+}
+
+.dark-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+.dark-mode-toggle:hover {
+  color: var(--color-logo-blue);
+}
+
+.login-form-container {
+  position: fixed;
+  top: 52px;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: var(--color-gray-08);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.login-form-container.open {
+  right: 0;
 }
 
 .logoContainer {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-right: 10px;
+  justify-content: center;
+  /* padding-right: 10px; */
+  /* margin-right: 10px; */
 }
 
 .menuIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
   font-size: 20px;
   cursor: pointer;
+  padding-right: 20px;
 }
 
 .menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #394551;
+  background-color: var(--color-gray-08);
   position: absolute;
-  top: 60px;
+  top: 52px;
   left: 0;
-  width: 100%;
+  /* width: 100%; */
+  width: 300px;
   height: calc(100vh - 60px);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
@@ -49,28 +125,30 @@
 .menu ul li {
   padding: 10px;
   font-size: 18px;
-  color: #fff;
+  color: var(--color-gray-7);
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
 .menu ul li:hover {
-  background-color: #556677;
+  background-color: var(--color-gray-3);
+  border-radius: 20px;
 }
 
 .search {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #394551;
+  /* background-color: var(--color-gray-11); */
   border-radius: 20px;
-  padding: 5px 10px;
-  margin-right: 10px;
+  padding: 0px 4px;
+  flex-grow: 1;
+  max-width: 800px;
 }
 
 .search input {
-  background-color: #728192;
-  color: #fff;
+  background-color: var(--color-gray-10);
+  color: var(--color-white-1);
   display: inline-block;
   align-items: center;
   justify-content: center;
@@ -79,21 +157,67 @@
   border: none;
   display: flex;
   border-radius: 20px;
-  padding: 0 10px;
+  padding: 0 20px;
   font-size: 16px;
   outline: none;
+}
+
+.searchIcon {
+  padding: 0 5px;
+}
+
+.search input:hover {
+  background-color: var(--color-gray-11);
+  border-radius: 20px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: 0;
+  font-size: 20px;
+  padding: 0px 6px;
+}
+
+.icon {
+  padding: 0px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+/* .icon:hover { */
+/*   background-color: var(--color-gray-11); */
+/*   border-radius: 20px; */
+/* } */
+
+.icon:hover {
+  color: var(--color-logo-blue);
 }
 
 .login {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px;
+  margin-left: 10px;
+  max-width: calc(
+    100% - 200px
+  ); /* This will ensure the search bar has enough space */
+  flex-wrap: nowrap;
+  flex: 1;
 }
 
-.user {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px;
+/* .userIcon { */
+/*   display: flex; */
+/*   align-items: center; */
+/*   justify-content: space-between; */
+/*   padding: 6px; */
+/* } */
+
+.logo {
+  width: auto; /* adjust the width as needed */
+  height: 52px; /* maintain aspect ratio */
 }

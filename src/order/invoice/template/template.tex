@@ -1,0 +1,184 @@
+\RequirePackage{graphicx}
+\documentclass[
+	a4paper, % Paper size, use 'a4paper' for A4 or 'letterpaper' for US letter
+	9pt, % Default font size, available sizes are: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt
+]{CSMinimalInvoice}
+\taxrate{23}
+
+% \usepackage{auto-pst-pdf}
+% \usepackage{pstool}
+% \usepackage{pstricks}
+\usepackage{qrcode}
+\usepackage{pstricks}
+\usepackage{pst-barcode}
+\usepackage{fancyhdr}
+% \usepackage{pst-barcode}
+\currencycode{EUR}
+\invoicenumber{40}
+
+\setlength{\footskip}{30pt} % Adjust the value to control the height of the footer
+\addtolength{\textheight}{-50pt} % Reduce the text height by the same amount to accommodate the increased footer size
+
+
+\roundcurrencytodecimals{2} % The number of decimal places to round currency numbers
+\roundquantitytodecimals{2} % The number of decimal places to round quantity numbers
+
+% Advanced settings for changing how numbers are output
+\sisetup{group-minimum-digits=4} % Delimit numbers (e.g. 4000 -> 4,000) when there are this number of digits or more
+\sisetup{group-separator={,}} % Character to use for delimiting digit groups
+\sisetup{output-decimal-marker={.}} % Character to use for specifying decimals
+
+\currencysuffix{} % Some currencies output the currency symbol after the number, such as Sweden's krona specified with a 'kr' suffix. Specify a suffix here if required, otherwise leave this command empty.
+
+%---------------------------------------------------------------------------------
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{} % Clear header and footer
+\renewcommand{\headrulewidth}{0pt} % Remove the header line
+
+\setstretch{1.2} % Increase line spacing
+
+\outputheader{Invoice}{\today} % Output the invoice title (automatically all caps) and date (can be empty if not needed)
+
+%
+% \begin{pspicture}(50mm,30mm)
+% \psbarcode{Hello world}{includetext}{code128}
+% \end{pspicture}
+
+\begin{pspicture}(10mm,10mm)
+  \psbarcode[scalex=0.6,scaley=0.3]{INVOICE_NUMBER_123}{}{code128}
+\end{pspicture}
+
+
+\outputinvoicenum % Output the invoice number if one has been set
+
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Due:} \duedatedays{30} % Use the \duedatedays{<number>} command to automatically determine the date when the invoice is due using the number of days from today in the single parameter to the command, or remove it and enter a due date manually
+	
+	\textbf{Project:} Pest control % Project name
+	
+	\textbf{Description:} Consulting and supplies for the eradication of unwanted birds % Project description
+\end{minipage}
+% Fixed minimum horizontal whitespace between sections
+\begin{minipage}[t]{0.03\textwidth}
+	~ % Populate the minipage with a dummy space so it is spaced correctly
+\end{minipage}
+% Payee information section
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Wile E. Coyote} % Payee name
+	
+	1 Monument Valley \\ % Payee contact lines
+	Arizona, United States \\
+	\href{mailto:wile.e.coyote@latextemplates.com}{wile.e.coyote@latextemplates.com} % Payee email
+\end{minipage}
+
+%---------------------------------------------------------------------------------
+
+\setstretch{1} % Restore single line spacing
+
+\vfill % Vertical alignment whitespace
+
+%---------------------------------------------------------------------------------
+%	INVOICE ITEMS TABLE
+%---------------------------------------------------------------------------------
+
+% Use the \invoiceitem command to output invoice items. It requires 4 parameters described below:
+% 1) Item description; this should be kept reasonably short so as not to span too many lines
+% 2) Item quantity (or hours); this should be a positive number (with no commas or other symbols) and decimals are allowed
+% 3) Item unit price (or hourly rate); this should be a positive or negative number (with no commas or other symbols) and decimals are allowed
+% 4) Item note; this can be left empty but, if used, it should be kept very short
+
+\begin{invoicetable}
+	\invoiceitem{Heavy wrought anvil}{1}{5600}{}
+	\invoiceitem{Dynamite (6pk)}{25}{24.99}{}
+	\invoiceitem{ACME TNT detonator}{1}{0}{Complimentary}
+	\invoiceitem{Hi-speed tonic}{10}{102.99}{}
+	\invoiceitem{Do-it yourself tornado kit}{1}{3495}{}
+	\invoiceitem{Refund for defective rocket}{1}{-1000}{Final settlement}
+	\invoiceitem{ACME Consulting: project planning and pest control ornithologist consulting}{23.5}{120}{}
+\end{invoicetable}
+
+
+\vfill\vfill % Vertical alignment whitespace
+
+%---------------------------------------------------------------------------------
+%	INVOICE CONDITIONS
+%---------------------------------------------------------------------------------
+
+\invoiceconditions{Terms and Conditions: Products sold by ACME Corporation come with no guarantees or warranties of any kind, expressed or implied. ACME specifically disclaims all implied warranties of any kind or nature, including any implied warranty of merchantability and/or any implied warranty of fitness for a particular purpose.} % Leave command empty (i.e. \invoiceconditions{}) if not required
+
+%---------------------------------------------------------------------------------
+%	MERCHANT (YOUR) INFORMATION
+%---------------------------------------------------------------------------------
+
+
+% \fancyfoot[C]{%
+% \begin{minipage}[t]{0.25\textwidth}
+% 	\itshape % Italic text
+% 	
+% 	\textbf{ACME Corporation} % Company/individual name
+% 	
+% 	2295 Horseneck Road \\ % Merchant address lines
+% 	Fairfield, NJ 07004 \\
+% 	United States \\
+% \end{minipage}
+% \begin{minipage}[t]{0.01\textwidth}
+% 	~ % Populate the minipage with a dummy space so it is spaced correctly
+% \end{minipage}
+% \begin{minipage}[t]{0.25\textwidth}
+% 	\itshape % Italic text
+% 	
+% 	\textbf{Contact}
+% 	
+% 	\href{https://www.latextemplates.com}{ACME.com} \\ % Merchant contact information lines
+% 	\href{mailto:sales@acme.com}{sales@acme.com} \\
+% \end{minipage}
+% \begin{minipage}[t]{0.01\textwidth}
+% 	~ % Populate the minipage with a dummy space so it is spaced correctly
+% \end{minipage}
+% \begin{minipage}[t]{0.26\textwidth}
+%     \centering
+%     \raisebox{-0.6cm}{\qrcode[height=1.5cm]{Your QR Code Data}}
+%     \\[1ex]
+%     ATCUD code
+% \end{minipage}%
+% }
+\fancyfoot[C]{%
+\parbox{\textwidth}{%
+\begin{minipage}[t]{0.32\textwidth}
+	\itshape % Italic text
+	
+	\textbf{ACME Corporation} % Company/individual name
+	
+	2295 Horseneck Road \\ % Merchant address lines
+	Fairfield, NJ 07004 \\
+	United States \\
+\end{minipage}
+\begin{minipage}[t]{0.01\textwidth}
+	~ % Populate the minipage with a dummy space so it is spaced correctly
+\end{minipage}
+\begin{minipage}[t]{0.32\textwidth}
+	\itshape % Italic text
+	
+	\textbf{Contact}
+	
+	\href{https://www.latextemplates.com}{ACME.com} \\ % Merchant contact information lines
+	\href{mailto:sales@acme.com}{sales@acme.com} \\
+\end{minipage}
+\begin{minipage}[t]{0.01\textwidth}
+	~ % Populate the minipage with a dummy space so it is spaced correctly
+\end{minipage}
+\begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \raisebox{-0.6cm}{\qrcode[height=1.5cm]{Your QR Code Data}}
+    \\[1ex]
+    ATCUD code
+\end{minipage}%
+} % End of parbox
+} % End of fancyfoot
+
+%---------------------------------------------------------------------------------
+
+\end{document}
