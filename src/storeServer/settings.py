@@ -25,7 +25,14 @@ SECRET_KEY = "django-insecure-kluzk8h%5eq7$()&s_zn_@=is=#0i5r$ap0@gwj8(c^2_b7c2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "gldb.dev",
+    "www.gldb.dev",
+    "176.79.170.121",
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -38,7 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Installed
     "rest_framework",
+    "corsheaders",  # DEV
     "cacheops",
+    "cities",
     # Functional apps
     "store",
     "users",
@@ -52,6 +61,13 @@ INSTALLED_APPS = [
     "blog",
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -60,7 +76,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # dev
+    "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+
+# dev
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = ["https://gldb.dev:8443", "https://www.gldb.dev:8443"]
 
 ROOT_URLCONF = "storeServer.urls"
 
@@ -88,7 +112,7 @@ WSGI_APPLICATION = "storeServer.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": "djangodev",
         "USER": "postgres",
         "PASSWORD": "123",
@@ -128,6 +152,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "users.backends.EmailOrUsernameModelBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -146,9 +175,35 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATIC_ROOT = "/var/www/tuxTech/static"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/build/static/"),
 ]
+
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "file": {
+#             "class": "logging.FileHandler",
+#             "filename": "/var/www/log/django.log",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["file"],
+#             "level": "INFO",
+#         },
+#         "storeServer": {
+#             "handlers": ["file"],
+#             "level": "INFO",
+#         },
+#     },
+# }
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
