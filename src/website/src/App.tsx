@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+import React, { useEffect } from "react";
+import { useTheme } from "./themeContext";
 import "./App.css";
 
-function App() {
+const App: React.FC = () => {
+    const { lightMode } = useTheme();
+
+    useEffect(() => {
+        if (lightMode) {
+            document.body.classList.add("dark-mode");
+            document.body.classList.remove("light-mode");
+        } else {
+            document.body.classList.add("light-mode");
+            document.body.classList.remove("dark-mode");
+        }
+    }, [lightMode]);
+
     return (
         <div className="App">
-            <div className="ads-container">
-                <div>
-                    <img src="amd.jpg"></img>
+            <div className="ad-left ad">
+            </div>
+            <div className="content">
+                <div
+                    style={{
+                        paddingTop: "80px",
+                        textAlign: "center",
+                        paddingBottom: "3000px",
+                    }}
+                >
+                    <h1>Website Content</h1>
+                    <p>...</p>
+                    <p>Contains bugs ATM, release expected 31/05!</p>
                 </div>
-                <div>
-                    TEXT IN THE MIDDLE
-                </div>
-                <div>
-                    <img src="amd.jpg"></img>
-                </div>
+            </div>
+            <div className="ad-right ad">
             </div>
         </div>
     );
-}
+};
 
-// <header className="App-header">
-//     <img src={logo} className="App-logo" alt="logo" />
-//     <p>
-//         Edit <code>src/App.tsx</code> and save to reload.
-//     </p>
-//     <a
-//         className="App-link"
-//         href="https://reactjs.org"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//     >
-//         Learn React
-//     </a>
-// </header>
 export default App;

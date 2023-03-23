@@ -1,48 +1,74 @@
-// import React from "react";
-// import "./header.css";
-//
-// import { FaSearch, FaUserCircle } from "react-icons/fa";
-// // import styles from './StoreHeader.module.css';
-// import "./header.css";
-//
-// interface StoreHeaderProps {
-//     logoUrl: string;
-// }
-//
-// const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
-//     return (
-//         <div className="container">
-//             <div className="logoContainer">
-//                 <img src={logoUrl} alt="Store logo" className="logo" />
-//             </div>
-//             <nav className="menu"></nav>
-//             <div className="login">
-//                 <div className="search">
-//                     <FaSearch style={{ marginRight: "10px", fontSize: "16px" }} />
-//                     <input type="text" placeholder="Search products" />
-//                 </div>
-//                 <div className="user">
-//                     <FaUserCircle style={{ fontSize: "24px" }} />
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-//
-// export default StoreHeader;
-import React, { useState } from "react";
-import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import React, { useRef, useState, useEffect } from "react";
+import {
+    FaHeart,
+    FaShoppingCart,
+    FaSearch,
+    FaUserCircle,
+    FaBars,
+    FaTimes,
+    FaMoon,
+    FaSun,
+} from "react-icons/fa";
 import "./header.css";
+import Login from "./login";
+import { useTheme } from "./themeContext";
 
 interface StoreHeaderProps {
     logoUrl: string;
 }
 
-const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
+const useHideHeaderOnScroll = () => {
+    const headerRef = useRef<HTMLDivElement | null>(null);
+    const lastScrollPosition = useRef(0);
+    const [isHeaderVisible] = useState(true);
+
+    const handleScroll = () => {
+        const currentScrollPosition = window.pageYOffset;
+        const headerElement = headerRef.current;
+
+        if (headerElement) {
+            if (currentScrollPosition < lastScrollPosition.current - 20) {
+                headerElement.classList.remove("hidden");
+                headerElement.style.top = "0px";
+            } else if (currentScrollPosition > lastScrollPosition.current + 20) {
+                headerElement.classList.add("hidden");
+                headerElement.style.top = "-60px";
+            }
+        }
+
+        lastScrollPosition.current = currentScrollPosition;
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    return { headerRef, isHeaderVisible };
+};
+
+const StoreHeader: React.FC<StoreHeaderProps> = () => {
+    const { headerRef, isHeaderVisible } = useHideHeaderOnScroll();
+    const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { lightMode, toggleDarkMode } = useTheme();
+
+    const renderDarkModeToggle = () => {
+        return (
+            <div onClick={toggleDarkMode} className="dark-mode-toggle">
+                {lightMode ? <FaSun /> : <FaMoon />}
+            </div>
+        );
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const toggleLoginForm = () => {
+        setIsLoginFormOpen(!isLoginFormOpen);
     };
 
     const renderMenu = () => {
@@ -66,24 +92,86 @@ const StoreHeader: React.FC<StoreHeaderProps> = ({ logoUrl }) => {
         );
     };
 
-    const renderUserIcon = () => {
-        return <FaUserCircle className="userIcon" />;
+    const renderFavIcon = () => {
+        return (
+            <div onClick={toggleLoginForm}>
+                <FaHeart className="icon" />
+            </div>
+        );
     };
 
+    const renderCartIcon = () => {
+        return (
+            <div onClick={toggleLoginForm}>
+                <FaShoppingCart className="icon" />
+            </div>
+        );
+    };
+
+    const renderUserIcon = () => {
+        return (
+            <div onClick={toggleLoginForm}>
+                <FaUserCircle className="icon" />
+            </div>
+        );
+    };
+
+    const renderLoginForm = () => {
+        return (
+            <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
+                <Login />
+            </div>
+        );
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+        if (isLoginFormOpen) {
+            const loginFormContainer = document.querySelector(
+                ".login-form-container"
+            );
+            if (
+                loginFormContainer &&
+                !loginFormContainer.contains(e.target as Node)
+            ) {
+                setIsLoginFormOpen(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isLoginFormOpen]);
+
     return (
-        <header className="header">
+        <header
+            className={`header ${isHeaderVisible ? "" : "hidden"}`}
+            ref={headerRef}
+        >
             <div className="container">
-                <div className="logoContainer">
-                    <img src={logoUrl} alt="Store logo" className="logo" />
-                </div>
                 <div className="menuIcon" onClick={toggleMenu}>
                     {isMenuOpen ? <FaTimes /> : <FaBars />}
                 </div>
                 {renderMenu()}
-                <div className="login">
+                <div className="logoContainer">
+                    <img src="l.svg" alt="Store logo" className="logo" />
+                </div>
+                <div className="icons">
                     {renderSearchBar()}
+                    <a href="/link1" className="link">
+                        TuxTech
+                    </a>
+                    <a href="/link2" className="link">
+                        Novidades
+                    </a>
+                    {renderDarkModeToggle()}
+                    {renderFavIcon()}
+                    {renderCartIcon()}
                     {renderUserIcon()}
                 </div>
+                {renderLoginForm()}
             </div>
         </header>
     );

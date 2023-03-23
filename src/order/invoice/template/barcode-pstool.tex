@@ -1,0 +1,92 @@
+\pdfoutput =0\relax 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Minimal Invoice
+% LaTeX Template
+% Version 1.1 (April 22, 2022)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	CLASS, PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	a4paper, % Paper size, use 'a4paper' for A4 or 'letterpaper' for US letter
+	9pt, % Default font size, available sizes are: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt
+]{CSMinimalInvoice}
+\taxrate{12.5}
+
+% \usepackage{auto-pst-pdf}
+\usepackage{pstool}
+\usepackage{pstricks}
+\usepackage{qrcode}
+\usepackage{pst-barcode}
+
+% The currency code (e.g. USD is United States Dollars), do one of the following:
+% 1) Enter a 3 letter code to have it appear at the bottom of the invoice
+% 2) Leave the command empty (i.e. \currencycode{}) if you don't want the code to appear on the invoice
+\currencycode{USD}
+
+% The default currency symbol for the invoice is the dollar sign, if you would like to change this, do one of the following:
+% 1) Uncomment the line below and enter one of the following currency codes to change it to the corresponding symbol for that currency: GBP, CNY, JPY, EUR, BRL or INR
+%\determinecurrencysymbol{GBP}
+% 2) Uncomment the line below and leave it blank for no currency symbol or use another character/symbol for your currency
+%\renewcommand{\currencysymbol}{}
+
+% The invoice number, do one of the following:
+% 1) Enter an invoice number, it may include any text you'd like such as '13-A'
+% 2) Leave command empty (i.e. \invoicenumber{}) and no invoice number will be output in the invoice
+\invoicenumber{40}
+
+%---------------------------------------------------------------------------------
+%	ADVANCED INVOICE SETTINGS
+%---------------------------------------------------------------------------------
+
+\roundcurrencytodecimals{2} % The number of decimal places to round currency numbers
+\roundquantitytodecimals{2} % The number of decimal places to round quantity numbers
+
+% Advanced settings for changing how numbers are output
+\sisetup{group-minimum-digits=4} % Delimit numbers (e.g. 4000 -> 4,000) when there are this number of digits or more
+\sisetup{group-separator={,}} % Character to use for delimiting digit groups
+\sisetup{output-decimal-marker={.}} % Character to use for specifying decimals
+
+\currencysuffix{} % Some currencies output the currency symbol after the number, such as Sweden's krona specified with a 'kr' suffix. Specify a suffix here if required, otherwise leave this command empty.
+
+%---------------------------------------------------------------------------------
+
+\usepackage [active,tightpage]{preview}
+\pagestyle {empty}
+
+\makeatletter 
+\@input {template.oldaux}
+\makeatother 
+
+\begin {document}
+\makeatletter 
+\immediate \write \@mainaux {\@percentchar <*PSTOOLLABELS>}
+\makeatother 
+
+\centering \null \vfill 
+
+\begin {preview}
+ \psset {unit=1bp} \begin {pspicture}(252,86) \psbarcode {12345678}{includetext inkspread=0.5}{ean8} \end {pspicture} 
+ \includegraphics [width=3.5in] {barcode}
+\end {preview}
+
+\vfill 
+
+\makeatletter 
+\immediate \write \@mainaux {\@percentchar </PSTOOLLABELS>}
+\makeatother 
+
+\end {document}
+
