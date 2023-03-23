@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",  # DEV
     "cacheops",
+    "cities",
     # Functional apps
     "store",
     "users",
@@ -83,7 +84,7 @@ MIDDLEWARE = [
 # dev
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://gldb.dev:8443', 'https://www.gldb.dev:8443']
+CSRF_TRUSTED_ORIGINS = ["https://gldb.dev:8443", "https://www.gldb.dev:8443"]
 
 ROOT_URLCONF = "storeServer.urls"
 
@@ -111,7 +112,7 @@ WSGI_APPLICATION = "storeServer.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": "djangodev",
         "USER": "postgres",
         "PASSWORD": "123",
@@ -151,6 +152,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "users.backends.EmailOrUsernameModelBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -177,26 +183,26 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/build/static/"),
 ]
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": "/var/www/log/django.log",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file"],
-            "level": "INFO",
-        },
-        "storeServer": {
-            "handlers": ["file"],
-            "level": "INFO",
-        },
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "file": {
+#             "class": "logging.FileHandler",
+#             "filename": "/var/www/log/django.log",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["file"],
+#             "level": "INFO",
+#         },
+#         "storeServer": {
+#             "handlers": ["file"],
+#             "level": "INFO",
+#         },
+#     },
+# }
 
 
 # Default primary key field type
