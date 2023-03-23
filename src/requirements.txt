@@ -1,5 +1,13 @@
 django
 django-rest-framework
+djangorestframework-simplejwt
 django-cacheops
 django-stubs
+django-cors-headers
+django-countries
+django-cities
+python-barcode
+qrcode
+whitenoise
+pillow
 psycopg2

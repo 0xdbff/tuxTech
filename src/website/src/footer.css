@@ -1,0 +1,22 @@
+@import "./variables.css";
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  text-align: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  /* Add any existing styles for the footer here */
+  flex-shrink: 0;
+}
+
+/* .footer-visible { */
+/*   opacity: 1; */
+/*   pointer-events: auto; */
+/* } */
