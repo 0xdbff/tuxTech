@@ -1,20 +1,20 @@
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth import get_user_model
+from .models import Admin
 
-User = get_user_model()
+Client = get_user_model()
 
-
-class EmailOrUsernameModelBackend(BaseBackend):
+class ClientModelBackend(BaseBackend):
     """ """
 
-    def authenticate(self, request, input=None, password=None, **kwargs):
+    def authenticate(self, input=None, password=None):
         """ """
         try:
-            user = User.objects.get(email=input)
-        except User.DoesNotExist:
+            user = Client.objects.get(email=input)
+        except Client.DoesNotExist:
             try:
-                user = User.objects.get(username=input)
-            except User.DoesNotExist:
+                user = Client.objects.get(username=input)
+            except Client.DoesNotExist:
                 return None
 
         try:
@@ -28,6 +28,34 @@ class EmailOrUsernameModelBackend(BaseBackend):
     def get_user(self, user_id):
         """ """
         try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
+            return Client.objects.get(pk=user_id)
+        except Client.DoesNotExist:
+            return None
+
+
+class AdminModelBackend(BaseBackend):
+    """ """
+
+    def authenticate(self, input=None, password=None):
+        """ """
+        try:
+            user = Admin.objects.get(email=input)
+        except Admin.DoesNotExist:
+            try:
+                user = Admin.objects.get(username=input)
+            except Admin.DoesNotExist:
+                return None
+
+        try:
+            if password:
+                if user.check_password(raw_password=password):
+                    return user
+            return None
+        except:
+            return None
+
+    def get_user(self, user_id):
+        try:
+            return Admin.objects.get(pk=user_id)
+        except Admin.DoesNotExist:
             return None

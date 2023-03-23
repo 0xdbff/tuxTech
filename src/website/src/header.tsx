@@ -12,6 +12,7 @@ import {
 import "./header.css";
 import Login from "./login";
 import { useTheme } from "./themeContext";
+import RegistrationForm from "./registrationForm";
 
 interface StoreHeaderProps {
     logoUrl: string;
@@ -50,6 +51,7 @@ const useHideHeaderOnScroll = () => {
 };
 
 const StoreHeader: React.FC<StoreHeaderProps> = () => {
+    const [isRegistrationFormOpen, setIsRegistrationFormOpen] = useState(false);
     const { headerRef, isHeaderVisible } = useHideHeaderOnScroll();
     const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,6 +71,10 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const toggleLoginForm = () => {
         setIsLoginFormOpen(!isLoginFormOpen);
+    };
+
+    const toggleRegistrationForm = () => {
+        setIsRegistrationFormOpen(!isRegistrationFormOpen);
     };
 
     const renderMenu = () => {
@@ -108,9 +114,17 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
         );
     };
 
+    // const renderUserIcon = () => {
+    //     return (
+    //         <div onClick={toggleLoginForm}>
+    //             <FaUserCircle className="icon" />
+    //         </div>
+    //     );
+    // };
+
     const renderUserIcon = () => {
         return (
-            <div onClick={toggleLoginForm}>
+            <div onClick={toggleRegistrationForm}>
                 <FaUserCircle className="icon" />
             </div>
         );
@@ -120,6 +134,17 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
         return (
             <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
                 <Login />
+            </div>
+        );
+    };
+
+    const renderRegistrationForm = () => {
+        return (
+            <div
+                className={`registration-form-container ${isRegistrationFormOpen ? "open" : ""
+                    }`}
+            >
+                <RegistrationForm />
             </div>
         );
     };
@@ -172,6 +197,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                     {renderUserIcon()}
                 </div>
                 {renderLoginForm()}
+                {renderRegistrationForm()}
             </div>
         </header>
     );
