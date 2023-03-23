@@ -19,12 +19,12 @@ class ClientModelBackend(BaseBackend):
                 return None
 
         try:
-            if password:
-                if user.check_password(raw_password=password):
-                    return user
-            return None
+            if password and user.check_password(raw_password=password):
+                return user
         except:
-            return None
+            pass
+
+        return None
 
     def get_user(self, user_id):
         """ """
@@ -48,12 +48,12 @@ class AdminModelBackend(BaseBackend):
                 return None
 
         try:
-            if password:
-                if user.check_password(raw_password=password):
-                    return user
-            return None
+            if password and user.check_password(raw_password=password):
+                return user
         except:
-            return None
+            pass
+
+        return None
 
     def get_user(self, user_id):
         try:
