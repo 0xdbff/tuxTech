@@ -155,8 +155,8 @@ const Registration: React.FC = () => {
 
     return (
         <div className="registration">
-            <h2>Register</h2>
             <form onSubmit={handleSubmit}>
+            <h2> O registo é facil e grátis!</h2>
                 {renderFirstNameField()}
                 {renderLastNameField()}
                 {renderEmailField()}
