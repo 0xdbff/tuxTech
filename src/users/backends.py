@@ -1,15 +1,10 @@
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth import get_user_model
-from .models import Admin
-
-Client = get_user_model()
+from .models import Admin, Client
 
 
 class ClientModelBackend(BaseBackend):
-    """ """
-
-    def authenticate(self, input=None, password=None):
-        """ """
+    def authenticate(self, input=None, password=None, **kwargs):
         try:
             user = Client.objects.get(email=input)
         except Client.DoesNotExist:
@@ -18,16 +13,11 @@ class ClientModelBackend(BaseBackend):
             except Client.DoesNotExist:
                 return None
 
-        try:
-            if password and user.check_password(raw_password=password):
-                return user
-        except:
-            pass
-
+        if password and user.check_password(password):
+            return user
         return None
 
     def get_user(self, user_id):
-        """ """
         try:
             return Client.objects.get(pk=user_id)
         except Client.DoesNotExist:
@@ -35,10 +25,7 @@ class ClientModelBackend(BaseBackend):
 
 
 class AdminModelBackend(BaseBackend):
-    """ """
-
-    def authenticate(self, input=None, password=None):
-        """ """
+    def authenticate(self, input=None, password=None, **kwargs):
         try:
             user = Admin.objects.get(email=input)
         except Admin.DoesNotExist:
@@ -47,12 +34,8 @@ class AdminModelBackend(BaseBackend):
             except Admin.DoesNotExist:
                 return None
 
-        try:
-            if password and user.check_password(raw_password=password):
-                return user
-        except:
-            pass
-
+        if password and user.check_password(password):
+            return user
         return None
 
     def get_user(self, user_id):

@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import React, { useEffect } from "react";
 import { useTheme } from "./themeContext";
 import "./App.css";
+import Registration from "./resgitration"; // !TODO CHANGE
 
 const App: React.FC = () => {
     const { lightMode } = useTheme();
@@ -17,8 +20,7 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <div className="ad-left ad">
-            </div>
+            <div className="ad-left ad"></div>
             <div className="content">
                 <div
                     style={{
@@ -30,10 +32,10 @@ const App: React.FC = () => {
                     <h1>Website Content</h1>
                     <p>...</p>
                     <p>Contains bugs ATM, release expected 31/05!</p>
+                    <Registration></Registration>
                 </div>
             </div>
-            <div className="ad-right ad">
-            </div>
+            <div className="ad-right ad"></div>
         </div>
     );
 };

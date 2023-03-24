@@ -12,7 +12,6 @@ import {
 import "./header.css";
 import Login from "./login";
 import { useTheme } from "./themeContext";
-import RegistrationForm from "./registrationForm";
 
 interface StoreHeaderProps {
     logoUrl: string;
@@ -51,7 +50,6 @@ const useHideHeaderOnScroll = () => {
 };
 
 const StoreHeader: React.FC<StoreHeaderProps> = () => {
-    const [isRegistrationFormOpen, setIsRegistrationFormOpen] = useState(false);
     const { headerRef, isHeaderVisible } = useHideHeaderOnScroll();
     const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,10 +71,6 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
         setIsLoginFormOpen(!isLoginFormOpen);
     };
 
-    const toggleRegistrationForm = () => {
-        setIsRegistrationFormOpen(!isRegistrationFormOpen);
-    };
-
     const renderMenu = () => {
         return (
             <nav className={`menu ${isMenuOpen ? "open" : ""}`}>
@@ -91,7 +85,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const renderSearchBar = () => {
         return (
-            <div className="search">
+            <div>
                 <FaSearch className="searchIcon" />
                 <input type="text" placeholder="Search products" />
             </div>
@@ -100,7 +94,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const renderFavIcon = () => {
         return (
-            <div onClick={toggleLoginForm}>
+            <div>
                 <FaHeart className="icon" />
             </div>
         );
@@ -108,23 +102,15 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const renderCartIcon = () => {
         return (
-            <div onClick={toggleLoginForm}>
+            <div>
                 <FaShoppingCart className="icon" />
             </div>
         );
     };
 
-    // const renderUserIcon = () => {
-    //     return (
-    //         <div onClick={toggleLoginForm}>
-    //             <FaUserCircle className="icon" />
-    //         </div>
-    //     );
-    // };
-
     const renderUserIcon = () => {
         return (
-            <div onClick={toggleRegistrationForm}>
+            <div onClick={toggleLoginForm}>
                 <FaUserCircle className="icon" />
             </div>
         );
@@ -133,18 +119,12 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     const renderLoginForm = () => {
         return (
             <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
+                <div className="registration-link-container">
+                    <a href="/register" onClick={toggleLoginForm}>
+                        Register
+                    </a>
+                </div>
                 <Login />
-            </div>
-        );
-    };
-
-    const renderRegistrationForm = () => {
-        return (
-            <div
-                className={`registration-form-container ${isRegistrationFormOpen ? "open" : ""
-                    }`}
-            >
-                <RegistrationForm />
             </div>
         );
     };
@@ -197,7 +177,6 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                     {renderUserIcon()}
                 </div>
                 {renderLoginForm()}
-                {renderRegistrationForm()}
             </div>
         </header>
     );

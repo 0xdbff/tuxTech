@@ -14,7 +14,7 @@ class LoginView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        input = request.data.get("input")
+        input = request.data.get("username")
         password = request.data.get("password")
         backend = ClientModelBackend()
         user = backend.authenticate(input=input, password=password)
@@ -40,7 +40,7 @@ class AdminLoginView(APIView):
         input = request.data.get("username")
         password = request.data.get("password")
         backend = AdminModelBackend()
-        user = backend.authenticate(input=input, password=password)
+        user = backend.authenticate(request=request, input=input, password=password)
 
         if user is not None:
             refresh = RefreshToken.for_user(user)
