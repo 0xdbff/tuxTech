@@ -85,7 +85,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const renderSearchBar = () => {
         return (
-            <div>
+            <div className="search">
                 <FaSearch className="searchIcon" />
                 <input type="text" placeholder="Search products" />
             </div>
