@@ -112,7 +112,9 @@ class Client(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    REQUIRED_FIELDS = ["email", "username"]
+    # Make the email the default identifier for an admin.
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -156,7 +158,9 @@ class Admin(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    REQUIRED_FIELDS = ["email", "username"]
+    # Make the email the default identifier for an admin.
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
