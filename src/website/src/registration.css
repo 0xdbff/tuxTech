@@ -1,0 +1,61 @@
+@import "./variables.css";
+
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
+  /* height: 60vh; */
+  /* background-color: #ffffff; */
+}
+
+.registration-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-gray-08);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  margin-right: 5px;
+  margin-left: 5px;
+  height: 60vh;
+  width: 60vh;
+}
+
+.form-container {
+  flex: 1;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  margin-left: 2rem;
+}
+
+.buttons-container button {
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttons-container button:hover {
+  background-color: #0056b3;
+}
+
+.google-login {
+  background-color: #dd4b39;
+}
+
+.google-login:hover {
+  background-color: #c23321;
+}

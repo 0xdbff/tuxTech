@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import InputField from "./inputField";
 import SelectField from "./selectField";
 import useInputHandler from "./useInputHandler";
+import "./registration.css";
 
 const Registration: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -155,17 +156,21 @@ const Registration: React.FC = () => {
 
     return (
         <div className="registration">
-            <form onSubmit={handleSubmit}>
-            <h2> O registo é facil e grátis!</h2>
-                {renderFirstNameField()}
-                {renderLastNameField()}
-                {renderEmailField()}
-                {renderUsernameField()}
-                {renderNifField()}
-                {renderDateOfBirthField()}
-                {renderIsSubscribedToNewsField()}
-                <button type="submit">Register</button>
-            </form>
+            <div className="registration-container">
+                <div className="form-container">
+                    <form onSubmit={handleSubmit}>
+                        <h2> O registo é facil e grátis!</h2>
+                        {renderFirstNameField()}
+                        {renderLastNameField()}
+                        {renderEmailField()}
+                        {renderUsernameField()}
+                        {renderNifField()}
+                        {renderDateOfBirthField()}
+                        {renderIsSubscribedToNewsField()}
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };
