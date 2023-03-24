@@ -32,7 +32,7 @@
   width: 40%;
   height: 30px;
   border: none;
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 0 20px;
   outline: none;
   transition: border-color 0.2s;
@@ -51,16 +51,6 @@
   background-color: var(--color-gray-04);
   border-radius: 20px;
 }
-
-/* .input-field input:focus + label, */
-/* .input-field input:not(:placeholder-shown) + label { */
-/*   top: 6px; */
-/*   font-size: 10px; */
-/*   transition: 0.2s ease-in-out; */
-/*   border-radius: 20px; */
-/*   background-color: var(--color-bg); */
-/*   color: var(--color-fg); */
-/* } */
 
 .input-field input:focus + label,
 .input-field input:not(:placeholder-shown) + label {
