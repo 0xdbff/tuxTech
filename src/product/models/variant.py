@@ -1,6 +1,6 @@
-""" Product models"""
 from django.db import models
 from .unit import Unit
+from .media import Media
 
 
 class Variant(models.Model):
@@ -10,9 +10,9 @@ class Variant(models.Model):
 
     sku = models.CharField(max_length=32, primary_key=True, editable=False)
     name = models.TextField(null=False)
-    media = models.ManyToManyField("Media")
+    media = models.ManyToManyField(Media, through="VariantMedia")
     mediafiles_hash = models.CharField(max_length=64, editable=True)
-    """ Dont resend media to website if there are no diferences for this variant."""
+    """ Dont resend media to website if there are no differences for this variant."""
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     info = models.ForeignKey(
         "BaseInfo",

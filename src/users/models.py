@@ -1,4 +1,5 @@
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -9,7 +10,6 @@ from cities.models import City, Country
 from datetime import date
 from .validators import validate_card_number
 import uuid
-
 
 class CreditCard(models.Model):
     CARD_TYPES = (
@@ -73,7 +73,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class Client(AbstractBaseUser, PermissionsMixin):
+class Client(AbstractUser, PermissionsMixin):
     """ """
 
     GENDER_CHOICES = (
@@ -91,6 +91,7 @@ class Client(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=150, unique=True, null=True)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     receive_news = models.BooleanField(default=False)
 
     groups = models.ManyToManyField(
@@ -120,7 +121,7 @@ class Client(AbstractBaseUser, PermissionsMixin):
         return f"{self.first_name} {self.last_name}"
 
 
-class Admin(AbstractBaseUser, PermissionsMixin):
+class Admin(AbstractUser, PermissionsMixin):
     """ """
 
     GENDER_CHOICES = (
@@ -138,6 +139,7 @@ class Admin(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     groups = models.ManyToManyField(
         "auth.Group",
@@ -211,6 +213,9 @@ class Address(models.Model):
             )
         ],
     )
+
+    class Meta:
+        unique_together = ('client', 'country', 'city', 'street', 'house_number', 'apartment_number', 'postal_code')
 
     def __str__(self):
         return f"{self.street} {self.house_number}\n{self.city}, {self.postal_code}, {self.country}"
