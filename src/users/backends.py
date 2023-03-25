@@ -25,16 +25,21 @@ class ClientModelBackend(BaseBackend):
 
 
 class AdminModelBackend(BaseBackend):
-    def authenticate(self, input=None, password=None, **kwargs):
+    def authenticate(self, request, input=None, password=None, **kwargs):
+        email_or_username = request.POST.get("email") or request.POST.get("username")
+        print(f"Input email/username: {email_or_username}")
         try:
-            user = Admin.objects.get(email=input)
+            user = Admin.objects.get(email=email_or_username)
         except Admin.DoesNotExist:
             try:
-                user = Admin.objects.get(username=input)
+                user = Admin.objects.get(username=email_or_username)
+                print("Authentication successful")
             except Admin.DoesNotExist:
+                print("Admin not found")
                 return None
 
         if password and user.check_password(password):
+            print("Password verified")
             return user
         return None
 
@@ -42,4 +47,5 @@ class AdminModelBackend(BaseBackend):
         try:
             return Admin.objects.get(pk=user_id)
         except Admin.DoesNotExist:
+            print("Admin not found in get_user")
             return None

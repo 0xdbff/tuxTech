@@ -4,5 +4,6 @@ from .unit import Unit
 from .brand import Brand
 from .category import Category
 from .media import Media
+from .variant_media import VariantMedia
 from .variant import Variant
 from .option import Option
