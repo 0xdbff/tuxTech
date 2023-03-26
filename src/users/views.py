@@ -5,8 +5,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.http import JsonResponse
 from django.views import View
-from .models import Client
-from .backends import ClientModelBackend, AdminModelBackend
+from .models import Client, Admin
+from .backends import CustomModelBackend
 from .serializers import ClientSerializer
 
 
@@ -16,8 +16,8 @@ class LoginView(APIView):
     def post(self, request):
         input = request.data.get("username")
         password = request.data.get("password")
-        backend = ClientModelBackend()
-        user = backend.authenticate(input=input, password=password)
+        backend = CustomModelBackend()
+        user = backend.authenticate(input=input, request=request, password=password)
 
         if user is not None:
             refresh = RefreshToken.for_user(user)
@@ -39,8 +39,14 @@ class AdminLoginView(APIView):
     def post(self, request):
         input = request.data.get("username")
         password = request.data.get("password")
-        backend = AdminModelBackend()
-        user = backend.authenticate(request=request, input=input, password=password)
+
+        print("Received input:", input)  # Debug print
+        print("Received password:", password)  # Debug print
+
+        backend = backend = CustomModelBackend()
+        user = backend.authenticate(
+            request=request, input=input, password=password, admin_only=True
+        )
 
         if user is not None:
             refresh = RefreshToken.for_user(user)

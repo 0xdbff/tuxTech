@@ -3,7 +3,8 @@ from .views import LoginView, AdminLoginView, ClientJsonView, ClientRegistration
 
 urlpatterns = [
     path("api/login/", LoginView.as_view(), name="login"),
-    path("api/admin/login/", AdminLoginView.as_view(), name="login"),
+    path("api/login/admin", LoginView.as_view(), name="admin_login"),
+    # path("api/login/admin", LoginView.as_view(), name="admin_login"),
     path("clients/<uuid:client_id>/", ClientJsonView.as_view(), name="client_json"),
     path("register/", ClientRegistrationView.as_view(), name="register"),
 ]

@@ -25,7 +25,8 @@ SECRET_KEY = "django-insecure-kluzk8h%5eq7$()&s_zn_@=is=#0i5r$ap0@gwj8(c^2_b7c2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-AUTH_USER_MODEL = "users.Client"
+# !TODO remove this
+# AUTH_USER_MODEL = "users.Client"
 
 ALLOWED_HOSTS = [
     "gldb.dev",
@@ -154,10 +155,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "users.Client"
+
 AUTHENTICATION_BACKENDS = [
-    "users.backends.ClientModelBackend",
-    "users.backends.AdminModelBackend",
-    # "django.contrib.auth.backends.ModelBackend",
+    "users.backends.CustomModelBackend",
+    # "users.backends.AdminModelBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 
@@ -206,7 +209,10 @@ STATICFILES_DIRS = [
 #         },
 #     },
 # }
+# settings.py
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -11,14 +11,14 @@ class Media(models.Model):
     """
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32, unique=True, editable=False, null=False)
-    hash = models.CharField(max_length=64, editable=True, default="")
+    name = models.CharField(max_length=32, unique=True, editable=True, null=False)
+    hash = models.CharField(max_length=64, editable=True, default=" ")
     """Signature hash"""
     media_type = models.CharField(max_length=4)
     """Media type -> url, png, jpg, gif ..."""
 
     image = models.ImageField(
-        upload_to="images/",
+        upload_to="images/",  # !TODO change to /var/TuxTech/media
         validators=[
             FileExtensionValidator(
                 allowed_extensions=["jpg", "jpeg", "png", "gif"],
