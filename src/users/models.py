@@ -1,8 +1,7 @@
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import (
-    AbstractBaseUser,
+    AbstractUser,
     BaseUserManager,
     PermissionsMixin,
 )
@@ -10,6 +9,7 @@ from cities.models import City, Country
 from datetime import date
 from .validators import validate_card_number
 import uuid
+
 
 class CreditCard(models.Model):
     CARD_TYPES = (
@@ -73,55 +73,115 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class Client(AbstractUser, PermissionsMixin):
-    """ """
+#
+#
+# class Client(AbstractUser, PermissionsMixin):
+#     """ """
+#
+#     GENDER_CHOICES = (
+#         ("M", "Male"),
+#         ("F", "Female"),
+#         ("O", "Other"),
+#         ("N", "Prefer not to say"),
+#     )
+#
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#     nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
+#     first_name = models.CharField(max_length=30, blank=True)
+#     last_name = models.CharField(max_length=30, blank=True)
+#     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default="N")
+#     email = models.EmailField(unique=True)
+#     username = models.CharField(max_length=150, unique=True, null=True)
+#     is_active = models.BooleanField(default=True)
+#     is_staff = models.BooleanField(default=False)
+#     receive_news = models.BooleanField(default=False)
+#
+#     groups = models.ManyToManyField(
+#         "auth.Group",
+#         blank=True,
+#         help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+#         related_name="client_set",
+#         related_query_name="client",
+#         verbose_name="groups",
+#     )
+#     user_permissions = models.ManyToManyField(
+#         "auth.Permission",
+#         blank=True,
+#         help_text="Specific permissions for this user.",
+#         related_name="client_set",
+#         related_query_name="client",
+#         verbose_name="user permissions",
+#     )
+#
+#     objects = CustomUserManager()
+#
+#     # Make the email the default identifier for an admin.
+#     USERNAME_FIELD = "email"
+#     REQUIRED_FIELDS = ["username"]
+#
+#     def __str__(self):
+#         return f"{self.first_name} {self.last_name}"
+#
+#
+# class Admin(AbstractUser, PermissionsMixin):
+#     """ """
+#
+#     GENDER_CHOICES = (
+#         ("M", "Male"),
+#         ("F", "Female"),
+#         ("O", "Other"),
+#         ("N", "Prefer not to say"),
+#     )
+#
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#     first_name = models.CharField(max_length=30, blank=True)
+#     last_name = models.CharField(max_length=30, blank=True)
+#     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default="O")
+#     email = models.EmailField(unique=True)
+#     username = models.CharField(max_length=150, unique=True, null=True)
+#     is_active = models.BooleanField(default=True)
+#     is_staff = models.BooleanField(default=False)
+#     is_superuser = models.BooleanField(default=False)
+#
+#     groups = models.ManyToManyField(
+#         "auth.Group",
+#         blank=True,
+#         help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+#         related_name="admin_set",
+#         related_query_name="admin",
+#         verbose_name="groups",
+#     )
+#     user_permissions = models.ManyToManyField(
+#         "auth.Permission",
+#         blank=True,
+#         help_text="Specific permissions for this user.",
+#         related_name="admin_set",
+#         related_query_name="admin",
+#         verbose_name="user permissions",
+#     )
+#
+#     objects = CustomUserManager()
+#
+#     # Make the email the default identifier for an admin.
+#     USERNAME_FIELD = "email"
+#     REQUIRED_FIELDS = ["username"]
+#
+#     def __str__(self):
+#         return f"{self.first_name} {self.last_name}"
+#
+#
+# class EnterpriseClient(Client):
+#     """ """
+#
+#     company_name = models.CharField(max_length=255)
+#     company_nif = models.CharField(max_length=255)
+#
+#     def __str__(self):
+#         """ """
+#         return f"{self.email} - {self.company_name}"
 
-    GENDER_CHOICES = (
-        ("M", "Male"),
-        ("F", "Female"),
-        ("O", "Other"),
-        ("N", "Prefer not to say"),
-    )
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default="N")
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=150, unique=True, null=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    receive_news = models.BooleanField(default=False)
-
-    groups = models.ManyToManyField(
-        "auth.Group",
-        blank=True,
-        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
-        related_name="client_set",
-        related_query_name="client",
-        verbose_name="groups",
-    )
-    user_permissions = models.ManyToManyField(
-        "auth.Permission",
-        blank=True,
-        help_text="Specific permissions for this user.",
-        related_name="client_set",
-        related_query_name="client",
-        verbose_name="user permissions",
-    )
-
-    objects = CustomUserManager()
-
-    # Make the email the default identifier for an admin.
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
-class Admin(AbstractUser, PermissionsMixin):
+class CustomUser(AbstractUser, PermissionsMixin):
     """ """
 
     GENDER_CHOICES = (
@@ -141,6 +201,45 @@ class Admin(AbstractUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
+    class Meta:
+        abstract = True
+
+    # Common fields and methods for Client and Admin models
+    # ...
+
+
+class Client(CustomUser):
+    groups = models.ManyToManyField(
+        "auth.Group",
+        blank=True,
+        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+        related_name="client_set",
+        related_query_name="client",
+        verbose_name="groups",
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        blank=True,
+        help_text="Specific permissions for this user.",
+        related_name="client_set",
+        related_query_name="client",
+        verbose_name="user permissions",
+    )
+    # Client-specific fields and methods
+    # ...
+    nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
+    receive_news = models.BooleanField(default=False)
+
+
+# class EnterpiseClient(Client):
+
+
+# Client-specific fields and methods
+# ...
+
+
+class Admin(CustomUser):
+    receive_news = models.BooleanField(default=False)
     groups = models.ManyToManyField(
         "auth.Group",
         blank=True,
@@ -158,25 +257,8 @@ class Admin(AbstractUser, PermissionsMixin):
         verbose_name="user permissions",
     )
 
-    objects = CustomUserManager()
-
-    # Make the email the default identifier for an admin.
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
-class EnterpriseClient(Client):
-    """ """
-
-    company_name = models.CharField(max_length=255)
-    company_nif = models.CharField(max_length=255)
-
-    def __str__(self):
-        """ """
-        return f"{self.email} - {self.company_name}"
+    # Admin-specific fields and methods
+    # ...
 
 
 class Address(models.Model):
@@ -215,7 +297,15 @@ class Address(models.Model):
     )
 
     class Meta:
-        unique_together = ('client', 'country', 'city', 'street', 'house_number', 'apartment_number', 'postal_code')
+        unique_together = (
+            "client",
+            "country",
+            "city",
+            "street",
+            "house_number",
+            "apartment_number",
+            "postal_code",
+        )
 
     def __str__(self):
         return f"{self.street} {self.house_number}\n{self.city}, {self.postal_code}, {self.country}"
