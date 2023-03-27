@@ -10,11 +10,11 @@ class Option(models.Model):
     spec_id = models.ForeignKey(
         "Specification",
         on_delete=models.CASCADE,
-        related_name="product_info",
+        related_name="base_info",
         editable=False,
         null=False,
     )
-    added_price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    price_to_add = models.DecimalField(max_digits=10, decimal_places=2, null=False)
 
     def __str__(self):
         """Instance name"""
