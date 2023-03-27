@@ -19,11 +19,23 @@ class BaseInfo(models.Model):
     ean = models.CharField(max_length=14, primary_key=True, editable=False)
     name = models.TextField(null=False)
     description = models.TextField(null=False)
+
+    # !TODO setup autoupdate for this fields, make this properties.
     price_min = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     price_max = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="product_baseInfo"
+        Category, on_delete=models.CASCADE, related_name="base_info"
     )
+    """ A reference to this product's category."""
+    subCategory = models.ForeignKey(
+        "SubCategory", on_delete=models.CASCADE, related_name="base_info"
+    )
+    """ A reference to this product's sub-category."""
+    ptype = models.ForeignKey(
+        "Type", on_delete=models.CASCADE, related_name="base_info"
+    )
+    """ A reference to this product's type."""
     brand = models.ForeignKey(
         Brand,
         on_delete=models.CASCADE,
@@ -31,11 +43,12 @@ class BaseInfo(models.Model):
         editable=False,
         null=False,
     )
+    """ A reference to this product's brand."""
     specifications = models.ManyToManyField(Specification)
     date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        """Get the product type and reference as default instance name"""
+        """Get the product's type and reference as default instance name"""
         return f"{self.name} - ({self.ean})"
 
     @property

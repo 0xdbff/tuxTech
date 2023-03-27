@@ -9,6 +9,7 @@ class Variant(models.Model):
     """
 
     sku = models.CharField(max_length=32, primary_key=True, editable=False)
+    variant_pos = models.SmallIntegerField(editable=True, null=False)
     name = models.TextField(null=False)
     media = models.ManyToManyField(Media, through="VariantMedia")
     mediafiles_hash = models.CharField(max_length=64, editable=True)
