@@ -1,0 +1,53 @@
+/* ImageModal.css */
+.thumbnail {
+  max-width: 20vw;
+  max-height: 20vh;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  width: 50vw;
+  height: 90vh;
+  outline: none;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .modal-content {
+    width: 94vw;
+    height: 94vh;
+  }
+}
+
+/* .modal-backdrop::before { */
+/*   content: ""; */
+/*   background-image: inherit; */
+/*   filter: blur(2000px); */
+/*   position: fixed; */
+/*   top: 0; */
+/*   left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   z-index: -1; */
+/* } */

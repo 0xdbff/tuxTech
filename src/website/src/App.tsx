@@ -54,10 +54,13 @@ import { useTheme } from "./themeContext";
 import "./App.css";
 import Registration from "./resgitration";
 import Images from "./images";
-import Background from "./Background";
+// import Background from "./Background";
+import ImageModal from "./ImageModal";
 
 const App: React.FC = () => {
     const { lightMode } = useTheme();
+
+    const imageSrc = "./p047671_1_.jpg";
 
     useEffect(() => {
         if (lightMode) {
@@ -69,31 +72,24 @@ const App: React.FC = () => {
         }
     }, [lightMode]);
 
-    const imageUrl = "amd.jpg";
-    const gradient = "to right, rgba(255, 0, 0, 0.5), rgba(0, 255, 0, 0.5)";
-
     return (
         <div className="App">
-            <div className="ad-left">
-                <Background imageUrl={imageUrl} gradient={gradient} />
-            </div>
-            <div className="content">
-                <div
-                    style={{
-                        paddingTop: "80px",
-                        textAlign: "center",
-                        paddingBottom: "3000px",
-                    }}
-                >
+            <ImageModal src={imageSrc} alt="Your image description" />
+            <div id="app-content">
+                <div className="ad-left">
+                    <img src="amd.jpg" alt="Your image description" />
+                </div>
+                <div className="content">
                     <Images></Images>
                     <h1>Website Content</h1>
                     <p>...</p>
                     <p>Contains bugs ATM, release expected 31/05!</p>
                     <Registration></Registration>
                 </div>
-            </div>
-            <div className="ad-right">
-                <Background imageUrl={imageUrl} gradient={gradient} rotation={180} />
+                <div className="ad-right">
+                    <img src="amd.jpg" alt="Your image description" />
+
+                </div>
             </div>
         </div>
     );

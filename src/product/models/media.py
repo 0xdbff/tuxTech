@@ -18,7 +18,7 @@ class Media(models.Model):
     """Media type -> url, png, jpg, gif ..."""
 
     image = models.ImageField(
-        upload_to="images/",  # !TODO change to /var/TuxTech/media
+        upload_to="products/",  # !TODO change to /var/TuxTech/media
         validators=[
             FileExtensionValidator(
                 allowed_extensions=["jpg", "jpeg", "png", "gif"],
@@ -30,7 +30,7 @@ class Media(models.Model):
 
     def __str__(self):
         """Instance name"""
-        return f"media@{self.name}.{self.media_type}"
+        return f"{self.name}-{self.id}.{self.media_type}"
 
     # def generate_hash(self):
     #     """
