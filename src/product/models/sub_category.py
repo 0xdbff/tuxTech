@@ -1,9 +1,8 @@
 """ """
 from django.db import models
-from django.core.validators import FileExtensionValidator
 
 
-class Category(models.Model):
+class SubCategory(models.Model):
     """
     Category model to represent different product categories.
     Examples include Computers, Servers, and Mobile Devices.
@@ -11,15 +10,12 @@ class Category(models.Model):
 
     name = models.CharField(max_length=32, primary_key=True, editable=True)
     description = models.TextField()
-    image = models.ImageField(
-        upload_to="categories/",  # !TODO change to /var/TuxTech/media
-        validators=[
-            FileExtensionValidator(
-                allowed_extensions=["png", "svg"],
-                message="File format not supported.",
-            )
-        ],
+    category = models.ForeignKey(
+        "Category",
+        on_delete=models.CASCADE,
+        related_name="sub_category",
         null=False,
+        editable=True,
     )
 
     def __str__(self):
