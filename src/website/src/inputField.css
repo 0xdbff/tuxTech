@@ -1,0 +1,64 @@
+@import "./variables.css";
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 4px 4px;
+  flex-grow: 1;
+  max-width: 800px;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.input-field label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.2s ease-in-out;
+  pointer-events: none;
+  font-size: 12px;
+  color: var(--color-blue);
+}
+
+.input-field input {
+  background-color: var(--color-gray-05);
+  color: var(--color-blue);
+  width: 40%;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding: 0 20px;
+  outline: none;
+  transition: border-color 0.2s;
+  font-size: 12px;
+}
+
+.input-field input:focus {
+  border: 1px solid var(--color-blue);
+}
+
+.input-placeholder::placeholder {
+  font-size: 8px; /* Adjust this value to your preference */
+}
+
+.input-field input:hover {
+  background-color: var(--color-gray-04);
+  border-radius: 20px;
+}
+
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+  top: 2px;
+  font-size: 10px;
+  transition: 0.2s ease-in-out;
+  border-radius: 20px;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  padding: 0px 6px;
+}

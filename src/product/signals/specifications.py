@@ -15,4 +15,4 @@ with open(default_specifications_path, "r") as f:
 @receiver(post_migrate)
 def load_default_specifications(sender, **kwargs):
     for spec in default_specifications:
-        Specification.objects.get_or_create(name=spec["key"], value=spec["value"])
+        Specification.objects.get_or_create(key=spec["key"], value=spec["value"])

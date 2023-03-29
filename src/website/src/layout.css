@@ -1,0 +1,22 @@
+/* Layout.css */
+.layout-container {
+  display: flex;
+  height: 100%;
+}
+
+.left-sidebar,
+.right-sidebar,
+.main-content {
+  height: 100%;
+  position: relative;
+}
+
+.left-sidebar,
+.right-sidebar {
+  width: 20%;
+}
+
+.main-content {
+  width: 60%;
+}
+
