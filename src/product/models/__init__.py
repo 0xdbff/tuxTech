@@ -3,6 +3,8 @@ from .specification import Specification
 from .unit import Unit
 from .brand import Brand
 from .category import Category
+from .sub_category import SubCategory
+from .type import Type
 from .media import Media
 from .variant_media import VariantMedia
 from .variant import Variant

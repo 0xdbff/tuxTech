@@ -18,12 +18,12 @@ class Specification(models.Model):
 
     def __str__(self):
         """Instance name"""
-        return f"{self.key}: {self.value}"
+        return f"{self.key}-{self.value}"
 
-    def __eq__(self, other):
-        if isinstance(other, Specification):
-            return self.key == other.key and self.value == other.value
-        return False
+    # def __eq__(self, other):
+    #     if isinstance(other, Specification):
+    #         return self.key == other.key and self.value == other.value
+    #     return False
 
     def __hash__(self):
         return hash((self.key, self.value))

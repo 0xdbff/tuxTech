@@ -1,10 +1,10 @@
 """ Product models"""
 from django.db import models
 from django.utils import timezone
-from .category import Category
-from .brand import Brand
-from .specification import Specification
+
 from .variant import Variant
+
+import uuid
 
 
 class BaseInfo(models.Model):
@@ -16,16 +16,13 @@ class BaseInfo(models.Model):
     product.baseInfo.
     """
 
-    ean = models.CharField(max_length=14, primary_key=True, editable=False)
     name = models.TextField(null=False)
+    ref = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     description = models.TextField(null=False)
 
-    # !TODO setup autoupdate for this fields, make this properties.
-    price_min = models.DecimalField(max_digits=10, decimal_places=2, null=False)
-    price_max = models.DecimalField(max_digits=10, decimal_places=2, null=False)
-
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="base_info"
+        "Category", on_delete=models.CASCADE, related_name="base_info"
     )
     """ A reference to this product's category."""
     subCategory = models.ForeignKey(
@@ -37,23 +34,36 @@ class BaseInfo(models.Model):
     )
     """ A reference to this product's type."""
     brand = models.ForeignKey(
-        Brand,
+        "Brand",
         on_delete=models.CASCADE,
         related_name="product_baseInfo",
         editable=False,
         null=False,
     )
     """ A reference to this product's brand."""
-    specifications = models.ManyToManyField(Specification)
     date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         """Get the product's type and reference as default instance name"""
-        return f"{self.name} - ({self.ean})"
+        return f"{self.name}-{self.ref})"
 
     @property
-    def variations(self):
+    def variations_count(self):
         return Variant.objects.filter(info=self).count()
+
+    @property
+    def price_min(self):
+        min_price = Variant.objects.filter(info=self).aggregate(min_price=Min("price"))[
+            "min_price"
+        ]
+        return min_price if min_price is not None else 0
+
+    @property
+    def price_max(self):
+        max_price = Variant.objects.filter(info=self).aggregate(max_price=Max("price"))[
+            "max_price"
+        ]
+        return max_price if max_price is not None else 0
 
     @property
     def price(self):

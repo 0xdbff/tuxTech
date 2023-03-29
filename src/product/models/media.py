@@ -32,20 +32,10 @@ class Media(models.Model):
         """Instance name"""
         return f"{self.name}-{self.id}.{self.media_type}"
 
-    # def generate_hash(self):
-    #     """
-    #     Generate a 256-bit hash for the image and return it.
-    #     """
-    #     if self.image:
-    #         with self.image.open("rb") as image_file:
-    #             image_data = image_file.read()
-    #         return hashlib.sha256(image_data).hexdigest()[:21]
-    #     return ""
+    def save(self, *args, **kwargs):
+        self.generate_image_hash()
+        super(Media, self).save(*args, **kwargs)
 
-    # def save(self, *args, **kwargs):
-    #     """
-    #     Override the save method to update the hash field before saving.
-    #     """
-    #     if self.image:
-    #         self.hash = self.generate_hash()
-    #     super().save(*args, **kwargs)
+    def generate_image_hash(self):
+        file_content = self.image.read()
+        self.hash = hashlib.sha256(file_content).hexdigest()
