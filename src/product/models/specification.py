@@ -1,6 +1,4 @@
-""" """
 from django.db import models
-import uuid
 
 
 class Specification(models.Model):
@@ -9,12 +7,14 @@ class Specification(models.Model):
     Each specification consists of a key and a value (e.g., color: red).
     """
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     key = models.CharField(max_length=32)
     value = models.TextField(null=False)
 
     class Meta:
-        unique_together = ("key", "value")
+        # unique_together = ("key", "value")
+        constraints = [
+            models.UniqueConstraint(fields=["key", "value"], name="unique_key_value")
+        ]
 
     def __str__(self):
         """Instance name"""
