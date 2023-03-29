@@ -37,7 +37,6 @@ class BaseInfo(models.Model):
         "Brand",
         on_delete=models.CASCADE,
         related_name="product_baseInfo",
-        editable=False,
         null=False,
     )
     """ A reference to this product's brand."""

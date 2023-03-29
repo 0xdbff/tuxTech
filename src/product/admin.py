@@ -9,6 +9,7 @@ from .models.base_info import BaseInfo
 from .models.variant_media import VariantMedia
 from .models.sub_category import SubCategory
 from .models.type import Type
+from .models.specification import Specification
 
 admin.site.register(Brand)
 admin.site.register(Category)
@@ -19,3 +20,4 @@ admin.site.register(VariantMedia)
 admin.site.register(Media)
 admin.site.register(BaseInfo)
 admin.site.register(Unit)
+admin.site.register(Specification)
