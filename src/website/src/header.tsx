@@ -94,7 +94,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const renderFavIcon = () => {
         return (
-            <div onClick={toggleLoginForm}>
+            <div>
                 <FaHeart className="icon" />
             </div>
         );
@@ -102,7 +102,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
 
     const renderCartIcon = () => {
         return (
-            <div onClick={toggleLoginForm}>
+            <div>
                 <FaShoppingCart className="icon" />
             </div>
         );
@@ -119,6 +119,11 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     const renderLoginForm = () => {
         return (
             <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
+                <div className="registration-link-container">
+                    <a href="/register" onClick={toggleLoginForm}>
+                        Register
+                    </a>
+                </div>
                 <Login />
             </div>
         );
@@ -156,7 +161,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                 </div>
                 {renderMenu()}
                 <div className="logoContainer">
-                    <img src="l.svg" alt="Store logo" className="logo" />
+                    <img src="le.svg" alt="Store logo" className="logo" />
                 </div>
                 <div className="icons">
                     {renderSearchBar()}

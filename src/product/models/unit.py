@@ -15,8 +15,8 @@ class Unit(models.Model):
         null=False,
         editable=False,
     )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    serial = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
         """Instance name"""
-        return f"{self.variant_id.name} - ({self.id})"
+        return f"{self.variant_id.name} - ({self.serial})"
