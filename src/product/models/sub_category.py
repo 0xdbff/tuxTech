@@ -17,6 +17,8 @@ class SubCategory(models.Model):
         null=False,
         editable=True,
     )
+    _sku_prefix = models.CharField(max_length=2, editable=False, null=False)
+    """Stock's keeping unit first prefix (Sub-Category)"""
 
     def __str__(self):
         """ """
