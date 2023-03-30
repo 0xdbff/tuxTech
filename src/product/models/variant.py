@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from .unit import Unit
 from .media import Media
 from .specification import Specification
@@ -21,7 +21,7 @@ class Variant(models.Model):
     """ """
     sku = models.CharField(max_length=32, primary_key=True, editable=False)
     """ """
-    _is_default = models.BooleanField(null=False, editable=True)
+    _is_default = models.BooleanField(null=False, editable=False)
     """ """
     name = models.TextField(null=False)
     """ """
@@ -36,12 +36,11 @@ class Variant(models.Model):
         on_delete=models.CASCADE,
         related_name="Variant",
         null=False,
-        editable=False,
     )
     """ """
     specifications = models.ManyToManyField(Specification)
     """ """
-    altered_specifications = models.JSONField(null=True)
+    _altered_specifications = models.JSONField(null=True)
     """ """
 
     objects = VariantManager()
