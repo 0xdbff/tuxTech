@@ -23,7 +23,10 @@ class Client(CustomUser):
     receive_news = models.BooleanField(default=False)
 
     # !ADD cart and favourites list reference.
-    cart = models.OneToOneField("Cart", on_delete=models.CASCADE, null=True, blank=True)
+    # cart = models.OneToOneField("Cart", on_delete=models.CASCADE, null=True, blank=True)
     favourites = models.OneToOneField(
-        "Favourites", on_delete=models.CASCADE, null=True, blank=True
+        "favourites.info",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )

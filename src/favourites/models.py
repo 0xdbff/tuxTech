@@ -1,8 +1,13 @@
 from django.db import models
 
 
-class Favourites(models.Model):
-    user = models.OneToOneField("Client", on_delete=models.CASCADE, primary_key=True)
+class Info(models.Model):
+    user = models.OneToOneField(
+        "users.client",
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name="favourites_info",
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -10,9 +15,9 @@ class Favourites(models.Model):
         return f"Cart of user {self.user.username}"
 
 
-class FavouritesItem(models.Model):
-    cart = models.ForeignKey(Favourites, on_delete=models.CASCADE, related_name="items")
-    variant = models.ForeignKey("Variant", on_delete=models.CASCADE)
+class Item(models.Model):
+    cart = models.ForeignKey(Info, on_delete=models.CASCADE, related_name="items")
+    variant = models.ForeignKey("product.variant", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
