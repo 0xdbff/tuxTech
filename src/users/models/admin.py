@@ -3,6 +3,7 @@ from django.db import models
 
 from .custom_user import CustomUser
 
+
 class Admin(CustomUser):
     receive_news = models.BooleanField(default=False)
     groups = models.ManyToManyField(

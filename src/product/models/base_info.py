@@ -1,6 +1,7 @@
 """ Product models"""
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
 
 from .variant import Variant
 
@@ -37,7 +38,6 @@ class BaseInfo(models.Model):
         "Brand",
         on_delete=models.CASCADE,
         related_name="product_baseInfo",
-        editable=False,
         null=False,
     )
     """ A reference to this product's brand."""
@@ -49,10 +49,12 @@ class BaseInfo(models.Model):
 
     @property
     def variations_count(self):
+        """ """
         return Variant.objects.filter(info=self).count()
 
     @property
     def price_min(self):
+        """ """
         min_price = Variant.objects.filter(info=self).aggregate(min_price=Min("price"))[
             "min_price"
         ]
@@ -60,13 +62,19 @@ class BaseInfo(models.Model):
 
     @property
     def price_max(self):
+        """ """
         max_price = Variant.objects.filter(info=self).aggregate(max_price=Max("price"))[
             "max_price"
         ]
         return max_price if max_price is not None else 0
 
     @property
+    def is_new(self):
+        return (timezone.now() - self.date_added) <= timedelta(days=30)
+
+    @property
     def price(self):
+        """ """
         return (
             str(self.price_min)
             if self.price_min == self.price_max
