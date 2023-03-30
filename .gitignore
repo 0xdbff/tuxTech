@@ -1,3 +1,5 @@
+src/media/
+
 # globs
 Makefile.in
 *.userprefs
