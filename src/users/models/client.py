@@ -1,7 +1,6 @@
-
 from django.db import models
-
 from .custom_user import CustomUser
+
 
 class Client(CustomUser):
     groups = models.ManyToManyField(
@@ -20,7 +19,11 @@ class Client(CustomUser):
         related_query_name="client",
         verbose_name="user permissions",
     )
-    # Client-specific fields and methods
-    # ...
     nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
     receive_news = models.BooleanField(default=False)
+
+    # !ADD cart and favourites list reference.
+    cart = models.OneToOneField("Cart", on_delete=models.CASCADE, null=True, blank=True)
+    favourites = models.OneToOneField(
+        "Favourites", on_delete=models.CASCADE, null=True, blank=True
+    )
