@@ -157,11 +157,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "users.Client"
 
-AUTHENTICATION_BACKENDS = [
-    "users.backends.CustomModelBackend",
-    # "users.backends.AdminModelBackend",
-    "django.contrib.auth.backends.ModelBackend",
-]
+# AUTHENTICATION_BACKENDS = [
+#     "users.backends.CustomModelBackend",
+#     # "users.backends.AdminModelBackend",
+#     # "django.contrib.auth.backends.ModelBackend",
+# ]
 
 
 # Internationalization
