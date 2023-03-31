@@ -61,7 +61,7 @@
 # return None
 
 from django.contrib.auth.backends import BaseBackend
-from .models import Client, Admin
+from .models import Client
 
 
 class CustomModelBackend(BaseBackend):
@@ -75,14 +75,14 @@ class CustomModelBackend(BaseBackend):
             print("User does not exist")
             pass
 
-        try:
-            user = Admin.objects.get(username=username)
-            if password and user.check_password(password):
-                print(f"Found user by username: {username}, in Client")
-                return user
-        except Admin.DoesNotExist:
-            print("User does not exist")
-            pass
+        # try:
+        #     user = Admin.objects.get(username=username)
+        #     if password and user.check_password(password):
+        #         print(f"Found user by username: {username}, in Client")
+        #         return user
+        # except Admin.DoesNotExist:
+        #     print("User does not exist")
+        #     pass
 
     def get_user(self, user_id):
         try:
@@ -90,7 +90,7 @@ class CustomModelBackend(BaseBackend):
         except Client.DoesNotExist:
             pass
 
-        try:
-            return Admin.objects.get(pk=user_id)
-        except Admin.DoesNotExist:
-            pass
+        # try:
+        #     return Admin.objects.get(pk=user_id)
+        # except Admin.DoesNotExist:
+        #     pass

@@ -1,8 +1,11 @@
+""" """
 from django.db import models
-from .custom_user import CustomUser
+from .custom_user import AbstractTuxTechUser
 
 
-class Client(CustomUser):
+class Client(AbstractTuxTechUser):
+    """ """
+
     groups = models.ManyToManyField(
         "auth.Group",
         blank=True,
@@ -11,6 +14,7 @@ class Client(CustomUser):
         related_query_name="client",
         verbose_name="groups",
     )
+    """ """
     user_permissions = models.ManyToManyField(
         "auth.Permission",
         blank=True,
@@ -19,14 +23,20 @@ class Client(CustomUser):
         related_query_name="client",
         verbose_name="user permissions",
     )
-    nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
-    receive_news = models.BooleanField(default=False)
 
-    # !ADD cart and favourites list reference.
-    # cart = models.OneToOneField("Cart", on_delete=models.CASCADE, null=True, blank=True)
+    """ """
+    nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
+    """ """
+    receive_news = models.BooleanField(default=False)
+    """ """
+    cart = models.OneToOneField(
+        "cart.info", on_delete=models.CASCADE, null=True, blank=True
+    )
+    """ """
     favourites = models.OneToOneField(
         "favourites.info",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
     )
+    """ """
