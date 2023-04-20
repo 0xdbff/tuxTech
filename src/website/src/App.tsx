@@ -54,7 +54,6 @@ import { useTheme } from "./themeContext";
 import "./App.css";
 import Registration from "./resgitration";
 import Images from "./images";
-// import Background from "./Background";
 import ImageModal from "./ImageModal";
 
 const App: React.FC = () => {
@@ -73,26 +72,26 @@ const App: React.FC = () => {
     }, [lightMode]);
 
     return (
-        <div className="App">
-            <ImageModal src={imageSrc} alt="Your image description" />
-            <div id="app-content">
-                <div className="ad-left">
-                    <img src="amd.jpg" alt="Your image description" />
-                </div>
-                <div className="content">
-                    <Images></Images>
-                    <h1>Website Content</h1>
-                    <p>...</p>
-                    <p>Contains bugs ATM, release expected 31/05!</p>
-                    <Registration></Registration>
-                </div>
-                <div className="ad-right">
-                    <img src="amd.jpg" alt="Your image description" />
-
-                </div>
+        <div className="Main">
+            <div className="ad-left">
+                <img src="amd.jpg" alt="Your image description" />
             </div>
+            <div className="content">
+                <h1>Website Content</h1>
+                <p>...</p>
+                <p>Contains bugs ATM, release expected 31/05!</p>
+                <Images></Images>
+                <Registration></Registration>
+                <Registration></Registration>
+                <Registration></Registration>
+            </div>
+            <div className="ad-right">
+                <img src="amd.jpg" alt="Your another image description" />
+            </div>
+            <p> FODASSE </p>
         </div>
     );
 };
+// <ImageModal src={imageSrc} alt="Your image description" />
 
 export default App;

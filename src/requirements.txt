@@ -1,4 +1,4 @@
-django~=4.1.7
+django
 django-rest-framework
 djangorestframework-simplejwt
 django-cacheops
@@ -7,9 +7,8 @@ django-cors-headers
 django-countries
 django-cities
 python-barcode
-qrcode~=7.4.2
+qrcode
 whitenoise
-pillow~=9.4.0
+pillow
 psycopg2
-
-djangorestframework~=3.14.0
+gunicorn
