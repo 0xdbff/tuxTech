@@ -1,0 +1,71 @@
+server {
+    server_name gldb.dev www.gldb.dev;
+    return 301 https://$host$request_uri;
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/gldb.dev/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/gldb.dev/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+    if ($host = www.gldb.dev) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 8443 ssl;
+    server_name gldb.dev www.gldb.dev;
+
+    ssl_certificate /etc/letsencrypt/live/gldb.dev/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/gldb.dev/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!MEDIUM:!LOW:!aNULL:!NULL:!SHA;
+
+    # Git lab location, i do not have another domain so it will be hosted in /db-lab
+    location /db-lab {
+        proxy_pass http://localhost:8880;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 300;
+        proxy_redirect off;
+    }
+
+    location /media {
+        alias /var/www/TuxTech/media;
+    }
+
+    location /static {
+        alias /var/www/TuxTech/static;
+    }
+
+    location /api {
+        proxy_pass http://unix:/home/db/tuxTech/src/storeServer.sock;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        # proxy_pass http://0.0.0.0:8000;
+        proxy_pass http://unix:/home/db/tuxTech/src/storeServer.sock;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+server {
+    if ($host = gldb.dev) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name gldb.dev www.gldb.dev;
+    return 404; # managed by Certbot
+}
