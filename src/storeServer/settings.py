@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-kluzk8h%5eq7$()&s_zn_@=is=#0i5r$ap0@gwj8(c^2_b7c2y
 DEBUG = True
 
 # !TODO remove this
-# AUTH_USER_MODEL = "users.Client"
+AUTH_USER_MODEL = "users.TuxTechUser"
 
 ALLOWED_HOSTS = [
     "gldb.dev",
@@ -47,10 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Installed
-    # "django_otp",
-    # "django_otp.plugins.otp_static",
-    # "django_otp.plugins.otp_totp",
-    # "two_factor",
     "rest_framework",
     "corsheaders",  # DEV
     "cacheops",
@@ -81,7 +77,6 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    # "two_factor.middleware.threadlocals.ThreadLocals",  # 2FA
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # dev
@@ -162,8 +157,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
-AUTH_USER_MODEL = "users.Client"
 
 AUTHENTICATION_BACKENDS = [
     # "two_factor.backends.TwoFactorBackend",
