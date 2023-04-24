@@ -190,9 +190,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-#!TODO CHANGE TO SERVER DIR
-# STATIC_ROOT = "/var/www/tuxTech/static"
-STATIC_ROOT = os.path.join(BASE_DIR, "static/static/")
+STATIC_ROOT = "/var/www/TuxTech/static"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -238,7 +236,8 @@ STATICFILES_DIRS = [
 # settings.py
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = "/var/www/TuxTech/media"
 
 LOGIN_URL = "two_factor:login"
 
