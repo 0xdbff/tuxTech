@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.http import JsonResponse
 from django.views import View
-from .models import Client, Admin
+from .models import Client
 from .backends import CustomModelBackend
 from .serializers import ClientSerializer
 
