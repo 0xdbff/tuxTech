@@ -1,56 +1,58 @@
+/* App.css */
 @import "./variables.css";
 
 body {
   background-color: var(--color-bg);
   color: var(--color-fg);
   transition: background-color 1s ease, color 1s ease;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
   height: 100%;
 }
 
-.App {
+.Main {
   display: flex;
   position: relative;
   flex-direction: row;
-  flex: 1 0 auto;
+  /* flex: 1; */
+  height: 100vh;
+  width: 100vw;
 }
 
 .content {
-  flex: 1;
-  overflow-y: auto;
-  position: inherit;
-  z-index: 1;
+  display: flex;
+  flex-grow: 1;
+  overflow-y: scroll;
+  flex-direction: column;
+  /* margin-left: 220px; */
+  /* margin-right: 220px; */
+  /* padding: 20px; */
+  /* max-width: calc(100% - 2 * 220px); */
 }
 
-.ad {
-  display: none;
-  width: 300px;
-  height: 100vh;
+.ad-left,
+.ad-right {
   position: fixed;
-  top: 10px;
+  height: 100vh;
+  display: flex;
+  object-fit: cover;
 }
+
+/* .ad-left img, */
+/* .ad-right img { */
+/*   height: 100%; */
+/* } */
 
 .ad-left {
-  display: flex;
   left: 0;
-  width: 300px;
-  height: 100vh;
-  position: relative;
-  top: 10px;
 }
 
 .ad-right {
   right: 0;
-  width: 300px;
-  height: 100vh;
-  position: fixed;
-  top: 10px;
 }
 
-@media (min-width: 1024px) {
-  .ad {
-    display: block;
-  }
-}
+/* @media (min-width: 1024px) { */
+/*   .ad-left, */
+/*   .ad-right { */
+/*     display: block; */
+/*   } */
+/* } */
