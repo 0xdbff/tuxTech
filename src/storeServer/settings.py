@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Installed
+    "django_otp",
+    "django_otp.plugins.otp_static",
+    "django_otp.plugins.otp_totp",
+    "two_factor",
     "rest_framework",
     "corsheaders",  # DEV
     "cacheops",
@@ -77,6 +81,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "two_factor.middleware.threadlocals.ThreadLocals",  # 2FA
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # dev
@@ -94,7 +99,10 @@ ROOT_URLCONF = "storeServer.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "website/build")],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates/"),
+            os.path.join(BASE_DIR, "website/build"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -158,7 +166,8 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = "users.Client"
 
 AUTHENTICATION_BACKENDS = [
-    "users.backends.CustomModelBackend",
+    # "two_factor.backends.TwoFactorBackend",
+    # "users.backends.CustomModelBackend",
     # "users.backends.AdminModelBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
@@ -185,9 +194,24 @@ STATIC_ROOT = "/var/www/TuxTech/static"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# STATICFILES = [
+#     {
+#         "DIRS": [
+#             os.path.join(BASE_DIR, "static/"),
+#             # os.path.join(BASE_DIR, "website/build/static/"),
+#         ],
+#         "APP_DIRS": True,
+#     },
+# ]
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static/"),
+# ]
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static/"),
     os.path.join(BASE_DIR, "website/build/static/"),
 ]
+
 
 # LOGGING = {
 #     "version": 1,
@@ -214,6 +238,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 # MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_ROOT = "/var/www/TuxTech/media"
+
+LOGIN_URL = "two_factor:login"
+
+# this one is optional
+LOGIN_REDIRECT_URL = "two_factor:profile"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

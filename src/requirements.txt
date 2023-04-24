@@ -11,4 +11,7 @@ qrcode
 whitenoise
 pillow
 psycopg2
-gunicorn
+djangorestframework~=3.14.0
+django-two-factor-auth
+phonenumbers
+django-otp

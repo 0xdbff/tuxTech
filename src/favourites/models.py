@@ -17,7 +17,7 @@ class Info(models.Model):
 
 class Item(models.Model):
     cart = models.ForeignKey(Info, on_delete=models.CASCADE, related_name="items")
-    variant = models.ForeignKey("product.variant", on_delete=models.CASCADE)
+    variant = models.ForeignKey("product.variant", on_delete=models.CASCADE, related_name="favourites_item")
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
