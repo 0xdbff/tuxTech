@@ -3,6 +3,7 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin,
+    Group,
 )
 from django.core.mail import send_mail
 from django.db import models
@@ -29,12 +30,14 @@ class TuxTechUserManager(BaseUserManager):
         :return custom_user.models.EmailUser user: user
         :raise ValueError: email is not set
         """
+
         if not email:
             raise ValueError("The given email must be set")
         if not username:
             raise ValueError("The given username must be set")
         if not password:
             raise ValueError("The given password must be set")
+
         email = self.normalize_email(email)
         is_active = extra_fields.pop("is_active", True)
         user = self.model(
@@ -49,6 +52,7 @@ class TuxTechUserManager(BaseUserManager):
         )
         user.set_password(password)
         user.save(using=self._db)
+
         return user
 
     def create_user(self, email, username, password=None, **extra_fields):
@@ -58,8 +62,10 @@ class TuxTechUserManager(BaseUserManager):
         :param str password: user password
         :return custom_user.models.EmailUser user: regular user
         """
+
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
+
         return self._create_user(email, username, password, **extra_fields)
 
     def create_superuser(self, email, username, password=None, **extra_fields):
@@ -81,7 +87,7 @@ class TuxTechUserManager(BaseUserManager):
         return self._create_user(email, username, password, **extra_fields)
 
 
-class AbstractTuxTechUser(AbstractBaseUser, PermissionsMixin):
+class TuxTechUser(AbstractBaseUser, PermissionsMixin):
     """
     Abstract User with the same behaviour as Django's default User.
     AbstractEmailUser does not have username field. Uses email as the
@@ -122,14 +128,30 @@ class AbstractTuxTechUser(AbstractBaseUser, PermissionsMixin):
             "active. Unselect this instead of deleting accounts."
         ),
     )
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=_("groups"),
+        blank=True,
+        help_text=_(
+            "The groups this user belongs to. A user will get all permissions "
+            "granted to each of their groups."
+        ),
+        related_name="user_set",
+        related_query_name="user",
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        verbose_name=_("user permissions"),
+        blank=True,
+        help_text=_("Specific permissions for this user."),
+        related_name="user_set",
+        related_query_name="user",
+    )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     objects = TuxTechUserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
-
-    class Meta:
-        abstract = True
 
     def get_full_name(self):
         """Return the user's full name"""
@@ -142,14 +164,3 @@ class AbstractTuxTechUser(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this User."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-
-#
-#
-# class TuxTechUser(AbstractTuxTechUser):
-#     """
-#     Concrete class for the user model.
-#     """
-#
-#     class Meta(AbstractTuxTechUser.Meta):
-#         swappable = "AUTH_USER_MODEL"
