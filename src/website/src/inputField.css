@@ -10,7 +10,7 @@
   flex-grow: 1;
   max-width: 800px;
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 .input-field label {
@@ -44,12 +44,11 @@
 }
 
 .input-placeholder::placeholder {
-  font-size: 8px; /* Adjust this value to your preference */
+  font-size: 8px;
 }
 
 .input-field input:hover {
   background-color: var(--color-gray-04);
-  border-radius: 20px;
 }
 
 .input-field input:focus + label,

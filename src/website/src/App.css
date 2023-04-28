@@ -1,4 +1,3 @@
-/* App.css */
 @import "./variables.css";
 
 body {
@@ -13,46 +12,66 @@ body {
   display: flex;
   position: relative;
   flex-direction: row;
-  /* flex: 1; */
   height: 100vh;
   width: 100vw;
 }
 
 .content {
   display: flex;
-  flex-grow: 1;
+  flex: 1;
   overflow-y: scroll;
   flex-direction: column;
-  /* margin-left: 220px; */
-  /* margin-right: 220px; */
-  /* padding: 20px; */
-  /* max-width: calc(100% - 2 * 220px); */
+  padding: 20px;
 }
 
-.ad-left,
-.ad-right {
-  position: fixed;
-  height: 100vh;
+.left-banner,
+.right-banner {
+  z-index: 1;
   display: flex;
+  position: flex;
+  height: 100vh;
   object-fit: cover;
 }
 
-/* .ad-left img, */
-/* .ad-right img { */
-/*   height: 100%; */
-/* } */
+.left-banner img,
+.right-banner img {
+  height: 100%;
+  max-width: 100h;
+}
 
-.ad-left {
+.left-banner {
   left: 0;
+  z-index: 1;
 }
 
-.ad-right {
+.right-banner {
   right: 0;
+  transform: rotate(180deg);
 }
 
-/* @media (min-width: 1024px) { */
-/*   .ad-left, */
-/*   .ad-right { */
-/*     display: block; */
-/*   } */
-/* } */
+.horizontal-ad {
+  height: 200px;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.horizontal-ad img {
+  position: absolute;
+  max-height: 200px;
+  max-width: 100%;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  transform: rotate(90deg);
+}
+
+@media (max-width: 1024px) {
+  .right-banner,
+  .left-banner {
+    display: none;
+  }
+}

@@ -49,7 +49,7 @@ const Registration: React.FC = () => {
             name: "first_name",
             value: formData.first_name,
             onChange: setFormData,
-            label: "First Name",
+            label: "First Name*",
             type: "text",
         });
 
@@ -61,7 +61,7 @@ const Registration: React.FC = () => {
             name: "last_name",
             value: formData.last_name,
             onChange: setFormData,
-            label: "Last Name",
+            label: "Last Name*",
             type: "text",
         });
 
@@ -73,23 +73,11 @@ const Registration: React.FC = () => {
             name: "email",
             value: formData.email,
             onChange: setFormData,
-            label: "Email",
+            label: "Email*",
             type: "email",
         });
 
         return <InputField {...emailFieldProps} />;
-    };
-
-    const renderUsernameField = () => {
-        const usernameFieldProps = useInputHandler({
-            name: "username",
-            value: formData.username,
-            onChange: setFormData,
-            label: "Username",
-            type: "text",
-        });
-
-        return <InputField {...usernameFieldProps} />;
     };
 
     // !TODO
@@ -135,7 +123,7 @@ const Registration: React.FC = () => {
             name: "date_of_birth",
             value: formData.date_of_birth,
             onChange: setFormData,
-            label: "Date of Birth",
+            label: "Date of Birth*",
             type: "date",
         });
 
@@ -163,7 +151,6 @@ const Registration: React.FC = () => {
                         {renderFirstNameField()}
                         {renderLastNameField()}
                         {renderEmailField()}
-                        {renderUsernameField()}
                         {renderNifField()}
                         {renderDateOfBirthField()}
                         {renderIsSubscribedToNewsField()}
