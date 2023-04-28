@@ -56,6 +56,8 @@ import Registration from "./resgitration";
 import Images from "./images";
 import ImageModal from "./ImageModal";
 
+// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const App: React.FC = () => {
     const { lightMode } = useTheme();
 
@@ -71,24 +73,30 @@ const App: React.FC = () => {
         }
     }, [lightMode]);
 
+    const handleContextMenu = (event: React.MouseEvent) => {
+        event.preventDefault();
+    };
+
     return (
         <div className="Main">
-            <div className="ad-left">
-                <img src="amd.jpg" alt="Your image description" />
+            <div className="left-banner">
+                <img src={`amd.jpg`} alt="Logo" onContextMenu={handleContextMenu} />
             </div>
             <div className="content">
                 <h1>Website Content</h1>
                 <p>...</p>
                 <p>Contains bugs ATM, release expected 31/05!</p>
+                <div className="horizontal-ad">
+                    <img src={`amd.jpg`} alt="Logo" onContextMenu={handleContextMenu} />
+                </div>
                 <Images></Images>
                 <Registration></Registration>
                 <Registration></Registration>
                 <Registration></Registration>
             </div>
-            <div className="ad-right">
-                <img src="amd.jpg" alt="Your another image description" />
+            <div className="right-banner">
+                <img src={`amd.jpg`} alt="Logo" onContextMenu={handleContextMenu} />
             </div>
-            <p> FODASSE </p>
         </div>
     );
 };
