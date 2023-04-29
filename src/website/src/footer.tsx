@@ -5,7 +5,7 @@ import "./footer.css";
 
 const Footer: React.FC = () => {
     const { middleContentRef } = useContext(MiddleContentContext);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             ) {
                 setIsVisible(true);
             } else {
-                setIsVisible(false);
+                setIsVisible(true);
             }
         };
 
