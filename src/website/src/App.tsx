@@ -55,11 +55,13 @@ import "./App.css";
 import Registration from "./resgitration";
 import Images from "./images";
 import ImageModal from "./ImageModal";
+import useBlurredBackground from "./useBlurredBackground";
 
 // const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const App: React.FC = () => {
     const { lightMode } = useTheme();
+    const blurredBackground = useBlurredBackground("path/to/your/image.jpg", 100);
 
     const imageSrc = "./p047671_1_.jpg";
 
@@ -86,8 +88,15 @@ const App: React.FC = () => {
                 <h1>Website Content</h1>
                 <p>...</p>
                 <p>Contains bugs ATM, release expected 31/05!</p>
-                <div className="horizontal-ad">
-                    <img src={`amd.jpg`} alt="Logo" onContextMenu={handleContextMenu} />
+                <div
+                    className="banner"
+                    style={{
+                        backgroundImage: blurredBackground
+                            ? `url(${blurredBackground})`
+                            : "",
+                    }}
+                >
+                    <img src="redhat2.png" alt="Your ad image" />
                 </div>
                 <Images></Images>
                 <Registration></Registration>

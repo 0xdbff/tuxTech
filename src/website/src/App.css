@@ -49,24 +49,33 @@ body {
   transform: rotate(180deg);
 }
 
-.horizontal-ad {
-  height: 200px;
+.banner {
+  height: 180px;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  display: flex;
+  flex: 1;
+  background-color: #000;
+  /* position: flex; */
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)); */
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
   position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
-.horizontal-ad img {
-  position: absolute;
-  max-height: 200px;
+.banner img {
+  position: flex;
+  /* background-color: #000; */
+  /* flex-grow: 1; */
+  max-height: 180px;
+  /* position: center; */
   max-width: 100%;
-  top: 50%;
-  left: 50%;
+  /* top: 50%; */
+  /* left: 50%; */
   /* transform: translate(-50%, -50%); */
-  transform: rotate(90deg);
+  /* transform: rotate(90deg); */
 }
 
 @media (max-width: 1024px) {
