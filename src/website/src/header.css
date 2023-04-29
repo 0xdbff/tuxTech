@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--color-gray-08);
-  height: 60px;
+  min-height: 60px;
   position: fixed;
   top: 0;
   left: 0;
@@ -19,6 +19,7 @@
 }
 
 .header .container {
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,7 +30,6 @@
 .container {
   display: flex;
   padding: 6px;
-  flex-wrap: wrap;
   width: 100%;
   justify-content: center;
 }
@@ -136,6 +136,7 @@
 }
 
 .search {
+  order: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,6 +145,7 @@
   padding: 0px 4px;
   flex-grow: 1;
   max-width: 800px;
+  min-width: 160px;
 }
 
 .search input {
@@ -176,7 +178,7 @@
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  flex-basis: 0;
+  /* flex-basis: 0; */
   font-size: 20px;
   padding: 0px 6px;
 }
@@ -203,9 +205,7 @@
   align-items: center;
   justify-content: space-between;
   margin-left: 10px;
-  max-width: calc(
-    100% - 200px
-  ); /* This will ensure the search bar has enough space */
+  max-width: calc(100% - 200px);
   flex-wrap: nowrap;
   flex: 1;
 }
@@ -218,6 +218,61 @@
 /* } */
 
 .logo {
-  width: auto; /* adjust the width as needed */
-  height: 52px; /* maintain aspect ratio */
+  width: auto;
+  height: 52px;
+  align-self: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .header .container {
+    flex-direction: row-reverse;
+    padding: 0 8px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .link {
+    display: none;
+    flex-wrap: wrap;
+  }
+
+  .icon {
+    font-size: 18px;
+    justify-content: start;
+    align-items: start;
+    flex-wrap: wrap;
+  }
+  .logoContainer {
+    order: 0;
+    width: auto;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    height: 40px;
+    flex-wrap: wrap;
+  }
+
+  .search {
+    order: 4;
+    width: 100%;
+  }
+
+  .icons {
+    order: 1;
+    font-size: 22px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .icon {
+    font-size: 22px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
 }
