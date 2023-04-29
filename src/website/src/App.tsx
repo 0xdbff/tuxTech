@@ -4,12 +4,17 @@ import "./App.css";
 import Registration from "./resgitration";
 import Images from "./images";
 import ImageModal from "./ImageModal";
+import { getStaticPath } from "./utils/staticPathUtil";
+
 // const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const App: React.FC = () => {
     const { lightMode } = useTheme();
 
-    const imageSrc = "redhat2.png";
+    const bannerSrc = getStaticPath("redhat2.png");
+    const verticalAdSrc = getStaticPath("amd.jpg");
+    console.log(verticalAdSrc);
+    console.log(bannerSrc);
 
     useEffect(() => {
         if (lightMode) {
@@ -48,7 +53,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const image = new Image();
-        image.src = "redhat2.png";
+        image.src = bannerSrc;
         image.onload = () => {
             const banner = document.querySelector(".banner");
             if (banner) {
@@ -65,7 +70,7 @@ const App: React.FC = () => {
     return (
         <div className="Main">
             <div className="left-banner">
-                <img src={`amd.jpg`} alt="Logo" onContextMenu={handleContextMenu} />
+                <img src={verticalAdSrc} alt="Logo" onContextMenu={handleContextMenu} />
             </div>
 
             <div className="content">
@@ -75,7 +80,7 @@ const App: React.FC = () => {
                     <div
                         className="non-blurred-background"
                         style={{
-                            backgroundImage: `url(${imageSrc})`,
+                            backgroundImage: `url(${bannerSrc})`,
                         }}
                     ></div>
                     <div
@@ -84,7 +89,7 @@ const App: React.FC = () => {
                             backgroundImage: blurredImage ? `url(${blurredImage})` : "",
                         }}
                     ></div>
-                    <img src={imageSrc} alt="Your ad image" />
+                    <img src={bannerSrc} alt="Your ad image" />
                 </div>
 
                 <Images></Images>
@@ -93,7 +98,7 @@ const App: React.FC = () => {
                 <Registration></Registration>
             </div>
             <div className="right-banner">
-                <img src={`amd.jpg`} alt="Logo" onContextMenu={handleContextMenu} />
+                <img src={verticalAdSrc} alt="Logo" onContextMenu={handleContextMenu} />
             </div>
         </div>
     );
