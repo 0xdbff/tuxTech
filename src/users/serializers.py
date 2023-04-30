@@ -1,6 +1,21 @@
 from rest_framework import serializers
+from .models import Client, TuxTechUser
 from django.contrib.auth.models import Permission
-from .models import Client
+
+
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        print("F1")
+        user = TuxTechUser.objects.filter(email=data["email"]).first()
+        print(user)
+        if user and user.check_password(data["password"]):
+            print(data)
+            return user
+        print(data)
+        raise serializers.ValidationError("Invalid email or password")
 
 
 class ClientSerializer(serializers.ModelSerializer):
