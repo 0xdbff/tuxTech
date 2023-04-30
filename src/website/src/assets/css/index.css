@@ -11,7 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-/* Add this to your main CSS file */
+
 #app-content.blurred > *:not(script) {
   filter: blur(20px);
   pointer-events: none;

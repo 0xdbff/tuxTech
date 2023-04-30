@@ -1,11 +1,11 @@
 // Footer.tsx
 import React, { useContext, useEffect, useState } from "react";
-import { MiddleContentContext } from "./middleContentContext";
-import "./footer.css";
+import { MiddleContentContext } from "../contexts/middleContentContext";
+import "../assets/css/footer.css";
 
 const Footer: React.FC = () => {
     const { middleContentRef } = useContext(MiddleContentContext);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             ) {
                 setIsVisible(true);
             } else {
-                setIsVisible(false);
+                setIsVisible(true);
             }
         };
 

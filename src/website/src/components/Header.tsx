@@ -9,9 +9,9 @@ import {
     FaMoon,
     FaSun,
 } from "react-icons/fa";
-import "./header.css";
-import Login from "./login";
-import { useTheme } from "./themeContext";
+import "../assets/css/header.css";
+import Login from "./Login";
+import { useTheme } from "../contexts/themeContext";
 
 interface StoreHeaderProps {
     logoUrl: string;

@@ -184,7 +184,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 # STATIC_ROOT = "/var/www/TuxTech/static"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticCollected")
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -202,8 +202,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 #     os.path.join(BASE_DIR, "static/"),
 # ]
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, "static/"),
-    os.path.join(BASE_DIR, "website/build/static/"),
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "website/build/static"),
 ]
 
 

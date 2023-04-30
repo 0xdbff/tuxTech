@@ -1,5 +1,5 @@
 import React from "react";
-import "./selectField.css";
+import "../../assets/css/selectField.css";
 
 interface SelectFieldProps {
     label: string;

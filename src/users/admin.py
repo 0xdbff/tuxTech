@@ -9,12 +9,16 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserChangeForm(UserChangeForm):
+    """Custom user change form for the custom user model (TuxTechUser)."""
+
     class Meta:
         model = TuxTechUser
         fields = "__all__"
 
 
 class UserAdmin(BaseUserAdmin):
+    """ModelAdmin for the TuxTechUser model."""
+
     form = CustomUserChangeForm
     list_display = ("email", "username", "is_staff", "is_superuser")
     search_fields = ("email", "username")
@@ -53,6 +57,8 @@ class UserAdmin(BaseUserAdmin):
 
 
 class ClientAdmin(admin.ModelAdmin):
+    """ModelAdmin for the client model."""
+
     list_display = ("user", "nif", "receive_news")
     fields = ("user", "nif", "receive_news", "cart", "favourites")
     search_fields = ("nif",)

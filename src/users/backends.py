@@ -66,6 +66,7 @@ from .models import Client
 
 class CustomModelBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
+        print("F")
         try:
             user = Client.objects.get(username=username)
             if password and user.check_password(password):

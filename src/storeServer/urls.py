@@ -22,7 +22,6 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("admin/", admin.site.urls),
-    # path("2fa/", include(tf_urls)),
     path("users/", include("users.urls")),
     path("products/", include("product.urls")),
 ]
