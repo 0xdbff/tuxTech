@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import React, { useState } from "react";
-import InputField from "./inputField";
-import SelectField from "./selectField";
-import useInputHandler from "./useInputHandler";
-import "./registration.css";
+import InputField from "./utils/inputField";
+import SelectField from "./utils/selectField";
+import useInputHandler from "../hooks/useInputHandler";
+import "../assets/css/registration.css";
 
 const Registration: React.FC = () => {
     const [formData, setFormData] = useState({

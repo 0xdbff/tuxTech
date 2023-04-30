@@ -1,6 +1,6 @@
 // ImageModal.tsx
 import React, { useState, useEffect } from "react";
-import "./ImageModal.css";
+import "../assets/css/imageModal.css";
 
 interface ImageModalProps {
     src: string;
