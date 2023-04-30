@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, FormEvent } from "react";
 import axios from "axios";
-import InputField from "./inputField";
-import useInputHandler from "./useInputHandler";
+import InputField from "./utils/inputField";
+import useInputHandler from "../hooks/useInputHandler";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>("");

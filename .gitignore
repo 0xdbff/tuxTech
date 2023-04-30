@@ -1,4 +1,6 @@
 src/static/
+src/staticCollected/
+src/website/public/images/
 src/media/
 
 # globs

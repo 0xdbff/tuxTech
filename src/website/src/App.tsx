@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "./themeContext";
-import "./App.css";
-import Registration from "./resgitration";
-import Images from "./images";
-import ImageModal from "./ImageModal";
+import { useTheme } from "./contexts/themeContext";
+import "./assets/css/App.css";
+import Registration from "./components/Registration";
+import Images from "./components/Images";
+import ImageModal from "./components/ImageModal";
 import { getStaticPath } from "./utils/staticPathUtil";
 
 // const backendUrl = process.env.REACT_APP_BACKEND_URL;
