@@ -7,8 +7,7 @@ from .views import (
 )
 
 urlpatterns = [
-    # ... other urlpatterns ...
-    path("api/media/", views.get_media, name="get_media"),
+    path("media/", views.get_media, name="get_media"),
     path(
         "category/<str:category>/",
         ProductsByCategoryView.as_view(),
@@ -20,4 +19,5 @@ urlpatterns = [
         name="products_by_subcategory",
     ),
     path("brand/<str:brand>/", ProductsByBrandView.as_view(), name="products_by_brand"),
+    path("api/categories/", views.CategoryList.as_view(), name="categories-list"),
 ]

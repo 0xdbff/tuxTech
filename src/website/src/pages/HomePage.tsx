@@ -8,6 +8,7 @@ import { getStaticPath } from "../utils/staticPathUtil";
 import StoreHeader from "../components/Header";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "../contexts/themeContext";
+import Categories from "../components/Categories";
 
 // const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -70,6 +71,7 @@ const HomeContent: React.FC = () => {
             setBlurredImage(null);
         };
     }, []);
+
     return (
         <div className="Main">
             <div className="left-banner">
@@ -78,7 +80,8 @@ const HomeContent: React.FC = () => {
 
             <div className="content">
                 <h1>Something here</h1>
-                <h1>Something here</h1>
+                <Categories />
+
                 <div className="banner">
                     <div
                         className="non-blurred-background"
@@ -95,11 +98,10 @@ const HomeContent: React.FC = () => {
                     <img src={bannerSrc} alt="Your ad image" />
                 </div>
 
-                <Images></Images>
-                <Registration></Registration>
                 <Registration></Registration>
                 <Registration></Registration>
             </div>
+
             <div className="right-banner">
                 <img src={verticalAdSrc} alt="Logo" onContextMenu={handleContextMenu} />
             </div>
@@ -115,7 +117,7 @@ const Home: React.FC = () => {
         <ThemeProvider>
             <StoreHeader logoUrl={logoUrl} />
             <HomeContent />
-            <Footer />
+                <Footer />
         </ThemeProvider>
     );
 };
