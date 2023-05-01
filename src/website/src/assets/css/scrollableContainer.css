@@ -1,0 +1,15 @@
+.scrollable-container {
+  position: relative;
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
+}
+
+.scrollable-container__content {
+  align-items: inherit;
+  justify-content: inherit;
+  flex-grow: 1;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+}

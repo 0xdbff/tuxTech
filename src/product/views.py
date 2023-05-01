@@ -10,6 +10,13 @@ from .models import Media
 
 from django.http import JsonResponse
 
+from rest_framework import generics
+from .serializers import CategorySerializer
+
+class CategoryList(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
 
 def get_media(request):
     media_items = Media.objects.filter(image__isnull=False)
