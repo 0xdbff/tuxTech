@@ -11,6 +11,8 @@ interface Category {
 
 const Categories: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
+    const containerRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -34,12 +36,13 @@ const Categories: React.FC = () => {
             {content}
         </div>
     );
+
     return (
-        <div className="categoriesContainer">
-            <ScrollableContainer renderContent={renderCategories} scrollStep={106}>
+        <div className="categoriesContainer" ref={containerRef}>
+            <ScrollableContainer renderContent={renderCategories}>
                 {categories.map((category) => (
                     <>
-                        {Array(16)
+                        {Array(6)
                             .fill(null)
                             .map((_, index) => (
                                 <div

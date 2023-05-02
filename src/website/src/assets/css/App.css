@@ -49,9 +49,8 @@ body {
 }
 
 .banner {
-  /* background-color: #000; */
-  height: 22vh;
-  /* height: 300px; */
+  min-height: 22%;
+  max-height: 24%;
   width: 100%;
   display: flex;
   flex: 1;
@@ -65,8 +64,7 @@ body {
 .banner img {
   position: flex;
   max-height: 100%;
-  max-width: 100vw;
-  /* max-width: 100%; */
+  max-width: 100%;
 }
 
 .non-blurred-background,
@@ -83,7 +81,7 @@ body {
 }
 
 .blurred-background {
-  filter: blur(256px);
+  filter: blur(1024px);
   z-index: -1;
 }
 

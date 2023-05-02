@@ -2,12 +2,11 @@
 
 .categoriesContainer {
   background-color: var(--color-gray-06);
-  min-height: 112px;
-  max-height: 128px;
+  min-height: 136px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 10px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -16,8 +15,10 @@
 }
 
 .categoryContainer {
-  max-width: 128px;
-  height: 112px;
+  margin-top: 7px;
+  max-height: 128px;
+  min-width: 136px;
+  max-width: 136px;
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -26,6 +27,7 @@
   font-size: 14px;
   padding-right: 5px;
   padding-left: 5px;
+  object-fit: contain;
 }
 
 .categoryContainer:first-child {
@@ -37,7 +39,8 @@
 }
 
 .categoryContainer img {
-  height: 70%;
+  width: 92px;
+  height: 92px;
   width: auto;
   object-fit: contain;
   display: flex;

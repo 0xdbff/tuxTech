@@ -9,6 +9,9 @@ import StoreHeader from "../components/Header";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "../contexts/themeContext";
 import Categories from "../components/Categories";
+import BaseInfoDisplay, { BaseInfo } from "../components/BaseInfoDisplay";
+
+import axios from "axios";
 
 // const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -59,6 +62,7 @@ const HomeContent: React.FC = () => {
         const image = new Image();
         image.src = bannerSrc;
         image.onload = () => {
+            console.log("hey");
             const banner = document.querySelector(".banner");
             if (banner) {
                 const bannerRect = banner.getBoundingClientRect();
@@ -68,9 +72,32 @@ const HomeContent: React.FC = () => {
             }
         };
         image.onerror = () => {
+            console.log("hi");
             setBlurredImage(null);
         };
     }, []);
+
+    const [baseInfos, setBaseInfos] = useState<BaseInfo[] | null>(null);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:8000/products/api/base_info/"
+            );
+            setBaseInfos(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setBaseInfos([]);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    if (!baseInfos) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="Main">
@@ -97,9 +124,11 @@ const HomeContent: React.FC = () => {
                     ></div>
                     <img src={bannerSrc} alt="Your ad image" />
                 </div>
-
-                <Registration></Registration>
-                <Registration></Registration>
+                <div>
+                        {baseInfos.map((info, index) => (
+                            <BaseInfoDisplay key={index} info={info} />
+                        ))}
+                </div>
             </div>
 
             <div className="right-banner">
@@ -117,7 +146,7 @@ const Home: React.FC = () => {
         <ThemeProvider>
             <StoreHeader logoUrl={logoUrl} />
             <HomeContent />
-                <Footer />
+            <Footer />
         </ThemeProvider>
     );
 };

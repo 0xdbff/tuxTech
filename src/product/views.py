@@ -12,6 +12,8 @@ from django.http import JsonResponse
 
 from rest_framework import generics
 from .serializers import CategorySerializer
+from .serializers import BaseInfoSerializer
+
 
 class CategoryList(generics.ListAPIView):
     queryset = Category.objects.all()
@@ -111,3 +113,12 @@ class ProductsByBrandView(View):
             ]
         }
         return JsonResponse(data)
+
+class BaseInfoList(generics.ListCreateAPIView):
+    queryset = BaseInfo.objects.all()
+    serializer_class = BaseInfoSerializer
+
+class BaseInfoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BaseInfo.objects.all()
+    serializer_class = BaseInfoSerializer
+

@@ -10,6 +10,5 @@
   justify-content: inherit;
   flex-grow: 1;
   overflow-x: auto;
-  white-space: nowrap;
   display: flex;
 }

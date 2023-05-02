@@ -4,6 +4,9 @@ from .views import (
     ProductsByCategoryView,
     ProductsBySubCategoryView,
     ProductsByBrandView,
+    CategoryList,
+    BaseInfoList,
+    BaseInfoDetail,
 )
 
 urlpatterns = [
@@ -19,5 +22,7 @@ urlpatterns = [
         name="products_by_subcategory",
     ),
     path("brand/<str:brand>/", ProductsByBrandView.as_view(), name="products_by_brand"),
-    path("api/categories/", views.CategoryList.as_view(), name="categories-list"),
+    path("api/categories/", CategoryList.as_view(), name="categories-list"),
+    path("api/base_info/", BaseInfoList.as_view(), name="base_info_list"),
+    path('<uuid:pk>/', BaseInfoDetail.as_view(), name='base_info_detail'),
 ]
