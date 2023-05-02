@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/baseInfoDisplay.css";
 
+import { AiFillCheckCircle } from "react-icons/ai";
 export interface Media {
     id: number;
     name: string;
@@ -41,25 +42,36 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
         return <div>No information available.</div>;
     }
 
-    console.log(info.thumbnail?.image);
+    var briefDescription = info.description;
+    var briefName = info.name;
+
+    if (briefDescription.length > 118) {
+        var briefDescription = info.description.substring(0, 118) + "...";
+    }
+    if (info.name.length > 42) {
+        briefName = info.name.substring(0, 42) + "...";
+    }
 
     return (
-        <div className="base-info-display">
-            <div className="base-info-container">
-                <div className="base-info-item">
-                    {info.thumbnail && (
-                        <div>
-                            <img
-                                src={"http://localhost:8000/" + info.thumbnail.image}
-                                alt={info.name}
-                            />
-                        </div>
-                    )}
-                    <div>{info.name}</div>
-                    <div>{info.description}</div>
-                    <div>{info.default_variant?.price}</div>
-                    <div>{info.default_variant?.sku}</div>
+        <div className="base-info-container">
+            <div className="base-info-item">
+                {info.thumbnail && (
+                    <div className="base-info-item">
+                        <img
+                            src={"http://localhost:8000/" + info.thumbnail.image}
+                            alt={info.name}
+                        />
+                    </div>
+                )}
+                <div className="s2">{briefName}</div>
+                <div className="s4">{briefDescription}</div>
+                <div className="s4">{info.default_variant?.sku}</div>
+                <div className="s3-1">
+                    <AiFillCheckCircle />
+                    Em stock
                 </div>
+                <div className="s3">entrega prevista dia 31/05!</div>
+                <div className="s1">{info.default_variant?.price}</div>
             </div>
         </div>
     );
