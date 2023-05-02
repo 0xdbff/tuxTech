@@ -44,18 +44,17 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
         }
     };
 
-      return (
-    <>
-      {canScrollLeft && (
-        <ScrollButton direction="left" onClick={() => scroll("left")} />
-      )}
-      {renderContent(children, containerRef)}
-      {canScrollRight && (
-        <ScrollButton direction="right" onClick={() => scroll("right")} />
-      )}
-    </>
-  );
+    return (
+        <>
+            {canScrollLeft && (
+                <ScrollButton direction="left" onClick={() => scroll("left")} />
+            )}
+            {renderContent(children, containerRef)}
+            {canScrollRight && (
+                <ScrollButton direction="right" onClick={() => scroll("right")} />
+            )}
+        </>
+    );
 };
-
 
 export default ScrollableContainer;

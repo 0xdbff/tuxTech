@@ -4,8 +4,8 @@ from django.utils import timezone
 from datetime import timedelta
 
 from .variant import Variant
-
 import uuid
+from django.db.models import Min, Max
 
 
 class BaseInfo(models.Model):
