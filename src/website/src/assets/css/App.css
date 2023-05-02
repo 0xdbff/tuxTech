@@ -6,6 +6,40 @@ body {
   transition: background-color 1s ease, color 1s ease;
   min-height: 100vh;
   height: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+h2 {
+  color: var(--color-blue);
+  font-size: 18px;
+}
+
+h2:hover {
+  color: var(--color-green);
+  transition: color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+h3 {
+  color: var(--color-green);
+  font-size: 16px;
+}
+
+h3:hover {
+  color: var(--color-blue);
+  transition: color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.subtitle-container {
+  margin-left: 8px;
+  margin-right: 8px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Main {
@@ -81,7 +115,7 @@ body {
 }
 
 .blurred-background {
-  filter: blur(1024px);
+  filter: blur(100px);
   z-index: -1;
 }
 
