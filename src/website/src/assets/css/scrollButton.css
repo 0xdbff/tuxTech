@@ -1,0 +1,31 @@
+@import "./variables.css";
+
+.scroll-button {
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px;
+  font-size: 24px;
+  background-color: transparent;
+  color: var(--color-gray-28);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.scroll-button:hover {
+  color: var(--color-blue);
+  opacity: 0.6;
+}
+
+.scroll-button--left {
+  left: 10px;
+}
+
+.scroll-button--right {
+  right: 10px;
+}

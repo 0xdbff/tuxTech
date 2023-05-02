@@ -2,6 +2,11 @@ from django.db import models, transaction
 from .unit import Unit
 from .media import Media
 from .specification import Specification
+import uuid
+
+
+def generate_unique_sku():
+    return uuid.uuid4().hex[:8].upper()
 
 
 class VariantManager(models.Manager):
@@ -19,9 +24,11 @@ class Variant(models.Model):
 
     ean = models.CharField(max_length=14, unique=True, editable=False)
     """ """
-    sku = models.CharField(max_length=32, primary_key=True, editable=False)
+    sku = models.CharField(
+        max_length=32, primary_key=True, editable=False, default=generate_unique_sku
+    )
     """ """
-    _is_default = models.BooleanField(null=False, editable=False)
+    is_default = models.BooleanField(null=False, editable=True, default=False)
     """ """
     name = models.TextField(null=False)
     """ """
@@ -40,7 +47,7 @@ class Variant(models.Model):
     """ """
     specifications = models.ManyToManyField(Specification)
     """ """
-    _altered_specifications = models.JSONField(null=True)
+    _altered_specifications = models.JSONField(null=True, editable=False)
     """ """
 
     objects = VariantManager()
@@ -50,14 +57,9 @@ class Variant(models.Model):
         """ """
         self._calculate_altered_specifications()
 
-        if self._is_default:
+        if self.is_default:
             Variant.objects.exclude(pk=self.pk).update(is_default=False)
         super().save(*args, **kwargs)
-
-    @property
-    def is_default(self):
-        """ """
-        return self._is_default
 
     @property
     def stock(self):

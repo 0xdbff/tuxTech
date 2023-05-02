@@ -1,0 +1,26 @@
+@import "./variables.css";
+
+.brandContainer {
+  background-color: var(--color-gray-08);
+  min-height: 136px;
+  max-height: 136px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: relative;
+  object-fit: contain;
+}
+
+.brandContainer img {
+  max-height: 128px;
+  max-width: 128px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin-left: 12px;
+}
