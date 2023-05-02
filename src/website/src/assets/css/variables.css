@@ -5,6 +5,7 @@
   --color-orange: #ee9025;
   --color-yellow: #eea825;
   --color-green: #1da912;
+  --color-light-green: #98c379;
   --color-cyan: #56b6c2;
   --color-blue: #118dc3;
   --color-purple: #9a77cf;
@@ -59,6 +60,7 @@
   --color-orange: #d19a66;
   --color-yellow: #e5c07b;
   --color-green: #98c379;
+  --color-light-green: var(--color-green);
   --color-cyan: #56b6c2;
   --color-blue: #61afef;
   --color-purple: #c678dd;

@@ -161,7 +161,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                 </div>
                 {renderMenu()}
                 <div className="logoContainer">
-                    <img src="le.svg" alt="Store logo" className="logo" />
+                    <img src="l.svg" alt="Store logo" className="logo" />
                 </div>
                 <div className="icons">
                     {renderSearchBar()}

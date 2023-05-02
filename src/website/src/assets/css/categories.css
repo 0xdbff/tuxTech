@@ -1,0 +1,62 @@
+@import "./variables.css";
+
+.categoriesContainer {
+  background-color: var(--color-gray-08);
+  min-height: 136px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.categoryContainer {
+  margin-top: 7px;
+  max-height: 128px;
+  min-width: 136px;
+  max-width: 136px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-32);
+  font-size: 14px;
+  padding-right: 5px;
+  padding-left: 5px;
+  object-fit: contain;
+}
+
+.categoryContainer:first-child {
+  padding-left: 35px;
+}
+
+.categoryContainer:last-child {
+  padding-right: 35px;
+}
+
+.categoryContainer img {
+  width: 92px;
+  height: 92px;
+  width: auto;
+  object-fit: contain;
+  display: flex;
+  border-radius: 50px;
+  background-color: var(--color-gray-10);
+  border: 1px solid transparent;
+}
+
+.categoryContainer img:hover {
+  transform: scale(1.1);
+  display: flex;
+  background-color: var(--color-light-green);
+  border: 3px double var(--color-blue);
+  transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.categoryContainer:hover {
+  color: var(--color-logo-blue);
+}
