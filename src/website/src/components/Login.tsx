@@ -3,6 +3,8 @@ import React, { useState, FormEvent } from "react";
 import axios from "axios";
 import InputField from "./utils/inputField";
 import useInputHandler from "../hooks/useInputHandler";
+import { getWebsiteUrl } from "../utils/path";
+import getAuthHeaders from "../utils/getAuthHeaders";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -13,7 +15,7 @@ const Login: React.FC = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "/users/api/login/",
+                getWebsiteUrl() + "/users/api/login/",
                 {
                     email,
                     password,
@@ -24,7 +26,6 @@ const Login: React.FC = () => {
                     },
                 }
             );
-
             localStorage.setItem("access", response.data.access);
             localStorage.setItem("refresh", response.data.refresh);
             setError(null);
