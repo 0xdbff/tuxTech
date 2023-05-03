@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/baseInfoDisplay.css";
+import { getWebsiteUrl } from "../utils/path";
 
 import { AiFillCheckCircle } from "react-icons/ai";
 export interface Media {
@@ -57,10 +58,7 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
             <div className="base-info-item">
                 {info.thumbnail && (
                     <div className="base-info-item">
-                        <img
-                            src={"http://localhost:8000/" + info.thumbnail.image}
-                            alt={info.name}
-                        />
+                        <img src={getWebsiteUrl() + info.thumbnail.image} alt={info.name} />
                     </div>
                 )}
                 <div className="s2">{briefName}</div>

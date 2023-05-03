@@ -12,6 +12,7 @@ import {
 import "../assets/css/header.css";
 import Login from "./Login";
 import { useTheme } from "../contexts/themeContext";
+import { getStaticPath } from "../utils/path";
 
 interface StoreHeaderProps {
     logoUrl: string;
@@ -54,6 +55,8 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lightMode, toggleDarkMode } = useTheme();
+
+    const logoUrl = getStaticPath("l.svg");
 
     const renderDarkModeToggle = () => {
         return (
@@ -161,7 +164,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                 </div>
                 {renderMenu()}
                 <div className="logoContainer">
-                    <img src="l.svg" alt="Store logo" className="logo" />
+                    <img src={logoUrl} alt=" " className="logo" />
                 </div>
                 <div className="icons">
                     {renderSearchBar()}

@@ -13,8 +13,6 @@ from .serializers import ClientSerializer
 
 
 # class LoginView(APIView):
-#     permission_classes = (permissions.AllowAny,)
-#
 #     def post(self, request):
 #         input = request.data.get("username")
 #         password = request.data.get("password")
@@ -42,15 +40,19 @@ from .serializers import UserLoginSerializer
 
 
 class LoginView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
-        print("Serializer")
-        print(request)
-        print(request.data)
         if serializer.is_valid():
             user = serializer.validated_data
-            print(user)
-            return Response({"email": user.email, "username": user.username})
+            refresh = RefreshToken.for_user(user)
+            return Response(
+                {
+                    "refresh": str(refresh),
+                    "access": str(refresh.access_token),
+                }
+            )
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 
