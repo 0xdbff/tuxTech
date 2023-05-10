@@ -4,6 +4,7 @@ import axios from "axios";
 import ScrollableContainer from "./utils/ScrollableContainer";
 import getAuthHeaders from "../utils/getAuthHeaders";
 import getAccessToken from "../utils/tokenManager";
+import { getWebsiteUrl } from "../utils/path";
 
 interface Category {
     name: string;
@@ -26,7 +27,7 @@ const Categories: React.FC = () => {
                 const authHeaders = getAuthHeaders();
 
                 const response = await axios.get<Category[]>(
-                    "http://localhost:8000/products/api/categories/",
+                    getWebsiteUrl() + "products/api/categories/",
                     { headers: authHeaders }
                 );
                 setCategories(response.data);

@@ -11,23 +11,41 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Info",
+            name="Order",
             fields=[
                 (
                     "id",
-                    models.BigAutoField(
-                        auto_created=True,
+                    models.UUIDField(
+                        default="1622b94f27334960bec16965e9e83dda",
+                        editable=False,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
                     ),
                 ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
+                ("paid_at", models.DateTimeField(null=True)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("Created", "CREATED"),
+                            ("Payment Pending", "PAYMENT_PENDING"),
+                            ("Payment Confirmed", "PAYMENT_CONFIRMED"),
+                            ("Shipped", "SHIPPED"),
+                            ("Delivered", "DELIVERED"),
+                            ("Cancelled", "CANCELLED"),
+                        ],
+                        default="Created",
+                        max_length=20,
+                    ),
+                ),
+                ("payment_info", models.TextField(null=True)),
+                ("shipped_at", models.DateTimeField(null=True)),
             ],
         ),
         migrations.CreateModel(
-            name="Item",
+            name="OrderedItem",
             fields=[
                 (
                     "id",
@@ -40,11 +58,11 @@ class Migration(migrations.Migration):
                 ),
                 ("quantity", models.PositiveIntegerField(default=1)),
                 (
-                    "cart",
+                    "order",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="items",
-                        to="cart.info",
+                        related_name="ordered_items",
+                        to="order.order",
                     ),
                 ),
             ],

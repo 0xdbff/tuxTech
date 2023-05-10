@@ -8,18 +8,18 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("product", "0001_initial"),
-        ("cart", "0001_initial"),
+        ("cart", "0002_initial"),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="item",
-            name="variant",
-            field=models.ForeignKey(
+            model_name="info",
+            name="user",
+            field=models.OneToOneField(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="cart_item",
-                to="product.variant",
+                related_name="cart_info",
+                to="users.client",
             ),
         ),
     ]

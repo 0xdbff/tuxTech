@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getWebsiteUrl } from "./path";
 
 const isTokenExpired = (token: string): boolean => {
     try {
@@ -25,7 +26,7 @@ const getAccessToken = async (): Promise<string | null> => {
 
     try {
         const response = await axios.post(
-            "http://localhost:8000/users/api/refresh_token/",
+            getWebsiteUrl()+"users/api/refresh_token/",
             {
                 refresh: refreshToken,
             }
