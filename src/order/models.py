@@ -1,5 +1,4 @@
 from django.db import models, transaction
-from celery import shared_task
 
 from django.db import IntegrityError
 from django.utils import timezone
@@ -113,13 +112,6 @@ class Order(models.Model):
         if self.shipped_at and timezone.now() - self.shipped_at >= timedelta(hours=24):
             self.status = OrderStatus.DELIVERED.value
         # If all items are in stock, mark the order as shipped
-        # elif all(
-        #     item.product_variant.units.filter(order__isnull=True).count()
-        #     >= item.quantity
-        #     for item in self.ordered_items.all()
-        # ):
-        #     self.status = OrderStatus.SHIPPED.value
-        #     self.shipped_at = timezone.now()
         elif all(
             models.OrderedItem.objects.filter(order=self)
             .product_variant.units.filter(order__isnull=True)

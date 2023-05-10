@@ -13,3 +13,19 @@ rm -rf ./order/migrations/0* && echo "Removed order migrations" || echo "Failed 
 
 sudo -u postgres dropdb djangodev && echo "Dropped database djangodev" || echo "Failed to drop database djangodev"
 sudo -u postgres createdb djangodev && echo "Created database djangodev" || echo "Failed to create database djangodev"
+
+# check if venv exists, if not create it and install requirements
+if [ ! -d "venv" ]; then
+  python3 -m venv venv
+  source venv/bin/activate
+  pip install -r requirements.txt
+else
+  source venv/bin/activate
+fi
+
+python manage.py makemigrations
+python manage.py migrate
+
+# import cities
+python manage.py cities --import=country
+python manage.py cities --import=city

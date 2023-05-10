@@ -112,6 +112,7 @@ class TuxTechUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default="O")
     username = models.CharField(max_length=128, unique=True, null=True)
+    date_of_birth = models.DateTimeField(null=True)
     email = models.EmailField(
         _("email address"), max_length=128, unique=True, db_index=True
     )
