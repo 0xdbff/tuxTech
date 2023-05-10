@@ -15,6 +15,10 @@ class Unit(models.Model):
         null=False,
         editable=False,
     )
+    order = models.ForeignKey(
+        "order.Order", on_delete=models.SET_NULL, null=True, blank=True, related_name="units"
+    )
+
     serial = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):

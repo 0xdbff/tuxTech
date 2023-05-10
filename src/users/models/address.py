@@ -1,9 +1,11 @@
 from django.core.validators import RegexValidator
 from django.db import models
 from cities.models import City, Country
+import uuid
 
 
 class Address(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
     client = models.ForeignKey("Client", on_delete=models.CASCADE)
     country = models.ForeignKey(
         Country, on_delete=models.SET_NULL, null=True, blank=True
@@ -37,17 +39,6 @@ class Address(models.Model):
             )
         ],
     )
-
-    class Meta:
-        unique_together = (
-            "client",
-            "country",
-            "city",
-            "street",
-            "house_number",
-            "apartment_number",
-            "postal_code",
-        )
 
     def __str__(self):
         return f"{self.street} {self.house_number}\n{self.city}, {self.postal_code}, {self.country}"
