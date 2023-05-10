@@ -66,14 +66,11 @@ from .models import Client
 
 class CustomModelBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
-        print("F")
         try:
             user = Client.objects.get(username=username)
             if password and user.check_password(password):
-                print(f"Found user by username: {username}, in Client")
                 return user
         except Client.DoesNotExist:
-            print("User does not exist")
             pass
 
         # try:

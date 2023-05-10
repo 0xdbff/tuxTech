@@ -6,7 +6,7 @@ import uuid
 
 class Address(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
-    client = models.ForeignKey("Client", on_delete=models.CASCADE)
+    client = models.ForeignKey("users.TuxTechUser", on_delete=models.CASCADE)
     country = models.ForeignKey(
         Country, on_delete=models.SET_NULL, null=True, blank=True
     )

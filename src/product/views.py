@@ -26,11 +26,6 @@ class CategoryList(generics.ListAPIView):
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     if not request.user.is_authenticated:
-    #         return HttpResponseForbidden("User not authenticated")
-    #     return super().dispatch(request, *args, **kwargs)
-
 
 def get_media(request):
     """ """
@@ -82,11 +77,6 @@ class ProductsByCategoryView(View):
             ]
         }
         return JsonResponse(data)
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     if not request.user.is_authenticated:
-    #         return HttpResponseForbidden("User not authenticated")
-    #     return super().dispatch(request, *args, **kwargs)
 
 
 class ProductsBySubCategoryView(View):
