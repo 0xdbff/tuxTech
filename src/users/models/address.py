@@ -34,8 +34,8 @@ class Address(models.Model):
         blank=True,
         validators=[
             RegexValidator(
-                r"^\d{5}(-\d{4})?$",
-                message="Postal code must be in the format '12345' or '12345-6789'.",
+                r"^[a-zA-Z0-9\s\-]*$",
+                message="Postal code can only contain digits, letters, spaces, and hyphens.",
             )
         ],
     )

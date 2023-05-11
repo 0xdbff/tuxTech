@@ -7,12 +7,22 @@ urlpatterns = [
     path("api/login/", views.LoginView.as_view(), name="login"),
     path("api/refresh_token/", TokenRefreshView.as_view(), name="token_refresh"),
     path(
-        "api/client/<uuid:client_id>/",
-        views.ClientJsonView.as_view(),
-        name="client_json",
+        "api/client/register/", views.ClientRegistrationView.as_view(), name="register"
     ),
     path(
-        "api/register/add-address/", views.AddAddressView.as_view(), name="add_address"
+        "api/client/<uuid:id>/",
+        views.ClientView.as_view(),
+        name="client-update",
+    ),
+    path(
+        "api/client/address/new/",
+        views.AddressCreateView.as_view(),
+        name="address-create",
+    ),
+    path(
+        "api/client/address/<uuid:id>/",
+        views.AddressUpdateView.as_view(),
+        name="address-update",
     ),
     path(
         "api/register/get-countries/",
@@ -25,5 +35,4 @@ urlpatterns = [
         name="list_cities",
         # api/register/get-cities/?country=<country_id>
     ),
-    path("api/register/", views.ClientRegistrationView.as_view(), name="register"),
 ]
