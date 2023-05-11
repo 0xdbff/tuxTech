@@ -6,41 +6,6 @@ from .models import Address
 from .models import TuxTechUser
 
 
-class TuxTechUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TuxTechUser
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-            "gender",
-            "username",
-            "email",
-            "date_of_birth",
-        )
-        extra_kwargs = {
-            "password": {"write_only": True},
-            "email": {"required": True},
-            "username": {"required": True},
-        }
-
-    def create(self, validated_data):
-        password = validated_data.pop("password", None)
-        user = TuxTechUser.objects.create_user(**validated_data)
-        if password is not None:
-            user.set_password(password)
-            user.save()
-        return user
-
-    def update(self, instance, validated_data):
-        password = validated_data.pop("password", None)
-        user = super().update(instance, validated_data)
-        if password is not None:
-            user.set_password(password)
-            user.save()
-        return user
-
-
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
@@ -56,28 +21,41 @@ class UserLoginSerializer(serializers.Serializer):
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ("email", "username", "nif", "password", "receive_news")
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "gender",
+            "username",
+            "email",
+            "date_of_birth",
+            "password",
+            "nif",
+            "receive_news",
+        )
         extra_kwargs = {
-            "password": {"write_only": True},
+            "password": {"write_only": True, "required": False},
             "email": {"required": True},
-            "username": {"required": False},
+            "username": {"required": True},
             "nif": {"required": False},
+            "gender": {"required": False},
+            "date_of_birth": {"required": False},
         }
 
     def create(self, validated_data):
         password = validated_data.pop("password", None)
         if password is None:
-            return
+            raise serializers.ValidationError({"password": "This field is required."})
+        client = Client.objects.create_user(**validated_data, password=password)
+        return client
 
-        user = TuxTechUser.objects.create(**validated_data)
-        user.set_password(password)
-        user.save()
-
-        instance = self.Meta.model(user=user, **validated_data)
-        instance.save()
-
-        instance.user_permissions.set(Permission.objects.none())
-        return instance
+    def update(self, instance, validated_data):
+        password = validated_data.pop("password", None)
+        client = super().update(instance, validated_data)
+        if password:
+            client.set_password(password)
+            client.save()
+        return client
 
 
 class CountrySerializer(serializers.ModelSerializer):
@@ -92,16 +70,22 @@ class CitySerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
+# class AddressSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Address
+#         fields = [
+#             "id",
+#             "client",
+#             "country",
+#             "city",
+#             "street",
+#             "house_number",
+#             "apartment_number",
+#             "postal_code",
+#         ]
+
+
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = [
-            "id",
-            "client",
-            "country",
-            "city",
-            "street",
-            "house_number",
-            "apartment_number",
-            "postal_code",
-        ]
+        fields = "__all__"

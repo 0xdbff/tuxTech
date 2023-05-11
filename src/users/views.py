@@ -5,7 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.http import JsonResponse
 from django.views import View
 from django.shortcuts import get_object_or_404
-from .models import Client
+from .models import Client, Address
 from .serializers import ClientSerializer
 from .serializers import UserLoginSerializer
 from .models import Address
@@ -31,27 +31,41 @@ class LoginView(APIView):
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class ClientJsonView(View):
-    # permission_classes = [IsAuthenticated]
-
-    def get(self, request, *args, **kwargs):
-        try:
-            client = Client.objects.get(pk=kwargs["client_id"])
-            serializer = ClientSerializer(client)
-            return JsonResponse(serializer.data)
-        except Client.DoesNotExist:
-            return JsonResponse({"error": "Client not found"}, status=404)
+# class ClientJsonView(View):
+#     # permission_classes = [IsAuthenticated]
+#
+#     def get(self, request, *args, **kwargs):
+#         try:
+#             client = Client.objects.get(pk=kwargs["client_id"])
+#             serializer = ClientSerializer(client)
+#             return JsonResponse(serializer.data)
+#         except Client.DoesNotExist:
+#             return JsonResponse({"error": "Client not found"}, status=404)
 
 
 class ClientRegistrationView(generics.CreateAPIView):
     serializer_class = ClientSerializer
 
 
-class AddAddressView(generics.CreateAPIView):
+class ClientView(generics.RetrieveUpdateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+    lookup_field = "id"
+
+
+class AddressCreateView(generics.CreateAPIView):
     # permission_classes = [IsAuthenticated]
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+
+
+class AddressUpdateView(generics.RetrieveUpdateAPIView):
+    # permission_classes = [IsAuthenticated]
+
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    lookup_field = "id"
 
 
 class ListCountriesView(generics.ListAPIView):
