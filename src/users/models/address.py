@@ -40,5 +40,16 @@ class Address(models.Model):
         ],
     )
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if not self.client.default_invoice_address:
+            self.client.default_invoice_address = self
+            self.client.save(update_fields=["default_invoice_address"])
+
+        if not self.client.default_shipping_address:
+            self.client.default_shipping_address = self
+            self.client.save(update_fields=["default_shipping_address"])
+
     def __str__(self):
         return f"{self.street} {self.house_number}\n{self.city}, {self.postal_code}, {self.country}"

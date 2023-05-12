@@ -1,9 +1,7 @@
 from rest_framework import serializers
-from .models import Client, TuxTechUser
 from django.contrib.auth.models import Permission
 from cities.models import Country, City
-from .models import Address
-from .models import TuxTechUser
+from .models import TuxTechUser, CreditCard, Address, Client
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -18,7 +16,31 @@ class UserLoginSerializer(serializers.Serializer):
         raise serializers.ValidationError("Invalid email or password")
 
 
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = "__all__"
+
+    def get_fields(self):
+        fields = super(AddressSerializer, self).get_fields()
+        fields["city"].queryset = City.objects.filter(country__name="Portugal")
+        fields["country"].queryset = Country.objects.filter(name="Portugal")
+        return fields
+
+    def validate(self, data):
+        city = data.get("city")
+        country = data.get("country")
+        if city and country and city.country != country:
+            raise serializers.ValidationError(
+                "The city does not belong to the selected country."
+            )
+        return data
+
+
 class ClientSerializer(serializers.ModelSerializer):
+    default_invoice_address = AddressSerializer(read_only=True)
+    default_shipping_address = AddressSerializer(read_only=True)
+
     class Meta:
         model = Client
         fields = (
@@ -32,6 +54,8 @@ class ClientSerializer(serializers.ModelSerializer):
             "password",
             "nif",
             "receive_news",
+            "default_invoice_address",
+            "default_shipping_address",
         )
         extra_kwargs = {
             "password": {"write_only": True, "required": False},
@@ -70,22 +94,12 @@ class CitySerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
-# class AddressSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Address
-#         fields = [
-#             "id",
-#             "client",
-#             "country",
-#             "city",
-#             "street",
-#             "house_number",
-#             "apartment_number",
-#             "postal_code",
-#         ]
-
-
-class AddressSerializer(serializers.ModelSerializer):
+class CreditCardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Address
+        model = CreditCard
         fields = "__all__"
+        extra_kwargs = {
+            "cvv": {
+                "write_only": True
+            },  # Ensure cvv is never exposed in any API response
+        }

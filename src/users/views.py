@@ -2,14 +2,16 @@ from rest_framework import permissions, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.http import JsonResponse
-from django.views import View
 from django.shortcuts import get_object_or_404
-from .models import Client, Address
-from .serializers import ClientSerializer
-from .serializers import UserLoginSerializer
-from .models import Address
-from .serializers import AddressSerializer, CountrySerializer, CitySerializer
+from .models import Client, Address, CreditCard
+from .serializers import (
+    ClientSerializer,
+    UserLoginSerializer,
+    CreditCardSerializer,
+    AddressSerializer,
+    CountrySerializer,
+    CitySerializer,
+)
 from cities.models import Country, City
 from rest_framework.permissions import IsAuthenticated
 
@@ -60,7 +62,7 @@ class AddressCreateView(generics.CreateAPIView):
     serializer_class = AddressSerializer
 
 
-class AddressUpdateView(generics.RetrieveUpdateAPIView):
+class AddressView(generics.RetrieveUpdateAPIView):
     # permission_classes = [IsAuthenticated]
 
     queryset = Address.objects.all()
@@ -92,3 +94,14 @@ class ListCitiesView(generics.ListAPIView):
             country = get_object_or_404(Country, id=country_id)
             queryset = queryset.filter(country=country)
         return queryset
+
+
+class CreditCardCreateView(generics.CreateAPIView):
+    queryset = CreditCard.objects.all()
+    serializer_class = CreditCardSerializer
+
+
+class CreditCardUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = CreditCard.objects.all()
+    serializer_class = CreditCardSerializer
+    lookup_field = "id"
