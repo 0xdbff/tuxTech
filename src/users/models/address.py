@@ -1,10 +1,12 @@
 from django.core.validators import RegexValidator
 from django.db import models
 from cities.models import City, Country
+import uuid
 
 
 class Address(models.Model):
-    client = models.ForeignKey("Client", on_delete=models.CASCADE)
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
+    client = models.ForeignKey("users.TuxTechUser", on_delete=models.CASCADE)
     country = models.ForeignKey(
         Country, on_delete=models.SET_NULL, null=True, blank=True
     )
@@ -32,22 +34,22 @@ class Address(models.Model):
         blank=True,
         validators=[
             RegexValidator(
-                r"^\d{5}(-\d{4})?$",
-                message="Postal code must be in the format '12345' or '12345-6789'.",
+                r"^[a-zA-Z0-9\s\-]*$",
+                message="Postal code can only contain digits, letters, spaces, and hyphens.",
             )
         ],
     )
 
-    class Meta:
-        unique_together = (
-            "client",
-            "country",
-            "city",
-            "street",
-            "house_number",
-            "apartment_number",
-            "postal_code",
-        )
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if not self.client.default_invoice_address:
+            self.client.default_invoice_address = self
+            self.client.save(update_fields=["default_invoice_address"])
+
+        if not self.client.default_shipping_address:
+            self.client.default_shipping_address = self
+            self.client.save(update_fields=["default_shipping_address"])
 
     def __str__(self):
         return f"{self.street} {self.house_number}\n{self.city}, {self.postal_code}, {self.country}"

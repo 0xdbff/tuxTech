@@ -4,6 +4,6 @@ export function getStaticPath(relativePath: string) {
     if (env === "production") {
         return process.env.REACT_APP_PUBLIC_URL_PROD + "static/" + relativePath;
     } else {
-        return process.env.REACT_APP_PUBLIC_URL_DEV + "images/" + relativePath;
+        return process.env.REACT_APP_PUBLIC_URL_DEV + "static/" + relativePath;
     }
 }
