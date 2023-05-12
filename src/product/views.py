@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse, HttpResponseForbidden
+from rest_framework.permissions import IsAuthenticated
+
 from django.views import View
 
 from .models import Category
@@ -6,7 +11,6 @@ from .models import Variant
 from .models import Brand
 from .models import BaseInfo
 from .models import Media
-
 
 from django.http import JsonResponse
 
@@ -16,11 +20,21 @@ from .serializers import BaseInfoSerializer
 
 
 class CategoryList(generics.ListAPIView):
+    """ """
+
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
 
 
 def get_media(request):
+    """ """
+
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("User not authenticated")
+
+    print(request.user.is_authenticated)
+
     media_items = Media.objects.filter(image__isnull=False)
     media_list = [
         {
@@ -35,6 +49,10 @@ def get_media(request):
 
 
 class ProductsByCategoryView(View):
+    """ """
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         category = self.kwargs["category"]
         products = BaseInfo.objects.filter(category__name=category)
@@ -62,6 +80,10 @@ class ProductsByCategoryView(View):
 
 
 class ProductsBySubCategoryView(View):
+    """ """
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         subcategory = self.kwargs["subcategory"]
         products = BaseInfo.objects.filter(subCategory__name=subcategory)
@@ -89,6 +111,10 @@ class ProductsBySubCategoryView(View):
 
 
 class ProductsByBrandView(View):
+    """ """
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         brand = self.kwargs["brand"]
         products = BaseInfo.objects.filter(brand__name=brand)
@@ -114,11 +140,20 @@ class ProductsByBrandView(View):
         }
         return JsonResponse(data)
 
+
 class BaseInfoList(generics.ListCreateAPIView):
+    """ """
+
+    permission_classes = [IsAuthenticated]
+
     queryset = BaseInfo.objects.all()
     serializer_class = BaseInfoSerializer
+
 
 class BaseInfoDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ """
+
+    permission_classes = [IsAuthenticated]
+
     queryset = BaseInfo.objects.all()
     serializer_class = BaseInfoSerializer
-

@@ -4,6 +4,6 @@ export function getMediaPath(relativePath: string) {
     if (env === "production") {
         return process.env.PUBLIC_URL_PROD + "media/" + relativePath;
     } else {
-        return process.env.PUBLIC_URL_DEV  + relativePath;
+        return process.env.PUBLIC_URL_DEV  + "media/" + relativePath;
     }
 }

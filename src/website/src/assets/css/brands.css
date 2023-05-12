@@ -24,3 +24,9 @@
   object-fit: contain;
   margin-left: 12px;
 }
+
+.brandContainer img:hover {
+  transform: scale(1.2);
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
+}

@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/categories.css";
 import axios from "axios";
 import ScrollableContainer from "./utils/ScrollableContainer";
+import getAuthHeaders from "../utils/getAuthHeaders";
+import getAccessToken from "../utils/tokenManager";
+import { getWebsiteUrl } from "../utils/path";
 
 interface Category {
     name: string;
@@ -16,8 +19,16 @@ const Categories: React.FC = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
+                const token = getAccessToken();
+                if (!token) {
+                    console.error("Unauthorized!");
+                    return;
+                }
+                const authHeaders = getAuthHeaders();
+
                 const response = await axios.get<Category[]>(
-                    "http://localhost:8000/products/api/categories/"
+                    getWebsiteUrl() + "products/api/categories/",
+                    { headers: authHeaders }
                 );
                 setCategories(response.data);
             } catch (error) {

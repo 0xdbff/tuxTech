@@ -59,8 +59,8 @@ class UserAdmin(BaseUserAdmin):
 class ClientAdmin(admin.ModelAdmin):
     """ModelAdmin for the client model."""
 
-    list_display = ("user", "nif", "receive_news")
-    fields = ("user", "nif", "receive_news", "cart", "favourites")
+    list_display = ( "nif", "receive_news")
+    fields = ("nif", "receive_news", "cart", "favourites")
     search_fields = ("nif",)
 
 
