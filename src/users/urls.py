@@ -21,7 +21,7 @@ urlpatterns = [
     ),
     path(
         "api/client/address/<uuid:id>/",
-        views.AddressUpdateView.as_view(),
+        views.AddressView.as_view(),
         name="address-update",
     ),
     path(
@@ -34,5 +34,15 @@ urlpatterns = [
         views.ListCitiesView.as_view(),
         name="list_cities",
         # api/register/get-cities/?country=<country_id>
+    ),
+    path(
+        "api/client/credit_card/new/",
+        views.CreditCardCreateView.as_view(),
+        name="credit_card_create",
+    ),
+    path(
+        "api/client/credit_card/<uuid:id>/",
+        views.CreditCardUpdateView.as_view(),
+        name="credit_card_update",
     ),
 ]
