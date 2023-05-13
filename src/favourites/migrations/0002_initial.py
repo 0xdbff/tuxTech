@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("cart", "0001_initial"),
+        ("favourites", "0001_initial"),
         ("product", "0001_initial"),
     ]
 
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name="variant",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="cart_item",
+                related_name="favourites_item",
                 to="product.variant",
             ),
         ),

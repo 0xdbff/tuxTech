@@ -1,6 +1,4 @@
-from enum import unique
 from django.db import models
-from django.conf import settings
 
 import uuid
 
