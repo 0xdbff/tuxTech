@@ -6,7 +6,7 @@ import uuid
 
 
 def generate_unique_sku():
-    return uuid.uuid4().hex[:8].upper()
+    return uuid.uuid4().hex
 
 
 class VariantManager(models.Manager):
@@ -47,7 +47,7 @@ class Variant(models.Model):
     """ """
     specifications = models.ManyToManyField(Specification)
     """ """
-    _altered_specifications = models.JSONField(null=True, editable=False)
+    altered_specs = models.JSONField(null=True, editable=False)
     """ """
 
     objects = VariantManager()
