@@ -1,5 +1,4 @@
 """ """
-from enum import unique
 from django.db import models
 from .custom_user import TuxTechUser
 

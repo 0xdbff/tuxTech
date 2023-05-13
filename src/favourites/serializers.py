@@ -5,7 +5,7 @@ from .models import Info, Item
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ["id", "cart", "variant", "quantity"]
+        fields = ["id", "cart", "variant", "quantity", "created_at", "updated_at"]
 
     def create(self, validated_data):
         item, created = Item.objects.get_or_create(

@@ -4,9 +4,13 @@ from cities.models import City, Country
 import uuid
 
 
+def generate_uuid():
+    return uuid.uuid4
+
+
 class Address(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
-    client = models.ForeignKey("users.TuxTechUser", on_delete=models.CASCADE)
+    id = models.UUIDField(primary_key=True, editable=False, default=generate_uuid())
+    client = models.ForeignKey("users.Client", on_delete=models.CASCADE)
     country = models.ForeignKey(
         Country, on_delete=models.SET_NULL, null=True, blank=True
     )
