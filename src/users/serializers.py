@@ -38,8 +38,8 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    default_invoice_address = AddressSerializer(read_only=True)
-    default_shipping_address = AddressSerializer(read_only=True)
+    # default_invoice_address = AddressSerializer(read_only=True)
+    # default_shipping_address = AddressSerializer(read_only=True)
 
     class Meta:
         model = Client

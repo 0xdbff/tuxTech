@@ -12,16 +12,25 @@ class Info(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if not self.user.favourites:
+            self.user.favourites = self
+            self.user.save(update_fields=["favourites"])
+
     def __str__(self):
         return f"Cart of user {self.user.username}"
 
 
 class Item(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     cart = models.ForeignKey(Info, on_delete=models.CASCADE, related_name="items")
     variant = models.ForeignKey(
         "product.variant", on_delete=models.CASCADE, related_name="favourites_item"
     )
-    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ("cart", "variant")

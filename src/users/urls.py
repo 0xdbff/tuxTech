@@ -20,6 +20,11 @@ urlpatterns = [
         name="address-create",
     ),
     path(
+        "api/client/address/dev_null/<uuid:id>",
+        views.AddressDeleteView.as_view(),
+        name="credit_card_create",
+    ),
+    path(
         "api/client/address/<uuid:id>/",
         views.AddressView.as_view(),
         name="address-update",
@@ -41,8 +46,13 @@ urlpatterns = [
         name="credit_card_create",
     ),
     path(
+        "api/client/credit_card/dev_null/<uuid:id>",
+        views.CreditDeleteView.as_view(),
+        name="credit_card_create",
+    ),
+    path(
         "api/client/credit_card/<uuid:id>/",
-        views.CreditCardUpdateView.as_view(),
+        views.CreditCardView.as_view(),
         name="credit_card_update",
     ),
 ]
