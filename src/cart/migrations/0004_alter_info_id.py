@@ -5,15 +5,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("order", "0003_initial"),
+        ("cart", "0003_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="order",
+            model_name="info",
             name="id",
             field=models.UUIDField(
-                default="91b0f852512f4fc295c1eb1f210c0c5f",
+                default="e3aa01d21f9f42c5a86d8a7c9d877ef9",
                 editable=False,
                 primary_key=True,
                 serialize=False,

@@ -1,8 +1,10 @@
 from django.db import models
-from django.conf import settings
+
+import uuid
 
 
 class Info(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
     user = models.OneToOneField(
         "users.client",
         on_delete=models.CASCADE,
@@ -18,9 +20,14 @@ class Info(models.Model):
 class Item(models.Model):
     cart = models.ForeignKey(Info, on_delete=models.CASCADE, related_name="items")
     variant = models.ForeignKey(
-        "product.variant", on_delete=models.CASCADE, related_name="cart_item"
+        "product.variant",
+        on_delete=models.CASCADE,
+        related_name="cart_item",
     )
     quantity = models.PositiveIntegerField(default=1)
 
+    class Meta:
+        unique_together = ("cart", "variant")
+
     def __str__(self):
-        return f"{self.variant.name} ({self.variant.sku}) x {self.quantity} in cart {self.cart.id}"
+        return f"{self.variant.name} ({self.variant.sku}) x {self.quantity} in cart {self.cart.user.id}"

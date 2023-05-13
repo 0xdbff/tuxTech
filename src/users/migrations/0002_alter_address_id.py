@@ -5,15 +5,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("order", "0003_initial"),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="order",
+            model_name="address",
             name="id",
             field=models.UUIDField(
-                default="91b0f852512f4fc295c1eb1f210c0c5f",
+                default="7aa768af7eb941ff9c7cc3834b0fbcb0",
                 editable=False,
                 primary_key=True,
                 serialize=False,

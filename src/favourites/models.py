@@ -1,11 +1,12 @@
 from django.db import models
+import uuid
 
 
 class Info(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
     user = models.OneToOneField(
         "users.client",
         on_delete=models.CASCADE,
-        primary_key=True,
         related_name="favourites_info",
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -17,8 +18,13 @@ class Info(models.Model):
 
 class Item(models.Model):
     cart = models.ForeignKey(Info, on_delete=models.CASCADE, related_name="items")
-    variant = models.ForeignKey("product.variant", on_delete=models.CASCADE, related_name="favourites_item")
+    variant = models.ForeignKey(
+        "product.variant", on_delete=models.CASCADE, related_name="favourites_item"
+    )
     quantity = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        unique_together = ("cart", "variant")
 
     def __str__(self):
         return (
