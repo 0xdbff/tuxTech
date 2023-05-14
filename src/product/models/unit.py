@@ -13,12 +13,23 @@ class Unit(models.Model):
         on_delete=models.CASCADE,
         related_name="instances",
         null=False,
-        editable=False,
     )
     order = models.ForeignKey(
-        "order.Order", on_delete=models.SET_NULL, null=True, blank=True, related_name="units"
+        "order.Order",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="units",
+    )
+    supply = models.ForeignKey(
+        "supply.info",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="units",
     )
 
+    # This is simulated, as this will not be used for production atm.
     serial = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):

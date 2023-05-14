@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import Permission
 from cities.models import Country, City
 from .models import TuxTechUser, CreditCard, Address, Client
+from django.core.mail import send_mail
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -71,6 +72,16 @@ class ClientSerializer(serializers.ModelSerializer):
         if password is None:
             raise serializers.ValidationError({"password": "This field is required."})
         client = Client.objects.create_user(**validated_data, password=password)
+
+        send_mail(
+            "Welcome To TuxTech",
+            f"We are happy to report that {client.first_name} {client.last_name}"
+            + "is now an official TuxTech Client!\n\nThe TuxTeach team,\nbest regards!",
+            "home@gldb.dev",
+            [f"{client.email}"],
+            fail_silently=False,
+        )
+
         return client
 
     def update(self, instance, validated_data):

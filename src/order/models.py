@@ -1,8 +1,6 @@
 from django.db import models, transaction
-
 from django.db import IntegrityError
 from django.utils import timezone
-
 from datetime import timedelta
 from enum import Enum
 
@@ -74,6 +72,7 @@ class Order(models.Model):
     )
     payment_info = models.TextField(null=True)
     shipped_at = models.DateTimeField(null=True)
+    include_nif = models.BooleanField(null=False, default=True)
 
     def confirm_payment(self):
         with transaction.atomic():
@@ -129,4 +128,55 @@ class Order(models.Model):
             if not self.paid_at:
                 self.paid_at = timezone.now()
 
+        if self.pk is not None:
+            old_order = Order.objects.get(pk=self.pk)
+
+            if old_order.status != self.status:
+                self.send_status_update_email()
+
         super().save(*args, **kwargs)
+
+    def send_status_update_email(self):
+        from django.core.mail import EmailMessage
+
+        # Define the subject and message for each possible status
+        email_subjects_messages = {
+            OrderStatus.CREATED.value: (
+                "Your Order Has Been Created",
+                "Your order has been successfully created and we are preparing it for shipment.",
+            ),
+            OrderStatus.PAYMENT_PENDING.value: (
+                "Payment For Your Order Is Pending",
+                "We are awaiting payment for your order.",
+            ),
+            OrderStatus.PAYMENT_CONFIRMED.value: (
+                "Payment For Your Order Confirmed",
+                "We have received your payment and your order will be shipped soon.",
+            ),
+            OrderStatus.SHIPPED.value: (
+                "Your Order Has Been Shipped",
+                "Your order has been shipped and is on its way.",
+            ),
+            OrderStatus.DELIVERED.value: (
+                "Your Order Has Been Delivered",
+                "Your order has been successfully delivered.",
+            ),
+            OrderStatus.CANCELLED.value: (
+                "Your Order Has Been Cancelled",
+                "Your order has been cancelled.",
+            ),
+        }
+
+        # Get the subject and message for the current status
+        subject, message = email_subjects_messages.get(
+            self.status, ("Order Update", "Your order status has been updated.")
+        )
+
+        # Create and send the email
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email="home@gldb.dev",
+            to=[self.customer.email],
+        )
+        email.send()
