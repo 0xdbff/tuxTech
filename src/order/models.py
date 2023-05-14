@@ -3,11 +3,16 @@ from django.db import IntegrityError
 from django.utils import timezone
 from datetime import timedelta
 from enum import Enum
+from django.core.mail import EmailMessage
 
 import uuid
 
 
 class OrderStatus(Enum):
+    """
+    An enumeration representing the possible statuses of an order.
+    """
+
     CREATED = "Created"
     PAYMENT_PENDING = "Payment Pending"
     PAYMENT_CONFIRMED = "Payment Confirmed"
@@ -17,10 +22,47 @@ class OrderStatus(Enum):
 
     @classmethod
     def choices(cls):
+        """
+        Get a list of tuples representing the possible choices for an order's status.
+        This can be used for a Django model field.
+
+        Returns:
+            list: A list of tuples where each tuple contains a status value and status name.
+        """
+        return [(key.value, key.name) for key in cls]
+
+
+class DeliveryOption(Enum):
+    """
+    An enumeration representing the possible delivery options for an order.
+
+    Attributes:
+        CTT: Delivery by CTT service.
+        DHL: Delivery by DHL service.
+        UPS: Delivery by UPS service.
+    """
+
+    CTT = "CTT"
+    DHL = "DHL"
+    UPS = "UPS"
+
+    @classmethod
+    def choices(cls):
+        """
+        Get a list of tuples representing the possible choices for an order's delivery option.
+        This can be used for a Django model field.
+
+        Returns:
+            list: A list of tuples where each tuple contains a delivery option value and name.
+        """
         return [(key.value, key.name) for key in cls]
 
 
 class OrderedItem(models.Model):
+    """
+    A model representing an item in an order.
+    """
+
     order = models.ForeignKey(
         "order.Order", related_name="ordered_items", on_delete=models.CASCADE
     )
@@ -28,6 +70,13 @@ class OrderedItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def save(self, *args, **kwargs):
+        """
+        Save the ordered item. If the item already exists, the old units are returned to the stock.
+        If there's not enough stock for the product variant, an IntegrityError is raised.
+
+        Raises:
+            IntegrityError: If there's not enough stock for this product variant.
+        """
         if self.pk:  # If this item already exists in the database
             old_self = OrderedItem.objects.get(pk=self.pk)
             self.product_variant.units.filter(
@@ -46,10 +95,20 @@ class OrderedItem(models.Model):
 
     @property
     def total_price(self):
+        """
+        Calculate the total price for this ordered item.
+
+        Returns:
+            Decimal: The total price.
+        """
         return self.product_variant.price * self.quantity
 
 
 class Order(models.Model):
+    """
+    A model representing an order.
+    """
+
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4().hex)
     customer = models.ForeignKey("users.TuxTechUser", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -73,13 +132,27 @@ class Order(models.Model):
     payment_info = models.TextField(null=True)
     shipped_at = models.DateTimeField(null=True)
     include_nif = models.BooleanField(null=False, default=True)
+    delivery_option = models.CharField(
+        max_length=10,
+        choices=DeliveryOption.choices(),
+        default=DeliveryOption.CTT.value,
+    )
 
     def confirm_payment(self):
+        """
+        Confirm the payment for the order.
+        """
         with transaction.atomic():
             self.status = OrderStatus.PAYMENT_CONFIRMED.value
             self.save()
 
     def ship(self):
+        """
+        Ship the order.
+
+        Raises:
+            ValueError: If the order hasn't been paid for.
+        """
         with transaction.atomic():
             if self.status != OrderStatus.PAYMENT_CONFIRMED.value:
                 raise ValueError("Cannot ship an order that hasn't been paid for.")
@@ -87,6 +160,12 @@ class Order(models.Model):
             self.save()
 
     def deliver(self):
+        """
+        Deliver the order.
+
+        Raises:
+            ValueError: If the order hasn't been shipped.
+        """
         with transaction.atomic():
             if self.status != OrderStatus.SHIPPED.value:
                 raise ValueError("Cannot deliver an order that hasn't been shipped.")
@@ -94,6 +173,12 @@ class Order(models.Model):
             self.save()
 
     def cancel(self):
+        """
+        Cancel the order.
+
+        Raises:
+            ValueError: If the order has been shipped or delivered.
+        """
         with transaction.atomic():
             if self.status not in [
                 OrderStatus.SHIPPED.value,
@@ -107,6 +192,13 @@ class Order(models.Model):
                 )
 
     def save(self, *args, **kwargs):
+        """
+        Save the order. Depending on the order's state, it might be marked as delivered,
+        shipped or payment confirmed. If the status changes, an update email is sent.
+
+        Raises:
+            ValueError: If the order has been shipped or delivered.
+        """
         # If the order has been shipped and it's been 24 hours, mark it as delivered
         if self.shipped_at and timezone.now() - self.shipped_at >= timedelta(hours=24):
             self.status = OrderStatus.DELIVERED.value
@@ -137,9 +229,10 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def send_status_update_email(self):
-        from django.core.mail import EmailMessage
+        """
+        Send an email to the customer to update them about the status of their order.
+        """
 
-        # Define the subject and message for each possible status
         email_subjects_messages = {
             OrderStatus.CREATED.value: (
                 "Your Order Has Been Created",
@@ -167,12 +260,10 @@ class Order(models.Model):
             ),
         }
 
-        # Get the subject and message for the current status
         subject, message = email_subjects_messages.get(
             self.status, ("Order Update", "Your order status has been updated.")
         )
 
-        # Create and send the email
         email = EmailMessage(
             subject=subject,
             body=message,

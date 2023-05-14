@@ -18,10 +18,11 @@ class BaseInfo(models.Model):
     """
 
     name = models.TextField(null=False)
+    """ Product's name."""
     ref = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
+    """ Product's reference."""
     description = models.TextField(null=False)
-
+    """ Product's description."""
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, related_name="base_info"
     )
