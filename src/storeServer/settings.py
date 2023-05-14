@@ -49,20 +49,18 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Installed
     "rest_framework",
-    "corsheaders",  # DEV
+    "corsheaders",
     "cacheops",
     "cities",
     # Functional apps
     "store",
     "users",
     "product",
-    "enterpriseStore",
     "supply",
     "support",
     "order",
     "cart",
     "favourites",
-    "blog",
 ]
 
 REST_FRAMEWORK = {
