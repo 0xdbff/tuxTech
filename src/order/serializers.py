@@ -26,4 +26,5 @@ class OrderSerializer(serializers.ModelSerializer):
             "shipped_at",
             "include_nif",
             "ordered_items",
+            "delivery_option",
         ]

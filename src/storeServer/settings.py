@@ -122,7 +122,8 @@ DATABASES = {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": "djangodev",
         "USER": "postgres",
-        "PASSWORD": os.environ.get("TUXTECH_POSTGRES_PASSWD"),
+        # "PASSWORD": os.environ.get("TUXTECH_POSTGRES_PASSWD"),
+        "PASSWORD": "123",
         "HOST": "localhost",
         "PORT": "5432",
     }
