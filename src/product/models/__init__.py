@@ -8,4 +8,3 @@ from .type import Type
 from .media import Media
 from .variant_media import VariantMedia
 from .variant import Variant
-from .option import Option
