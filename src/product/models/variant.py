@@ -6,7 +6,7 @@ import uuid
 
 
 def generate_unique_sku():
-    return uuid.uuid4().hex
+    return uuid.uuid4
 
 
 class VariantManager(models.Manager):
