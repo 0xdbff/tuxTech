@@ -27,5 +27,5 @@ python manage.py makemigrations
 python manage.py migrate
 
 # import cities
-# python manage.py cities --import=country
-# python manage.py cities --import=city
+python manage.py cities --import=country
+python manage.py cities --import=city

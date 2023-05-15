@@ -6,29 +6,55 @@ from django.core.mail import send_mail
 
 
 class UserLoginSerializer(serializers.Serializer):
+    """
+    Serializer for user login.
+    """
+
     email = serializers.EmailField()
     password = serializers.CharField()
 
     def validate(self, data):
+        """
+        Validate user login data.
+        :param dict data: user login data
+        :return: validated user
+        :rtype: TuxTechUser
+        :raises serializers.ValidationError: if email or password is invalid
+        """
         user = TuxTechUser.objects.filter(email=data["email"]).first()
         if user and user.check_password(data["password"]):
-            print(data)
             return user
         raise serializers.ValidationError("Invalid email or password")
 
 
 class AddressSerializer(serializers.ModelSerializer):
+    """
+    Serializer for address model.
+    """
+
     class Meta:
         model = Address
         fields = "__all__"
 
     def get_fields(self):
+        """
+        Get the serializer fields and customize queryset for city and country fields.
+        :return: serializer fields
+        :rtype: dict
+        """
         fields = super(AddressSerializer, self).get_fields()
         fields["city"].queryset = City.objects.filter(country__name="Portugal")
         fields["country"].queryset = Country.objects.filter(name="Portugal")
         return fields
 
     def validate(self, data):
+        """
+        Validate address data.
+        :param dict data: address data
+        :return: validated data
+        :rtype: dict
+        :raises serializers.ValidationError: if the city does not belong to the selected country
+        """
         city = data.get("city")
         country = data.get("country")
         if city and country and city.country != country:
@@ -39,8 +65,9 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    # default_invoice_address = AddressSerializer(read_only=True)
-    # default_shipping_address = AddressSerializer(read_only=True)
+    """
+    Serializer for client model.
+    """
 
     class Meta:
         model = Client
@@ -68,6 +95,13 @@ class ClientSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        """
+        Create a new client.
+        :param dict validated_data: validated client data
+        :return: created client
+        :rtype: Client
+        :raises serializers.ValidationError: if password is missing
+        """
         password = validated_data.pop("password", None)
         if password is None:
             raise serializers.ValidationError({"password": "This field is required."})
@@ -85,6 +119,13 @@ class ClientSerializer(serializers.ModelSerializer):
         return client
 
     def update(self, instance, validated_data):
+        """
+        Update an existing client.
+        :param Client instance: existing client instance
+        :param dict validated_data: validated client data
+        :return: updated client
+        :rtype: Client
+        """
         password = validated_data.pop("password", None)
         client = super().update(instance, validated_data)
         if password:
@@ -94,18 +135,30 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class CountrySerializer(serializers.ModelSerializer):
+    """
+    Serializer for country model.
+    """
+
     class Meta:
         model = Country
         fields = ["id", "name"]
 
 
 class CitySerializer(serializers.ModelSerializer):
+    """
+    Serializer for city model.
+    """
+
     class Meta:
         model = City
         fields = ["id", "name"]
 
 
 class CreditCardSerializer(serializers.ModelSerializer):
+    """
+    Serializer for credit card model.
+    """
+
     class Meta:
         model = CreditCard
         fields = "__all__"
