@@ -1,7 +1,4 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import  HttpResponseForbidden
 from rest_framework.permissions import IsAuthenticated
 
 from django.views import View
@@ -11,12 +8,14 @@ from .models import Variant
 from .models import Brand
 from .models import BaseInfo
 from .models import Media
+from .models import Comment
 
 from django.http import JsonResponse
 
 from rest_framework import generics
 from .serializers import CategorySerializer
 from .serializers import BaseInfoSerializer
+from .serializers import CommentSerializer
 
 
 class CategoryList(generics.ListAPIView):
@@ -157,3 +156,33 @@ class BaseInfoDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = BaseInfo.objects.all()
     serializer_class = BaseInfoSerializer
+
+class CommentList(generics.ListCreateAPIView):
+    """
+    List all comments for a given variant, or create a new comment.
+
+    * The GET method retrieves a list of all comments for a given variant.
+    * The POST method allows clients to create a new comment for a variant.
+    """
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        variant_pk = self.kwargs['variant_pk']
+        variant = Variant.objects.get(pk=variant_pk)
+        return Comment.objects.filter(variant=variant)
+
+    def perform_create(self, serializer):
+        variant_pk = self.kwargs['variant_pk']
+        variant = Variant.objects.get(pk=variant_pk)
+        serializer.save(variant=variant)
+
+
+class CommentDetail(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve a comment or delete a comment.
+
+    * The GET method retrieves a specific comment.
+    * The DELETE method allows clients to delete a specific comment.
+    """
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

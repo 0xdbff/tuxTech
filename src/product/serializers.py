@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BaseInfo, Variant, Media, VariantMedia, Category
+from .models import BaseInfo, Variant, Media, VariantMedia, Category, Comment
 
 
 class MediaSerializer(serializers.ModelSerializer):
@@ -68,3 +68,9 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = "__all__"
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["client", "variant", "content", "date_posted"]
