@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 from enum import Enum
 from django.core.mail import EmailMessage
+from django.db.models import Sum
 
 import uuid
 
@@ -68,6 +69,7 @@ class OrderedItem(models.Model):
     )
     product_variant = models.ForeignKey("product.Variant", on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField(default=1)
+    total_cost = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
     def save(self, *args, **kwargs):
         """
@@ -86,6 +88,8 @@ class OrderedItem(models.Model):
         available_units = self.product_variant.units.filter(order__isnull=True)
         if available_units.count() < self.quantity:
             raise IntegrityError("Not enough stock for this product variant")
+
+        self.order.calculate_total_cost()
 
         super().save(*args, **kwargs)
 
@@ -211,7 +215,7 @@ class Order(models.Model):
         ):
             self.status = OrderStatus.SHIPPED.value
             self.shipped_at = timezone.now()
-            # !TODO integrate with transportation servicies
+            # !TODO integrate with transportation services
             self.status = OrderStatus.DELIVERED.value
         # If payment information has been provided, mark the order as payment confirmed
         elif self.payment_info:
@@ -271,3 +275,55 @@ class Order(models.Model):
             to=[self.customer.email],
         )
         email.send()
+
+    def calculate_total_cost(self):
+        """
+        Calculate the total cost of the order by summing up the total cost of each ordered item.
+        """
+        self.total_cost = sum(item.total_price for item in self.ordered_items.all())
+        self.save()
+
+    @staticmethod
+    def sales_growth(start_date, end_date):
+        """
+        Calculate sales growth between two dates.
+
+        Args:
+            start_date (datetime): The start date.
+            end_date (datetime): The end date.
+
+        Returns:
+            float: The sales growth as a percentage.
+        """
+        previous_period_sales = (
+            Order.objects.filter(
+                created_at__range=(start_date - (end_date - start_date), start_date)
+            ).aggregate(total=Sum("total_cost"))["total"]
+            or 0
+        )
+        current_period_sales = (
+            Order.objects.filter(created_at__range=(start_date, end_date)).aggregate(
+                total=Sum("total_cost")
+            )["total"]
+            or 0
+        )
+
+        return (
+            ((current_period_sales - previous_period_sales) / previous_period_sales)
+            * 100
+            if previous_period_sales != 0
+            else 0
+        )
+
+    @staticmethod
+    def average_order_value():
+        """
+        Calculate average order value.
+
+        Returns:
+            float: The average order value.
+        """
+        total_revenue = Order.objects.aggregate(total=Sum("total_cost"))["total"] or 0
+        total_orders = Order.objects.count()
+
+        return total_revenue / total_orders if total_orders != 0 else 0

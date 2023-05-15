@@ -7,22 +7,30 @@ from .views import (
     CategoryList,
     BaseInfoList,
     BaseInfoDetail,
+    CommentList,
+    CommentDetail,
 )
 
 urlpatterns = [
-    path("media/", views.get_media, name="get_media"),
+    path("api/media/", views.get_media, name="get_media"),
     path(
-        "category/<str:category>/",
+        "api/category/<str:category>/",
         ProductsByCategoryView.as_view(),
         name="products_by_category",
     ),
     path(
-        "subcategory/<str:subcategory>/",
+        "api/subcategory/<str:subcategory>/",
         ProductsBySubCategoryView.as_view(),
         name="products_by_subcategory",
     ),
-    path("brand/<str:brand>/", ProductsByBrandView.as_view(), name="products_by_brand"),
+    path(
+        "api/brand/<str:brand>/",
+        ProductsByBrandView.as_view(),
+        name="products_by_brand",
+    ),
     path("api/categories/", CategoryList.as_view(), name="categories-list"),
     path("api/base_info/", BaseInfoList.as_view(), name="base_info_list"),
-    path('<uuid:pk>/', BaseInfoDetail.as_view(), name='base_info_detail'),
+    path("api/<uuid:pk>/", BaseInfoDetail.as_view(), name="base_info_detail"),
+    path("api/variants/<uuid:id>/comments/", CommentList.as_view()),
+    path("api/comments/<int:id>/", CommentDetail.as_view()),
 ]
