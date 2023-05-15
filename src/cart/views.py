@@ -12,6 +12,7 @@ class CartInfoCreateView(generics.CreateAPIView):
 class CartInfoView(generics.RetrieveUpdateAPIView):
     queryset = Info.objects.all()
     serializer_class = CartInfoSerializer
+    lookup_field = "id"
 
 
 class ItemCreateView(generics.CreateAPIView):
@@ -19,6 +20,13 @@ class ItemCreateView(generics.CreateAPIView):
     serializer_class = ItemSerializer
 
 
+class ItemDeleteView(generics.DestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    lookup_field = "id"
+
+
 class ItemView(generics.RetrieveUpdateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    lookup_field = "id"

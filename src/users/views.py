@@ -58,6 +58,14 @@ class AddressView(generics.RetrieveUpdateAPIView):
     lookup_field = "id"
 
 
+class AddressDeleteView(generics.DestroyAPIView):
+    # permission_classes = [IsAuthenticated]
+
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    lookup_field = "id"
+
+
 class ListCountriesView(generics.ListAPIView):
     # permission_classes = [IsAuthenticated]
 
@@ -89,7 +97,13 @@ class CreditCardCreateView(generics.CreateAPIView):
     serializer_class = CreditCardSerializer
 
 
-class CreditCardUpdateView(generics.RetrieveUpdateAPIView):
+class CreditCardView(generics.RetrieveUpdateAPIView):
+    queryset = CreditCard.objects.all()
+    serializer_class = CreditCardSerializer
+    lookup_field = "id"
+
+
+class CreditDeleteView(generics.DestroyAPIView):
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
     lookup_field = "id"

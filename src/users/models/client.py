@@ -1,11 +1,11 @@
-""" """
-from enum import unique
 from django.db import models
 from .custom_user import TuxTechUser
 
 
 class Client(TuxTechUser):
-    """ """
+    """
+    Model representing a client.
+    """
 
     nif = models.CharField(max_length=16, unique=True, null=True, blank=True)
     receive_news = models.BooleanField(default=False)
