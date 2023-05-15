@@ -26,7 +26,7 @@ class Unit(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name="units",
+        related_name="supply_units",
     )
 
     # This is simulated, as this will not be used for production atm.

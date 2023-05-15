@@ -45,17 +45,29 @@ class BaseInfo(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        """Get the product's type and reference as default instance name"""
+        """
+        Return the default instance name for the BaseInfo model.
+
+        Returns the name and reference of the product.
+        """
         return f"{self.name}-{self.ref})"
 
     @property
     def variations_count(self):
-        """ """
+        """
+        Retrieve the number of variations for the BaseInfo model.
+
+        Returns the count of Variant objects associated with the BaseInfo model.
+        """
         return Variant.objects.filter(info=self).count()
 
     @property
     def price_min(self):
-        """ """
+        """
+        Retrieve the minimum price for the BaseInfo model.
+
+        Returns the minimum price among the Variant objects associated with the BaseInfo model.
+        """
         min_price = Variant.objects.filter(info=self).aggregate(min_price=Min("price"))[
             "min_price"
         ]
@@ -63,7 +75,11 @@ class BaseInfo(models.Model):
 
     @property
     def price_max(self):
-        """ """
+        """
+        Retrieve the maximum price for the BaseInfo model.
+
+        Returns the maximum price among the Variant objects associated with the BaseInfo model.
+        """
         max_price = Variant.objects.filter(info=self).aggregate(max_price=Max("price"))[
             "max_price"
         ]
@@ -71,11 +87,22 @@ class BaseInfo(models.Model):
 
     @property
     def is_new(self):
+        """
+        Check if the BaseInfo model is new.
+
+        Returns True if the product was added within the last 30 days, False otherwise.
+        """
         return (timezone.now() - self.date_added) <= timedelta(days=30)
 
     @property
     def price(self):
-        """ """
+        """
+        Retrieve the price range for the BaseInfo model.
+
+        Returns the price range as a string, either displaying the minimum price only if
+        it's the same as the maximum price, or displaying both the minimum and maximum
+        prices separated by a range indicator.
+        """
         return (
             str(self.price_min)
             if self.price_min == self.price_max

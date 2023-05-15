@@ -9,6 +9,10 @@ def generate_uuid():
 
 
 class Address(models.Model):
+    """
+    Model representing an address.
+    """
+
     id = models.UUIDField(primary_key=True, editable=False, default=generate_uuid())
     client = models.ForeignKey("users.Client", on_delete=models.CASCADE)
     country = models.ForeignKey(
@@ -45,6 +49,10 @@ class Address(models.Model):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Save the address instance and update the default invoice and shipping
+        addresses of the associated client if necessary.
+        """
         super().save(*args, **kwargs)
 
         if not self.client.default_invoice_address:
@@ -56,4 +64,7 @@ class Address(models.Model):
             self.client.save(update_fields=["default_shipping_address"])
 
     def __str__(self):
+        """
+        Return a string representation of the address.
+        """
         return f"{self.street} {self.house_number}\n{self.city}, {self.postal_code}, {self.country}"
