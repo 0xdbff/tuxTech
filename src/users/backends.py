@@ -65,7 +65,19 @@ from .models import Client
 
 
 class CustomModelBackend(BaseBackend):
+    """
+    Custom authentication backend for authenticating users based on the Client model.
+    """
+
     def authenticate(self, request, username=None, password=None, **kwargs):
+        """
+        Authenticates a user based on the provided username and password.
+        :param request: The request object.
+        :param str username: The username of the user.
+        :param str password: The password of the user.
+        :return: The authenticated user if successful, None otherwise.
+        :rtype: users.models.Client
+        """
         try:
             user = Client.objects.get(username=username)
             if password and user.check_password(password):
@@ -73,16 +85,13 @@ class CustomModelBackend(BaseBackend):
         except Client.DoesNotExist:
             pass
 
-        # try:
-        #     user = Admin.objects.get(username=username)
-        #     if password and user.check_password(password):
-        #         print(f"Found user by username: {username}, in Client")
-        #         return user
-        # except Admin.DoesNotExist:
-        #     print("User does not exist")
-        #     pass
-
     def get_user(self, user_id):
+        """
+        Retrieves a user based on the provided user ID.
+        :param int user_id: The ID of the user.
+        :return: The user with the given ID if found, None otherwise.
+        :rtype: users.models.Client
+        """
         try:
             return Client.objects.get(pk=user_id)
         except Client.DoesNotExist:

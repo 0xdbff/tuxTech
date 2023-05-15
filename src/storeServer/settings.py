@@ -49,20 +49,18 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Installed
     "rest_framework",
-    "corsheaders",  # DEV
+    "corsheaders",
     "cacheops",
     "cities",
     # Functional apps
     "store",
     "users",
     "product",
-    "enterpriseStore",
     "supply",
     "support",
     "order",
     "cart",
     "favourites",
-    "blog",
 ]
 
 REST_FRAMEWORK = {
@@ -122,6 +120,7 @@ DATABASES = {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": "djangodev",
         "USER": "postgres",
+        # "PASSWORD": os.environ.get("TUXTECH_POSTGRES_PASSWD"),
         "PASSWORD": "123",
         "HOST": "localhost",
         "PORT": "5432",
@@ -257,9 +256,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # MEDIA_ROOT = "/var/www/TuxTech/media"
 
 LOGIN_URL = "/login"
-#
-# # this one is optional
 # LOGIN_REDIRECT_URL = "two_factor:profile"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "mail.gldb.dev"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "home@gldb.dev"
+EMAIL_HOST_PASSWORD = os.environ.get("TUXTECH_MAIL_PASSWD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
