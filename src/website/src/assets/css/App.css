@@ -6,8 +6,8 @@ body {
   transition: background-color 1s ease, color 1s ease;
   min-height: 100vh;
   height: 100%;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -46,15 +46,19 @@ h3:hover {
   display: flex;
   position: relative;
   flex-direction: row;
-  height: 100vh;
+  min-height: 94vh;
   width: 100vw;
 }
 
 .content {
+  max-width: 1902px;
+  height: 100%;
   display: flex;
   flex: 1;
   overflow-y: scroll;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .left-banner,
@@ -83,11 +87,11 @@ h3:hover {
 }
 
 .banner {
-  min-height: 22%;
-  max-height: 24%;
-  width: 100%;
+  height: auto;
+  height: 260px;
+  /* width: 100%; */
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   position: relative;
   justify-content: center;
   align-items: center;
@@ -135,12 +139,4 @@ h3:hover {
   .content {
     padding: 10px;
   }
-
-  /* .banner { */
-  /*   max-width: 100vw; */
-  /* } */
-
-  /* .banner img { */
-  /*   max-width: 100vw; */
-  /* } */
 }

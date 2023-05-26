@@ -24,8 +24,8 @@ class Variant(models.Model):
 
     ean = models.CharField(max_length=14, unique=True, editable=False)
     """ """
-    sku = models.CharField(
-        max_length=32, primary_key=True, editable=False, default=generate_unique_sku
+    sku = models.UUIDField(
+        primary_key=True, editable=False, default=generate_unique_sku()
     )
     """ """
     is_default = models.BooleanField(null=False, editable=True, default=False)

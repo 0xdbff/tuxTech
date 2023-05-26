@@ -1,7 +1,7 @@
 @import "./variables.css";
 
 .categoriesContainer {
-  background-color: var(--color-gray-08);
+  background-color: var(--color-gray-07);
   min-height: 136px;
   display: flex;
   flex-direction: row;

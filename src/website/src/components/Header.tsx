@@ -168,12 +168,6 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                 </div>
                 <div className="icons">
                     {renderSearchBar()}
-                    <a href="/link1" className="link">
-                        TuxTech
-                    </a>
-                    <a href="/link2" className="link">
-                        Novidades
-                    </a>
                     {renderDarkModeToggle()}
                     {renderFavIcon()}
                     {renderCartIcon()}
