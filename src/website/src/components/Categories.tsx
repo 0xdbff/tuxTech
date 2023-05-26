@@ -5,6 +5,7 @@ import ScrollableContainer from "./utils/ScrollableContainer";
 import getAuthHeaders from "../utils/getAuthHeaders";
 import getAccessToken from "../utils/tokenManager";
 import { getWebsiteUrl } from "../utils/path";
+import { useNavigate } from "react-router-dom";
 
 interface Category {
     name: string;
@@ -15,6 +16,7 @@ interface Category {
 const Categories: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const containerRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -51,20 +53,15 @@ const Categories: React.FC = () => {
     return (
         <div className="categoriesContainer" ref={containerRef}>
             <ScrollableContainer renderContent={renderCategories}>
-                {categories.map((category) => (
-                    <>
-                        {Array(6)
-                            .fill(null)
-                            .map((_, index) => (
-                                <div
-                                    className="categoryContainer"
-                                    key={`${category.name}-${index}`}
-                                >
-                                    <img src={category.image} alt={category.name} />
-                                    {category.name}
-                                </div>
-                            ))}
-                    </>
+                {categories.map((category, index) => (
+                    <div
+                        className="categoryContainer"
+                        key={`${category.name}-${index}`}
+                        onClick={() => navigate(`/products/categories=${category.name}`)}
+                    >
+                        <img src={category.image} alt={category.name} />
+                        {category.name}
+                    </div>
                 ))}
             </ScrollableContainer>
         </div>
