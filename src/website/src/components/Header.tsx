@@ -96,19 +96,11 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     };
 
     const renderFavIcon = () => {
-        return (
-            <div>
-                <FaHeart className="icon" />
-            </div>
-        );
+        return <FaHeart className="icon" />;
     };
 
     const renderCartIcon = () => {
-        return (
-            <div>
-                <FaShoppingCart className="icon" />
-            </div>
-        );
+        return <FaShoppingCart className="icon" />;
     };
 
     const renderUserIcon = () => {
@@ -123,7 +115,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
         return (
             <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
                 <div className="registration-link-container">
-                    <a href="/register" onClick={toggleLoginForm}>
+                    <a href="/login" onClick={toggleLoginForm}>
                         Register
                     </a>
                 </div>
