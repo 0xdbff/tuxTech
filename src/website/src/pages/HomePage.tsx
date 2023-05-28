@@ -20,87 +20,12 @@ import "../assets/css/brands.css"; //!TODO remove
 import axios from "axios";
 
 const HomeContent: React.FC = () => {
-    const { lightMode } = useTheme();
-
-    // const bannerSrc = getStaticPath("nvidiaA1002.png");
     const bannerSrc = "images/amd3.jpg";
     const banner2Src = "images/a.jpg";
-    // const verticalAdSrc = getStaticPath("amd.png");
-
-    useEffect(() => {
-        if (lightMode) {
-            document.body.classList.add("dark-mode");
-            document.body.classList.remove("light-mode");
-        } else {
-            document.body.classList.add("light-mode");
-            document.body.classList.remove("dark-mode");
-        }
-    }, [lightMode]);
-
-    // const applyBlurToImage = (
-    //     image: HTMLImageElement,
-    //     blurRadius: number,
-    //     containerWidth: number,
-    //     containerHeight: number
-    // ): string => {
-    //     const canvas = document.createElement("canvas");
-    //     const context = canvas.getContext("2d");
-    //     canvas.width = containerWidth;
-    //     canvas.height = containerHeight;
-    //
-    //     if (context) {
-    //         context.filter = `blur(${blurRadius}px)`;
-    //         context.drawImage(image, 0, 0, containerWidth, containerHeight);
-    //     }
-    //
-    //     return canvas.toDataURL();
-    // };
 
     const handleContextMenu = (event: React.MouseEvent) => {
         event.preventDefault();
     };
-
-    // const [blurredImage, setBlurredImage] = useState<string | null>(null);
-    // const [blurredImage2, setBlurredImage2] = useState<string | null>(null);
-    //
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         const image = new Image();
-    //         image.src = bannerSrc;
-    //         image.onload = () => {
-    //             const banner = document.querySelector(".banner");
-    //             if (banner) {
-    //                 const bannerRect = banner.getBoundingClientRect();
-    //                 setBlurredImage(
-    //                     applyBlurToImage(image, 64, bannerRect.width, bannerRect.height)
-    //                 );
-    //             }
-    //         };
-    //         image.onerror = () => {
-    //             setBlurredImage(null);
-    //         };
-    //     }, 80);
-    // }, []);
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         const image = new Image();
-    //         image.src = banner2Src;
-    //         image.onload = () => {
-    //             const banner = document.querySelector(".banner");
-    //             if (banner) {
-    //                 const bannerRect = banner.getBoundingClientRect();
-    //                 setBlurredImage2(
-    //                     applyBlurToImage(image, 64, bannerRect.width, bannerRect.height)
-    //                 );
-    //             }
-    //         };
-    //         image.onerror = () => {
-    //             setBlurredImage2(null);
-    //         };
-    //     }, 80);
-    // }, []);
-
     const [baseInfos, setBaseInfos] = useState<BaseInfo[] | null>(null);
 
     const fetchData = async () => {
@@ -177,7 +102,7 @@ const HomeContent: React.FC = () => {
     return (
         <div className="Main">
             <div className="content">
-                <h1>Something here</h1>
+                <h1> -  </h1>
                 <Categories />
 
                 <div className="banner">
@@ -288,11 +213,11 @@ const HomeContent: React.FC = () => {
 
 const Home: React.FC = () => {
     return (
-        <ThemeProvider>
+        <div>
             <StoreHeader logoUrl=" " />
             <HomeContent />
             <Footer />
-        </ThemeProvider>
+        </div>
     );
 };
 

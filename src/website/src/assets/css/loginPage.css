@@ -1,0 +1,80 @@
+@import "./variables.css";
+
+.loginPage {
+  background-color: var(--color-bg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* margin-top: 3rem; */
+  min-height: 85vh;
+  background-color: var(--color-gray-04);
+}
+
+.loginPage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.loginPage-container-login {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-gray-05);
+  height: 70vh;
+  width: 30vw;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.loginPage-container-register {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 70vh;
+  width: 30vw;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-gray-05);
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.logoLoginContainer {
+  background-color: var(--color-gray-04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  height: 10vh;
+}
+
+.logoLogin img {
+  width: auto;
+  height: 10vh;
+}
+
+@media only screen and (max-width: 1200px) {
+  .loginPage-container {
+    flex-direction: column;
+  }
+  .loginPage-container-login,
+  .loginPage-container-register {
+    width: 80vw;
+    height: auto;
+  }
+  .logoLogin img {
+    width: 220px;
+    height: auto;
+  }
+}
