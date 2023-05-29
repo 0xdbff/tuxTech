@@ -10,7 +10,7 @@
   flex-grow: 1;
   max-width: 800px;
   position: relative;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
 }
 
 .input-field label {
@@ -27,9 +27,9 @@
 }
 
 .input-field input {
-  background-color: var(--color-gray-05);
+  background-color: var(--color-gray-04);
   color: var(--color-blue);
-  width: 40%;
+  min-width: 200px;
   height: 30px;
   border: none;
   border-radius: 8px;
@@ -48,7 +48,7 @@
 }
 
 .input-field input:hover {
-  background-color: var(--color-gray-04);
+  background-color: var(--color-gray-06);
 }
 
 .input-field input:focus + label,

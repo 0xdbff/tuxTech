@@ -42,13 +42,22 @@ export const useInputHandler = ({
         onChange(newValue);
     };
 
-    return {
-        label,
-        type,
-        name,
-        value: inputValue,
-        onChange: handleChange,
-    };
+    return type === "checkbox"
+        ? {
+            label,
+            type,
+            name,
+            checked: !!inputValue,
+            onChange: handleChange,
+        }
+        : {
+            label,
+            type,
+            name,
+            value: inputValue,
+            onChange: handleChange,
+            checked: false,
+        };
 };
 
 export default useInputHandler;

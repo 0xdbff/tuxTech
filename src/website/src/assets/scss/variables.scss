@@ -1,0 +1,68 @@
+$base-hue-light: 220;
+$base-saturation-light: 14%;
+$base-hue-dark: 220;
+$base-saturation-dark: 8%;
+
+.light-mode {
+  --color-bg: #dcdfe4;
+
+  @for $i from 1 through 32 {
+    $lightness-light: 100% - ($i * (100 / 32) * 1%);
+    $var-name-light: "--color-gray-" + if($i < 10, "0#{$i}", "#{$i}");
+    #{$var-name-light}: hsl(
+      $base-hue-light,
+      $base-saturation-light,
+      $lightness-light
+    );
+  }
+  --color-fg: var(--color-gray-01);
+  --color-fg: var(--color-gray-32);
+  --color-red: #e05661;
+  --color-orange: #ee9025;
+  --color-yellow: #eea825;
+  --color-green: #1da912;
+  --color-light-green: #98c379;
+  --color-cyan: #56b6c2;
+  --color-blue: #118dc3;
+  --color-purple: #9a77cf;
+  --color-white: #fafafa;
+  --color-black: #6a6a6a;
+  --color-gray: #bebebe;
+  --color-highlight: #e2be7d;
+  --color-comment: #9b9fa6;
+
+  --color-white-1: var(--color-gray-01);
+
+  --color-logo-blue: #0066d1;
+}
+
+.dark-mode {
+  @for $i from 1 through 32 {
+    $lightness-dark: $i * (100 / 32) * 1%;
+    $var-name-dark: "--color-gray-" + if($i < 10, "0#{$i}", "#{$i}");
+    #{$var-name-dark}: hsl(
+      $base-hue-dark,
+      $base-saturation-dark,
+      $lightness-dark
+    );
+  }
+  --color-bg: var(--color-gray-03);
+  --color-fg: var(--color-gray-32);
+  --color-red: #e06c75;
+  --color-orange: #d19a66;
+  --color-yellow: #e5c07b;
+  --color-green: #98c379;
+  --color-light-green: var(--color-green);
+  --color-cyan: #56b6c2;
+  --color-blue: #61afef;
+  --color-purple: #c678dd;
+  --color-white: #abb2bf;
+  --color-black: #282c34;
+  --color-gray: #5c6370;
+  --color-highlight: #e2be7d;
+  --color-comment: #7f848e;
+
+  --color-white-1: var(--color-gray-32);
+
+  --color-logo-blue: var(--color-blue);
+}

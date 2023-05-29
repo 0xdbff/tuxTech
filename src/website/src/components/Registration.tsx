@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import InputField from "./utils/inputField";
+import CheckboxField from "./utils/checkBoxField";
 import SelectField from "./utils/selectField";
 import useInputHandler from "../hooks/useInputHandler";
 import "../assets/css/registration.css";
@@ -22,6 +23,7 @@ const Registration: React.FC = () => {
         event.preventDefault();
 
         // Replace with your Django REST API endpoint
+        // !TODO
         const apiUrl = "https://your-django-api.com/api/register/";
 
         try {
@@ -80,9 +82,6 @@ const Registration: React.FC = () => {
         return <InputField {...emailFieldProps} />;
     };
 
-    // !TODO
-    // !TODO
-    // !TODO
     // const renderGenderField = () => {
     //     const genderFieldProps = useInputHandler({
     //         name: "gender",
@@ -139,7 +138,19 @@ const Registration: React.FC = () => {
             type: "checkbox",
         });
 
-        return <InputField {...isSubscribedToNewsFieldProps} />;
+        return <CheckboxField {...isSubscribedToNewsFieldProps} />;
+    };
+
+    const renderAgreeToTermsField = () => {
+        const agreeToTermsFieldProps = useInputHandler({
+            name: "agreed_to_terms",
+            value: null,
+            onChange: () => { },
+            label: "I Agree to the Terms and Conditions",
+            type: "checkbox",
+        });
+
+        return <CheckboxField {...agreeToTermsFieldProps} />;
     };
 
     return (
@@ -154,8 +165,11 @@ const Registration: React.FC = () => {
                         {renderNifField()}
                         {renderDateOfBirthField()}
                         {renderIsSubscribedToNewsField()}
-                        <button type="submit">Register</button>
+                        {renderAgreeToTermsField()}
                     </form>
+                    <div className="buttons-container">
+                        <button type="submit">Register</button>
+                    </div>
                 </div>
             </div>
         </div>

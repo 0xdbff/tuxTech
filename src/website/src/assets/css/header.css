@@ -4,18 +4,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-gray-08);
+  background-color: var(--color-gray-07);
   min-height: 60px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  transition: top 0.3s ease-in-out; /* Add transition here */
+  transition: top 0.3s ease-in-out;
 }
 
 .header.hidden {
-  top: -60px; /* Remove transform, add top */
+  top: -60px;
 }
 
 .header .container {
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px; /* You can adjust this value according to your preference */
+  max-width: 1100px;
   padding: 0 16px;
 }
 
@@ -66,7 +66,7 @@
   right: -300px;
   width: 300px;
   height: 100%;
-  background-color: var(--color-gray-08);
+  background-color: var(--color-gray-07);
   transition: right 0.3s ease-in-out;
   z-index: 1000;
   display: flex;
@@ -101,7 +101,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-gray-08);
+  background-color: var(--color-gray-07);
   position: absolute;
   top: 52px;
   left: 0;
@@ -125,15 +125,15 @@
 .menu ul li {
   padding: 10px;
   font-size: 18px;
-  color: var(--color-gray-7);
+  /* color: var(--color-gray-6); */
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
-.menu ul li:hover {
-  background-color: var(--color-gray-3);
-  border-radius: 20px;
-}
+/* .menu ul li:hover { */
+/* background-color: var(--color-gray-07); */
+/* border-radius: 20px; */
+/* } */
 
 .search {
   order: 0;
@@ -149,7 +149,7 @@
 }
 
 .search input {
-  background-color: var(--color-gray-10);
+  background-color: var(--color-gray-09);
   color: var(--color-white-1);
   display: inline-block;
   align-items: center;
@@ -169,7 +169,7 @@
 }
 
 .search input:hover {
-  background-color: var(--color-gray-11);
+  background-color: var(--color-gray-10);
   border-radius: 20px;
 }
 
