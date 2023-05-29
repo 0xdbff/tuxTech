@@ -1,14 +1,33 @@
-import "./assets/css/App.css";
-import Home from "./pages/HomePage";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+import Home from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import ProductsPage from "./pages/ProductsPage";
+import ProductInfoPage from "./pages/ProductInfo";
+import { ThemeProvider } from "./contexts/themeContext";
+import withAuth from "./components/utils/withAuth";
+import "./assets/css/App.css";
 
 const App: React.FC = () => {
+    const initialTheme = localStorage.getItem("theme") || "dark";
+
+    const AuthenticatedHome = withAuth(Home);
+
+    document.body.classList.add(
+        "no-transition",
+        initialTheme === "light" ? "light-mode" : "dark-mode"
+    );
+
     return (
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
+            <ThemeProvider initialTheme={initialTheme}>
+                <Routes>
+                    <Route path="/" element={<AuthenticatedHome />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/product-info/:uuid" element={<ProductInfoPage />} />
+                    <Route path="/products/*" element={<ProductsPage />} />
+                </Routes>
+            </ThemeProvider>
         </BrowserRouter>
     );
 };

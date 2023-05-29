@@ -1,0 +1,59 @@
+@import "./variables.css";
+
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 0.3rem;
+  margin-left: 0.3rem;
+}
+
+.checkbox-field input[type="checkbox"] {
+  appearance: none;
+  background-color: var(--color-gray-06);
+  border: none;
+  border-radius: 8px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.2s;
+}
+
+.checkbox-field input[type="checkbox"]:checked {
+  background-color: var(--color-blue);
+}
+
+.checkbox-field input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background-color: var(--color-bg);
+  left: 9px;
+  top: 8px;
+  border-radius: 5px;
+}
+
+.checkbox-field input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--color-blue);
+}
+
+.checkbox-field input[type="checkbox"]:hover {
+  background-color: var(--color-gray-04);
+}
+
+.checkbox-field label {
+  font-size: 12px;
+  color: var(--color-blue);
+  font-weight: bold;
+  pointer-events: none;
+  transition: 0.2s ease-in-out;
+  padding-left: 10px;
+}
+
+.checkbox-field input[type="checkbox"]:focus + label,
+.checkbox-field input[type="checkbox"]:checked + label {
+  color: var(--color-green);
+}

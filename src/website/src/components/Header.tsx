@@ -13,6 +13,7 @@ import "../assets/css/header.css";
 import Login from "./Login";
 import { useTheme } from "../contexts/themeContext";
 import { getStaticPath } from "../utils/path";
+import { useNavigate } from "react-router-dom";
 
 interface StoreHeaderProps {
     logoUrl: string;
@@ -51,10 +52,16 @@ const useHideHeaderOnScroll = () => {
 };
 
 const StoreHeader: React.FC<StoreHeaderProps> = () => {
+    const navigate = useNavigate();
+
     const { headerRef, isHeaderVisible } = useHideHeaderOnScroll();
     const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lightMode, toggleDarkMode } = useTheme();
+
+    const goToLogin = () => {
+        navigate("/login");
+    };
 
     const logoUrl = getStaticPath("l.svg");
 
@@ -122,11 +129,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     const renderLoginForm = () => {
         return (
             <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
-                <div className="registration-link-container">
-                    <a href="/register" onClick={toggleLoginForm}>
-                        Register
-                    </a>
-                </div>
+                <h2 onClick={goToLogin}>Click here to Register</h2>
                 <Login />
             </div>
         );
@@ -168,12 +171,6 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
                 </div>
                 <div className="icons">
                     {renderSearchBar()}
-                    <a href="/link1" className="link">
-                        TuxTech
-                    </a>
-                    <a href="/link2" className="link">
-                        Novidades
-                    </a>
                     {renderDarkModeToggle()}
                     {renderFavIcon()}
                     {renderCartIcon()}
