@@ -205,29 +205,26 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# STATIC_ROOT = "/var/www/TuxTech/static"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticCollected")
+# STATIC_ROOT = "/var/www/TuxTech/static" 
+# deployment through docker
+STATIC_ROOT = "/srv/nginx/tuxTech/static/"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # STATICFILES = [
 #     {
 #         "DIRS": [
-#             os.path.join(BASE_DIR, "static/"),
-#             # os.path.join(BASE_DIR, "website/build/static/"),
+#             os.path.join(BASE_DIR, "templates"),
+#             os.path.join(BASE_DIR, "website/build/static/"),
 #         ],
 #         "APP_DIRS": True,
 #     },
 # ]
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static/"),
-# ]
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "website/build/static"),
+    os.path.join(BASE_DIR, "templates"),
+    os.path.join(BASE_DIR, "website/build/static/"),
 ]
-
 
 # LOGGING = {
 #     "version": 1,
@@ -249,11 +246,10 @@ STATICFILES_DIRS = [
 #         },
 #     },
 # }
-# settings.py
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-# MEDIA_ROOT = "/var/www/TuxTech/media"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = "/srv/nginx/tuxTech/media"
 
 LOGIN_URL = "/login"
 # LOGIN_REDIRECT_URL = "two_factor:profile"
