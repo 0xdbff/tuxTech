@@ -12,6 +12,7 @@ import Categories from "../components/Categories";
 import BaseInfoDisplay, { BaseInfo } from "../components/BaseInfoDisplay";
 import { getWebsiteUrl } from "../utils/path";
 import getAuthHeaders from "../utils/getAuthHeaders";
+import withAuth from "../utils/getAuthHeaders";
 
 import { useInterval } from "react-use";
 
@@ -102,7 +103,7 @@ const HomeContent: React.FC = () => {
     return (
         <div className="Main">
             <div className="content">
-                <h1> -  </h1>
+                <h1> - </h1>
                 <Categories />
 
                 <div className="banner">

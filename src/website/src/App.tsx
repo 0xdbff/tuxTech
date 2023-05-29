@@ -5,10 +5,14 @@ import LoginPage from "./pages/LoginPage";
 import ProductsPage from "./pages/ProductsPage";
 import ProductInfoPage from "./pages/ProductInfo";
 import { ThemeProvider } from "./contexts/themeContext";
+import withAuth from "./components/utils/withAuth";
 import "./assets/css/App.css";
 
 const App: React.FC = () => {
     const initialTheme = localStorage.getItem("theme") || "dark";
+
+    const AuthenticatedHome = withAuth(Home);
+
     document.body.classList.add(
         "no-transition",
         initialTheme === "light" ? "light-mode" : "dark-mode"
@@ -18,7 +22,7 @@ const App: React.FC = () => {
         <BrowserRouter>
             <ThemeProvider initialTheme={initialTheme}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<AuthenticatedHome />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/product-info/:uuid" element={<ProductInfoPage />} />
                     <Route path="/products/*" element={<ProductsPage />} />
