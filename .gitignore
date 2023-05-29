@@ -1,7 +1,10 @@
-src/static/
-src/staticCollected/
 src/website/public/images/
-src/media/
+
+/media/*
+!/media/STATIC_FILES_GOTO_HERE
+
+/static/*
+!/static/STATIC_FILES_GOTO_HERE
 
 # globs
 Makefile.in

@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('TuxTech site admin') }}{% endblock %}
+
+{% block branding %}
+<a href="{% url 'admin:index' %}" id="site-name">
+    <img src="{% static 'admin/img/logo-admin.svg' %}" alt="{{ site_header|default:_('TuxTech administration') }}" style="height: 40px; max-height: 60px;" />
+</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
