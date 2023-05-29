@@ -23,6 +23,7 @@ const Registration: React.FC = () => {
         event.preventDefault();
 
         // Replace with your Django REST API endpoint
+        // !TODO
         const apiUrl = "https://your-django-api.com/api/register/";
 
         try {
@@ -144,7 +145,7 @@ const Registration: React.FC = () => {
         const agreeToTermsFieldProps = useInputHandler({
             name: "agreed_to_terms",
             value: null,
-            onChange: () => {},
+            onChange: () => { },
             label: "I Agree to the Terms and Conditions",
             type: "checkbox",
         });

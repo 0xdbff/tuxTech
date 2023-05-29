@@ -9,10 +9,10 @@ const LoginPage: React.FC = () => {
 
     return (
         <div>
-        <div className="logoLoginContainer">
-            <div className="logoLogin">
-                <img src={logoUrl} alt=" " className="logo" />
-            </div>
+            <div className="logoLoginContainer">
+                <div className="logoLogin">
+                    <img src={logoUrl} alt=" " className="logo" />
+                </div>
             </div>
             <div className="loginPage">
                 <div className="loginPage-container">

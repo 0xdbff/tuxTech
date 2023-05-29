@@ -13,6 +13,7 @@ import "../assets/css/header.css";
 import Login from "./Login";
 import { useTheme } from "../contexts/themeContext";
 import { getStaticPath } from "../utils/path";
+import { useNavigate } from "react-router-dom";
 
 interface StoreHeaderProps {
     logoUrl: string;
@@ -51,10 +52,16 @@ const useHideHeaderOnScroll = () => {
 };
 
 const StoreHeader: React.FC<StoreHeaderProps> = () => {
+    const navigate = useNavigate();
+
     const { headerRef, isHeaderVisible } = useHideHeaderOnScroll();
     const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lightMode, toggleDarkMode } = useTheme();
+
+    const goToLogin = () => {
+        navigate("/login");
+    };
 
     const logoUrl = getStaticPath("l.svg");
 
@@ -96,11 +103,19 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     };
 
     const renderFavIcon = () => {
-        return <FaHeart className="icon" />;
+        return (
+            <div>
+                <FaHeart className="icon" />
+            </div>
+        );
     };
 
     const renderCartIcon = () => {
-        return <FaShoppingCart className="icon" />;
+        return (
+            <div>
+                <FaShoppingCart className="icon" />
+            </div>
+        );
     };
 
     const renderUserIcon = () => {
@@ -114,11 +129,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
     const renderLoginForm = () => {
         return (
             <div className={`login-form-container ${isLoginFormOpen ? "open" : ""}`}>
-                <div className="registration-link-container">
-                    <a href="/login" onClick={toggleLoginForm}>
-                        Register
-                    </a>
-                </div>
+                <h2 onClick={goToLogin}>Click here to Register</h2>
                 <Login />
             </div>
         );
