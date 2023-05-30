@@ -20,7 +20,8 @@ CSRF_TRUSTED_ORIGINS = ["https://gldb.dev:8443", "https://www.gldb.dev:8443"]
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "tuxtech",
+        # !TODO
+        "NAME": "djangodev",
         "USER": "postgres",
         "PASSWORD": os.environ.get("TUXTECH_POSTGRES_PASSWD"),
         "HOST": "localhost",
