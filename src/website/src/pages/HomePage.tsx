@@ -12,11 +12,10 @@ import BaseInfoDisplay, { BaseInfo } from "../components/BaseInfoDisplay";
 import { getWebsiteUrl } from "../utils/path";
 import getAuthHeaders from "../utils/getAuthHeaders";
 import BrandList from "../components/ListBrands";
+import Advertisements from "../components/Advertisements";
 import withAuth from "../utils/getAuthHeaders";
 
-import { useInterval } from "react-use";
-
-import "../assets/css/brands.css"; //!TODO remove
+import "../assets/css/brands.css";
 
 import axios from "axios";
 
@@ -46,59 +45,9 @@ const HomeContent: React.FC = () => {
         fetchData();
     }, []);
 
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
-    const logoWidth = 128 + 12;
-    const numLogos = 18;
-
-    useInterval(() => {
-        if (!isHovered) {
-            setScrollPosition((prevScrollPosition) => prevScrollPosition + 1);
-        }
-    }, 32);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-
-    useEffect(() => {
-        const container = document.querySelector(".brandContainer");
-        if (container) {
-            if (scrollPosition > logoWidth * numLogos) {
-                // Reset the scroll position to the start when it reaches the halfway point
-                setScrollPosition(0);
-            } else {
-                container.scrollLeft = scrollPosition;
-            }
-        }
-    }, [scrollPosition]);
-
     if (!baseInfos) {
         return <div>Loading...</div>;
     }
-
-    const logoT1 = "images/nvidia.png"; //!TODO remove
-    const logoT2 = "images/amdl.png"; //!TODO remove
-    const logoT3 = "images/supermicro.png"; //!TODO remove
-    const logoT4 = "images/micron.png"; //!TODO remove
-    const logoT5 = "images/cisco.png"; //!TODO remove
-    const logoT6 = "images/apple.png"; //!TODO remove
-    const logoT7 = "images/asus.png"; //!TODO remove
-    const logoT8 = "images/dell.png"; //!TODO remove
-    const logoT9 = "images/lenovo.png"; //!TODO remove
-    const logoT10 = "images/intel.png"; //!TODO remove
-    const logoT11 = "images/lg.png"; //!TODO remove
-    const logoT12 = "images/samsung.png"; //!TODO remove
-    const logoT13 = "images/sony.png"; //!TODO remove
-    const logoT14 = "images/synology.png"; //!TODO remove
-    const logoT15 = "images/ubiquiti.png"; //!TODO remove
-    const logoT16 = "images/tp-link.png"; //!TODO remove
-    const logoT17 = "images/wd.png"; //!TODO remove
-    const logoT18 = "images/xiaomi.png"; //!TODO remove
 
     return (
         <div className="Main">
@@ -107,13 +56,7 @@ const HomeContent: React.FC = () => {
                 <Categories />
 
                 <div className="banner">
-                    <div
-                        className="non-blurred-background"
-                        style={{
-                            backgroundImage: `url(${bannerSrc})`,
-                        }}
-                    ></div>
-                    <img src={bannerSrc} alt="Your ad image" />
+                    <Advertisements startingIndex={0} />
                 </div>
                 <div className="subtitle-container">
                     <h2>|Destaques</h2>
