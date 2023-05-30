@@ -7,7 +7,6 @@ import ImageModal from "../components/ImageModal";
 import { getStaticPath } from "../utils/staticPathUtil";
 import StoreHeader from "../components/Header";
 import Footer from "../components/Footer";
-import { ThemeProvider } from "../contexts/themeContext";
 import Categories from "../components/Categories";
 import BaseInfoDisplay, { BaseInfo } from "../components/BaseInfoDisplay";
 import { getWebsiteUrl } from "../utils/path";
@@ -48,8 +47,8 @@ const HomeContent: React.FC = () => {
 
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
-    const logoWidth = 128 + 12; // Width of a logo
-    const numLogos = 18; // Total number of logos
+    const logoWidth = 128 + 12;
+    const numLogos = 18;
 
     useInterval(() => {
         if (!isHovered) {
