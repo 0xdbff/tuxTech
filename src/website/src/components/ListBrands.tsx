@@ -18,12 +18,10 @@ const BrandList: React.FC = () => {
 
     const fetchBrands = async () => {
         try {
-            const response = await axios.get(
-                getWebsiteUrl() + "/products/api/brands"
-            );
+            const response = await axios.get(getWebsiteUrl() + "products/api/brands");
             setBrands(response.data);
         } catch (error) {
-            console.log("There was an error fetching the brands.");
+            console.log(error);
             return;
         }
     };

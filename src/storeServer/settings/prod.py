@@ -3,10 +3,18 @@ from .base import *
 # !TODO change
 DEBUG = True
 
+# ALLOWED_HOSTS = [
+#     "gldb.dev",
+#     "www.gldb.dev",
+#     "176.79.170.121",
+# ]
 ALLOWED_HOSTS = [
     "gldb.dev",
     "www.gldb.dev",
     "176.79.170.121",
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",
 ]
 
 # !TODO
