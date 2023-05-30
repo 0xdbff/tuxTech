@@ -1,6 +1,7 @@
 from .base import *
 
-DEBUG = False
+# !TODO change
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "gldb.dev",
