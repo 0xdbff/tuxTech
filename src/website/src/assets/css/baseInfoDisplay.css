@@ -4,6 +4,8 @@
   color: var(--color-gray-32);
   font-size: 13px;
   margin-bottom: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 
 .s3-1 {
@@ -11,6 +13,8 @@
   color: rgba(0, 128, 0, 0.9);
   font-weight: 600;
   font-size: 13px;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 
 .s3 {
@@ -18,21 +22,28 @@
   color: rgba(0, 128, 0, 0.9);
   font-weight: 400;
   font-size: 13px;
+  margin-left: 6px;
   margin-left: 13px;
   margin-bottom: 6px;
+  margin-right: 6px;
 }
 
 .s2 {
   color: var(--color-gray-32);
   font-size: 15px;
   margin-bottom: 6px;
+  margin-left: 6px;
+  margin-top: 6px;
   font-weight: 500;
+  margin-right: 6px;
 }
 
 .s1 {
   color: var(--color-blue);
+  margin-left: 6px;
   font-size: 18px;
   font-weight: bold;
+  margin-right: 6px;
 }
 
 .base-info-display {

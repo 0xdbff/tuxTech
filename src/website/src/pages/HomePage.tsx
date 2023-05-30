@@ -11,6 +11,7 @@ import Categories from "../components/Categories";
 import BaseInfoDisplay, { BaseInfo } from "../components/BaseInfoDisplay";
 import { getWebsiteUrl } from "../utils/path";
 import getAuthHeaders from "../utils/getAuthHeaders";
+import BrandList from "../components/ListBrands";
 import withAuth from "../utils/getAuthHeaders";
 
 import { useInterval } from "react-use";
@@ -129,38 +130,7 @@ const HomeContent: React.FC = () => {
                 <div className="subtitle-container">
                     <h2>|Marcas</h2>
                 </div>
-                <div
-                    className="brandContainer"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    {Array(2)
-                        .fill(0)
-                        .map((_, i) =>
-                            [
-                                logoT1,
-                                logoT2,
-                                logoT3,
-                                logoT4,
-                                logoT5,
-                                logoT6,
-                                logoT7,
-                                logoT8,
-                                logoT9,
-                                logoT10,
-                                logoT11,
-                                logoT12,
-                                logoT13,
-                                logoT14,
-                                logoT15,
-                                logoT16,
-                                logoT17,
-                                logoT18,
-                            ].map((logoSrc, j) => (
-                                <img key={`logo-${i}-${j}`} src={logoSrc} />
-                            ))
-                        )}
-                </div>
+                <BrandList />
                 <div className="subtitle-container">
                     <h2>|Promocoes</h2>
                     <h3>Ver mais+</h3>

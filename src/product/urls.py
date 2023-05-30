@@ -9,10 +9,12 @@ from .views import (
     BaseInfoDetail,
     CommentList,
     CommentDetail,
+    BrandListView,
 )
 
 urlpatterns = [
     path("api/media/", views.get_media, name="get_media"),
+    path("api/brands/", BrandListView.as_view(), name="brands-list"),
     path(
         "api/category/<str:category>/",
         ProductsByCategoryView.as_view(),

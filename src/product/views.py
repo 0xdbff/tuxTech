@@ -16,6 +16,7 @@ from rest_framework import generics
 from .serializers import CategorySerializer
 from .serializers import BaseInfoSerializer
 from .serializers import CommentSerializer
+from .serializers import BrandSerializer
 
 
 class CategoryList(generics.ListAPIView):
@@ -186,3 +187,7 @@ class CommentDetail(generics.RetrieveDestroyAPIView):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+class BrandListView(generics.ListCreateAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer

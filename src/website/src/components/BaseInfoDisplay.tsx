@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import "../assets/css/baseInfoDisplay.css";
 import { getWebsiteUrl } from "../utils/path";
 
@@ -39,6 +40,33 @@ interface BaseInfoDisplayProps {
 }
 
 const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
+    const [deliveryDate, setDeliveryDate] = useState("");
+
+    useEffect(() => {
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const day = String(tomorrow.getDate()).padStart(2, "0");
+        const monthNames = [
+            "janeiro",
+            "fevereiro",
+            "março",
+            "abril",
+            "maio",
+            "junho",
+            "julho",
+            "agosto",
+            "setembro",
+            "outubro",
+            "novembro",
+            "dezembro",
+        ];
+        const month = monthNames[tomorrow.getMonth()];
+
+        setDeliveryDate(`${day} ${month}`);
+    }, []);
+
     if (!info) {
         return <div>No information available.</div>;
     }
@@ -68,8 +96,11 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
                     <AiFillCheckCircle />
                     Em stock
                 </div>
-                <div className="s3">entrega prevista dia 31/05!</div>
-                <div className="s1">{info.default_variant?.price}</div>
+                <div className="s3">Entrega prevista dia {deliveryDate}!</div>
+                <div className="s1">
+                    {info.default_variant?.price}
+                    {"€"}
+                </div>
             </div>
         </div>
     );
