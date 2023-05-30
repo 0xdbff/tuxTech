@@ -3,7 +3,7 @@ import axios from "axios";
 import ScrollableContainer from "./utils/ScrollableContainer";
 import getAuthHeaders from "../utils/getAuthHeaders";
 import getAccessToken from "../utils/tokenManager";
-import { getWebsiteUrl } from "../utils/path";
+import { getWebsiteUrl, getMediaPath } from "../utils/path";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/categories.css";
 
@@ -64,7 +64,7 @@ const Categories: React.FC = () => {
                             key={`${category.name}-${index}`}
                             onClick={() => navigate(`/products/categories=${category.name}`)}
                         >
-                            <img src={category.image} alt={category.name} />
+                            <img src={getMediaPath(category.image)} alt={" "} />
                             {category.name}
                         </div>
                     ))}
