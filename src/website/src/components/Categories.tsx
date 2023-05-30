@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import "../assets/css/categories.css";
 import axios from "axios";
 import ScrollableContainer from "./utils/ScrollableContainer";
 import getAuthHeaders from "../utils/getAuthHeaders";
 import getAccessToken from "../utils/tokenManager";
 import { getWebsiteUrl } from "../utils/path";
 import { useNavigate } from "react-router-dom";
+import "../assets/css/categories.css";
 
 interface Category {
     name: string;
@@ -32,7 +32,11 @@ const Categories: React.FC = () => {
                     getWebsiteUrl() + "products/api/categories/",
                     { headers: authHeaders }
                 );
-                setCategories(response.data);
+                if (response && response.data) {
+                    setCategories(response.data);
+                } else {
+                    console.error("No categories returned from backend.");
+                }
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
@@ -53,16 +57,17 @@ const Categories: React.FC = () => {
     return (
         <div className="categoriesContainer" ref={containerRef}>
             <ScrollableContainer renderContent={renderCategories}>
-                {categories.map((category, index) => (
-                    <div
-                        className="categoryContainer"
-                        key={`${category.name}-${index}`}
-                        onClick={() => navigate(`/products/categories=${category.name}`)}
-                    >
-                        <img src={category.image} alt={category.name} />
-                        {category.name}
-                    </div>
-                ))}
+                {categories &&
+                    categories.map((category, index) => (
+                        <div
+                            className="categoryContainer"
+                            key={`${category.name}-${index}`}
+                            onClick={() => navigate(`/products/categories=${category.name}`)}
+                        >
+                            <img src={category.image} alt={category.name} />
+                            {category.name}
+                        </div>
+                    ))}
             </ScrollableContainer>
         </div>
     );
