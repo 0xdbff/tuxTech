@@ -121,9 +121,10 @@ const HomeContent: React.FC = () => {
                 </div>
                 <div>
                     <div className="base-info-display">
-                        {baseInfos.map((info, index) => (
-                            <BaseInfoDisplay key={index} info={info} />
-                        ))}
+                        {Array.isArray(baseInfos) &&
+                            baseInfos.map((info, index) => (
+                                <BaseInfoDisplay key={index} info={info} />
+                            ))}
                     </div>
                 </div>
                 <div className="subtitle-container">
@@ -190,9 +191,10 @@ const HomeContent: React.FC = () => {
                 </div>
                 <div>
                     <div className="base-info-display">
-                        {baseInfos.map((info, index) => (
-                            <BaseInfoDisplay key={index} info={info} />
-                        ))}
+                        {Array.isArray(baseInfos) &&
+                            baseInfos.map((info, index) => (
+                                <BaseInfoDisplay key={index} info={info} />
+                            ))}
                     </div>
                 </div>
                 <div className="subtitle-container">
@@ -200,11 +202,11 @@ const HomeContent: React.FC = () => {
                     <h3>Ver mais+</h3>
                 </div>
                 <div>
-                    <div className="base-info-display">
-                        {baseInfos.map((info, index) => (
-                            <BaseInfoDisplay key={index} info={info} />
-                        ))}
-                    </div>
+                <div className="base-info-display">
+    {Array.isArray(baseInfos) && baseInfos.map((info, index) => (
+        <BaseInfoDisplay key={index} info={info} />
+    ))}
+</div>
                 </div>
             </div>
         </div>
