@@ -32,7 +32,7 @@ const Categories: React.FC = () => {
                     getWebsiteUrl() + "products/api/categories/",
                     { headers: authHeaders }
                 );
-                if (response && response.data) {
+                if (response && response.data && Array.isArray(response.data)) {
                     setCategories(response.data);
                 } else {
                     console.error("No categories returned from backend.");
