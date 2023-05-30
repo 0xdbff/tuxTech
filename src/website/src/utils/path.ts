@@ -15,3 +15,9 @@ export const getStaticPath = (relativePath: string) => {
 export const getMediaPath = (relativePath: string) => {
     return getWebsiteUrl() + "media/" + relativePath;
 };
+
+// export const getMediaPath = (django_app_name: string, relativePath: string) => {
+//     return django_app_name
+//         ? getWebsiteUrl() + django_app_name + "/media/" + relativePath
+//         : getWebsiteUrl() + "media/" + relativePath;
+// };

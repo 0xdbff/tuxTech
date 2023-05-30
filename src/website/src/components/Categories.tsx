@@ -58,16 +58,20 @@ const Categories: React.FC = () => {
         <div className="categoriesContainer" ref={containerRef}>
             <ScrollableContainer renderContent={renderCategories}>
                 {categories &&
-                    categories.map((category, index) => (
-                        <div
-                            className="categoryContainer"
-                            key={`${category.name}-${index}`}
-                            onClick={() => navigate(`/products/categories=${category.name}`)}
-                        >
-                            <img src={getMediaPath(category.image)} alt={" "} />
-                            {category.name}
-                        </div>
-                    ))}
+                    categories.map((category, index) => {
+                        return (
+                            <div
+                                className="categoryContainer"
+                                key={`${category.name}-${index}`}
+                                onClick={() =>
+                                    navigate(`/products/categories=${category.name}`)
+                                }
+                            >
+                                <img src={category.image} alt={" "} />
+                                {category.name}
+                            </div>
+                        );
+                    })}
             </ScrollableContainer>
         </div>
     );
