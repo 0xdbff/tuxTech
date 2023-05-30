@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useInterval } from "react-use";
 import axios from "axios";
 import { getWebsiteUrl } from "../utils/path";
+import { useNavigate } from 'react-router-dom';
 
 export interface Brand {
     name: string;
@@ -15,6 +16,7 @@ const BrandList: React.FC = () => {
     const [brands, setBrands] = useState<Brand[]>([]);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
 
     const fetchBrands = async () => {
         try {
@@ -65,7 +67,11 @@ const BrandList: React.FC = () => {
                 .fill(0)
                 .map((_, i) =>
                     brands.map((brand, j) => (
-                        <img key={`logo-${i}-${j}`} src={brand.logo} />
+                        <img
+                            key={`logo-${i}-${j}`}
+                            src={brand.logo}
+                            onClick={() => navigate(`/product/by-brand=${brand.name}`)}
+                        />
                     ))
                 )}
         </div>
@@ -73,3 +79,4 @@ const BrandList: React.FC = () => {
 };
 
 export default BrandList;
+
