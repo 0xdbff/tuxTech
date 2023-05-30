@@ -1,0 +1,12 @@
+version: '3'
+services:
+  nginx:
+    build: .
+    image: nginx-container
+    network_mode: host
+    ports:
+      - "8443:8443"
+    volumes:
+      - /srv/nginx/tuxTech/static:/var/www/TuxTech/static
+      - /srv/nginx/tuxTech/media:/var/www/TuxTech/media
+      - /etc/letsencrypt:/etc/letsencrypt:ro

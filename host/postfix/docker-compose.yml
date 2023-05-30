@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mailserver:
+    image: docker.io/mailserver/docker-mailserver:latest
+    hostname: mail
+    domainname: gldb.dev
+    container_name: mailserver
+    ports:
+      - "25:25"
+      - "143:143"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - maildata:/var/mail
+      - mailstate:/var/mail-state
+      - ./config/:/tmp/docker-mailserver/
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    environment:
+      - SSL_TYPE=letsencrypt
+      - POSTMASTER_ADDRESS=postmaster@gldb.dev
+      - OVERRIDE_HOSTNAME=mail.gldb.dev
+      - DMS_DEBUG=0
+      - ENABLE_DKIM=1
+      - DOVECOT_DEFAULT_PASS_SCHEME=SHA512-CRYPT
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    networks:
+      - dmz-network
+
+networks:
+  dmz-network:
+    external: true
+
+volumes:
+  maildata:
+  mailstate:

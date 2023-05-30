@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd ../src/
+
 rm -rf ./product/migrations/0* && echo "Removed product migrations" || echo "Failed to remove product migrations"
 rm -rf ./cart/migrations/0* && echo "Removed cart migrations" || echo "Failed to remove cart migrations"
 rm -rf ./favourites/migrations/0* && echo "Removed favourites migrations" || echo "Failed to remove favourites migrations"

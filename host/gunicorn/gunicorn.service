@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=db
+Group=www-data
+WorkingDirectory=/srv/nginx/tuxTech/src/
+ExecStart=/srv/nginx/tuxTech/src/venv/bin/gunicorn --access-logfile - --workers 10 --bind 0.0.0.0:8000 storeServer.wsgi:application
+Environment="TUXTECH_MAIL_PASSWD=###CHANGE###"
+
+[Install]
+WantedBy=multi-user.target

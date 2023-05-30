@@ -10,7 +10,7 @@ sudo apt install gdal-bin libgdal-dev libpq-dev python3-dev build-essential post
 sudo apt install certbot python3-certbot-nginx nginx certbot
 
 # Email server
-sudo apt-get install postfix postfix-pgsql dovecot-core dovecot-imapd dovecot-lmtpd dovecot-pgsql certbot
+# sudo apt-get install postfix postfix-pgsql dovecot-core dovecot-imapd dovecot-lmtpd dovecot-pgsql certbot
 
 # Setup postgres (naive)
 sudo -u postgres psql -d postgres -c "CREATE DATABASE djangodev;"
