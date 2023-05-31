@@ -57,14 +57,11 @@ class Variant(models.Model):
         """
         Overriding the save method to ensure only one variant is set as default for each product.
         """
-        # If this variant is being set as the default,
-        # we set is_default to False for all other variants of this product.
         if self.is_default:
             Variant.objects.filter(info=self.info, is_default=True).exclude(
                 pk=self.pk
             ).update(is_default=False)
 
-        # Now we can safely save.
         super(Variant, self).save(*args, **kwargs)
 
     @property

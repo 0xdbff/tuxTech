@@ -1,10 +1,15 @@
 src/website/public/images/
 
 /media/*
+/src/media/*
 !/media/MEDIA_FILES_GOTO_HERE
+!/media/logos/*
+!/src/media/MEDIA_FILES_GOTO_HERE_DEVELOPMENT
 
 /static/*
+/src/static/*
 !/static/STATIC_FILES_GOTO_HERE
+!/src/static/STATIC_FILES_GOTO_HERE_DEVELOPMENT
 
 # globs
 Makefile.in

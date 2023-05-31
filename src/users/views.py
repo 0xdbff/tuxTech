@@ -17,9 +17,14 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class LoginView(APIView):
-    # permission_classes = (permissions.AllowAny,)
+    """
+    A view for user login.
+    """
 
     def post(self, request):
+        """
+        Handle user login.
+        """
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data
@@ -34,24 +39,36 @@ class LoginView(APIView):
 
 
 class ClientRegistrationView(generics.CreateAPIView):
+    """
+    A view for registering new clients.
+    """
+
     serializer_class = ClientSerializer
 
 
 class ClientView(generics.RetrieveUpdateAPIView):
+    """
+    A view for retrieving and updating client information.
+    """
+
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     lookup_field = "id"
 
 
 class AddressCreateView(generics.CreateAPIView):
-    # permission_classes = [IsAuthenticated]
+    """
+    A view for creating new addresses.
+    """
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
 
 class AddressView(generics.RetrieveUpdateAPIView):
-    # permission_classes = [IsAuthenticated]
+    """
+    A view for retrieving and updating addresses.
+    """
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
@@ -59,7 +76,9 @@ class AddressView(generics.RetrieveUpdateAPIView):
 
 
 class AddressDeleteView(generics.DestroyAPIView):
-    # permission_classes = [IsAuthenticated]
+    """
+    A view for deleting addresses.
+    """
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
@@ -67,14 +86,18 @@ class AddressDeleteView(generics.DestroyAPIView):
 
 
 class ListCountriesView(generics.ListAPIView):
-    # permission_classes = [IsAuthenticated]
+    """
+    A view for listing countries.
+    """
 
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 
 
 class ListCitiesView(generics.ListAPIView):
-    # permission_classes = [IsAuthenticated]
+    """
+    A view for listing cities.
+    """
 
     queryset = City.objects.all()
     serializer_class = CitySerializer
@@ -93,17 +116,29 @@ class ListCitiesView(generics.ListAPIView):
 
 
 class CreditCardCreateView(generics.CreateAPIView):
+    """
+    A view for creating new credit cards.
+    """
+
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
 
 
 class CreditCardView(generics.RetrieveUpdateAPIView):
+    """
+    A view for retrieving and updating credit card information.
+    """
+
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
     lookup_field = "id"
 
 
 class CreditDeleteView(generics.DestroyAPIView):
+    """
+    A view for deleting credit cards.
+    """
+
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
     lookup_field = "id"

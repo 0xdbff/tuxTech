@@ -29,7 +29,6 @@ class Unit(models.Model):
         related_name="supply_units",
     )
 
-    # This is simulated, as this will not be used for production atm.
     serial = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):

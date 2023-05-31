@@ -193,5 +193,7 @@ class CommentDetail(generics.RetrieveDestroyAPIView):
 
 
 class BrandListView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
