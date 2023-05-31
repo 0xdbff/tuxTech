@@ -98,7 +98,7 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
                 <div className="s4">{briefDescription}</div>
                 <div className="s4">{briefsku}</div>
                 <div className="s3-1">
-                    <AiFillCheckCircle />
+                    <AiFillCheckCircle style={{ marginRight: "4px" }} />
                     Em stock
                 </div>
                 <div className="s3">Entrega prevista dia {deliveryDate}!</div>

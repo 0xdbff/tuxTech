@@ -5,7 +5,7 @@ import "../assets/css/loginPage.css";
 import { getStaticPath } from "../utils/path";
 
 const LoginPage: React.FC = () => {
-    const logoUrl = getStaticPath("l.svg");
+    const logoUrl = getStaticPath("logo512.png");
 
     return (
         <div>

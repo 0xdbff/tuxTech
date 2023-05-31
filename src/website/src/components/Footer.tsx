@@ -1,12 +1,15 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import "../assets/css/footer.css";
+import { getStaticPath } from "../utils/path";
 
 const Footer: React.FC = () => {
+    const logoUrl = getStaticPath("logo512.png");
+
     return (
         <footer className="footer">
             <div className="footer-content">
-                <h1>TuxTech</h1>
+                <img src={logoUrl} alt=" " className="logo" />
                 <p>
                     TuxTech is your one-stop shop for all your tech needs. We provide a
                     wide range of products from various categories such as computers,

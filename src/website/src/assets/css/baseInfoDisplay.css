@@ -4,52 +4,52 @@
   color: var(--color-gray-32);
   font-size: 13px;
   margin-bottom: 6px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .s3-1 {
-  /* color: var(--color-green); */
-  color: rgba(0, 128, 0, 0.9);
+  color: var(--color-green);
+  /* color: rgba(0, 128, 0, 0.9); */
   font-weight: 600;
   font-size: 13px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin-left: 13px;
+  margin-right: 10px;
 }
 
 .s3 {
-  /* color: var(--color-green); */
-  color: rgba(0, 128, 0, 0.9);
+  color: var(--color-green);
+  /* color: rgba(0, 128, 0, 0.9); */
   font-weight: 400;
   font-size: 13px;
-  margin-left: 6px;
-  margin-left: 13px;
+  margin-left: 30px;
   margin-bottom: 6px;
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .s2 {
   color: var(--color-gray-32);
   font-size: 15px;
   margin-bottom: 6px;
-  margin-left: 6px;
+  margin-left: 10px;
   margin-top: 6px;
   font-weight: 500;
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .s1 {
   color: var(--color-blue);
-  margin-left: 6px;
+  margin-left: 10px;
   font-size: 18px;
   font-weight: bold;
-  margin-right: 6px;
+  margin-right: 10px;
+  margin-bottom: 12px;
 }
 
 .base-info-display {
   /* background-color: var(--color-gray-04); */
-  min-height: 440px;
-  width: 100%;
+  /* height: 450px; */
+  /* width: 100%; */
   position: relative;
   display: flex;
   flex-direction: row;
@@ -65,17 +65,15 @@
   margin-left: 6px;
   margin-right: 6px;
   margin-bottom: 6px;
-  min-height: 440px;
-  max-height: 440px;
-  min-width: 260px;
-  max-width: 260px;
+  height: 446px;
+  width: 260px;
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: var(--color-gray-05);
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .base-info-item {
@@ -91,8 +89,10 @@
 }
 
 .base-info-item img {
-  margin-top: 9px;
-  margin-left: 9px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 6px;
   width: 240px;
   height: 240px;
   border-radius: 20px;

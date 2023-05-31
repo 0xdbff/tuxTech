@@ -63,7 +63,7 @@ const StoreHeader: React.FC<StoreHeaderProps> = () => {
         navigate("/login");
     };
 
-    const logoUrl = getStaticPath("l.svg");
+    const logoUrl = getStaticPath("logo512.png");
 
     const renderDarkModeToggle = () => {
         return (
