@@ -93,7 +93,7 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
     return (
         <div
             className="base-info-container"
-            onClick={() => navigate(`/product/${info.default_variant?.sku}`)}
+            onClick={() => navigate(`/product/${info.ref}`)}
         >
             <div className="base-info-item">
                 {info.thumbnail && (

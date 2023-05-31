@@ -20,9 +20,6 @@ import "../assets/css/brands.css";
 import axios from "axios";
 
 const HomeContent: React.FC = () => {
-    const bannerSrc = "images/amd3.jpg";
-    const banner2Src = "images/a.jpg";
-
     const handleContextMenu = (event: React.MouseEvent) => {
         event.preventDefault();
     };
@@ -52,7 +49,7 @@ const HomeContent: React.FC = () => {
     return (
         <div className="Main">
             <div className="content">
-                <h1> - </h1>
+                <div style={{ height: "80px" }}></div>
                 <Categories />
 
                 <div className="banner">

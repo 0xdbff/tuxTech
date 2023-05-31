@@ -144,7 +144,7 @@ class ProductsByBrandView(View):
 class BaseInfoList(generics.ListCreateAPIView):
     """ """
 
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     queryset = BaseInfo.objects.all()
     serializer_class = BaseInfoSerializer
@@ -153,7 +153,7 @@ class BaseInfoList(generics.ListCreateAPIView):
 class BaseInfoDetail(generics.RetrieveUpdateDestroyAPIView):
     """ """
 
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     queryset = BaseInfo.objects.all()
     serializer_class = BaseInfoSerializer

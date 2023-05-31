@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProductsPage from "./pages/ProductsPage";
-import ProductInfoPage from "./pages/ProductInfo";
+import ProductInfo from "./pages/ProductInfo";
 import { ThemeProvider } from "./contexts/themeContext";
 import withAuth from "./components/utils/withAuth";
 import "./assets/css/App.css";
@@ -12,6 +12,7 @@ const App: React.FC = () => {
     const initialTheme = localStorage.getItem("theme") || "dark";
 
     const AuthenticatedHome = withAuth(Home);
+    // ADD MORE !TODO
 
     document.body.classList.add(
         "no-transition",
@@ -24,7 +25,7 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={<AuthenticatedHome />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/product/:uuid" element={<ProductInfoPage />} />
+                    <Route path="/product/:uuid" element={<ProductInfo />} />
                     <Route path="/products/*" element={<ProductsPage />} />
                 </Routes>
             </ThemeProvider>

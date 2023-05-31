@@ -82,6 +82,9 @@ class Variant(models.Model):
         """ """
         return f"{self.info.Variant._sku_prefix}"
 
+    def __str__(self):
+        return f"{self.name}-{self.info.ref}"
+
     def _calculate_altered_specifications(self):
         """ """
         if self.is_default:
