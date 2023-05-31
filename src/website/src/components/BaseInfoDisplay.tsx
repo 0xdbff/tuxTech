@@ -73,12 +73,17 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
 
     var briefDescription = info.description;
     var briefName = info.name;
+    var briefsku = info.default_variant?.sku;
 
     if (briefDescription.length > 118) {
         var briefDescription = info.description.substring(0, 118) + "...";
     }
-    if (info.name.length > 42) {
-        briefName = info.name.substring(0, 42) + "...";
+    if (info.name.length > 57) {
+        briefName = info.name.substring(0, 56) + "...";
+    }
+
+    if (briefsku && briefsku?.length > 16) {
+        briefsku = info.default_variant?.sku.substring(0, 15);
     }
 
     return (
@@ -91,7 +96,7 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
                 )}
                 <div className="s2">{briefName}</div>
                 <div className="s4">{briefDescription}</div>
-                <div className="s4">{info.default_variant?.sku}</div>
+                <div className="s4">{briefsku}</div>
                 <div className="s3-1">
                     <AiFillCheckCircle />
                     Em stock
