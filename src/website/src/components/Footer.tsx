@@ -9,11 +9,13 @@ const Footer: React.FC = () => {
     return (
         <footer className="footer">
             <div className="footer-content">
-                <img src={logoUrl} alt=" " className="logo" />
-                <p>
-                    TuxTech is your one-stop shop for all your tech needs. We provide a
-                    wide range of products from various categories such as computers,
-                    smartphones, accessories, and much more.
+                <img src={logoUrl} alt=" " className="logoFooter" />
+                <p style={{ lineHeight: "1.5" }}>
+                    A TuxTech é a sua loja de tecnologia.
+                    <br />
+                    Oferecemos uma grande variedade de produtos de várias categorias como
+                    <br />
+                    computadores, smartphones, acessórios e muito mais.
                 </p>
 
                 <div className="social-links">
@@ -46,6 +48,12 @@ const Footer: React.FC = () => {
                         <FaLinkedin />
                     </a>
                 </div>
+            </div>
+            <div className="footer-line">
+                <h2> Academic work </h2>
+                <a className="link" href="https://github.com/Db-Dev2002/tuxTech">
+                    https://github.com/Db-Dev2002/tuxTech
+                </a>
             </div>
         </footer>
     );
