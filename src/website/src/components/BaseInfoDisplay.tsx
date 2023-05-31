@@ -2,8 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "../assets/css/baseInfoDisplay.css";
 import { getWebsiteUrl } from "../utils/path";
+import { useNavigate } from "react-router-dom";
 
 import { AiFillCheckCircle } from "react-icons/ai";
+
 export interface Media {
     id: number;
     name: string;
@@ -24,10 +26,10 @@ export interface BaseInfo {
     name: string;
     ref: string;
     description: string;
-    category: number;
-    subCategory: number;
-    ptype: number;
-    brand: number;
+    category: string;
+    subCategory: string;
+    ptype: string;
+    brand: string;
     date_added: string;
     price_min: number;
     price_max: number;
@@ -41,6 +43,14 @@ interface BaseInfoDisplayProps {
 
 const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
     const [deliveryDate, setDeliveryDate] = useState("");
+    const navigate = useNavigate();
+
+    console.log(info?.subCategory);
+    console.log(info?.name);
+    console.log(info?.ref);
+    console.log(info?.category);
+    console.log(info?.ptype);
+    console.log(info?.description);
 
     useEffect(() => {
         const today = new Date();
@@ -87,7 +97,10 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
     }
 
     return (
-        <div className="base-info-container">
+        <div
+            className="base-info-container"
+            onClick={() => navigate(`/product/${info.default_variant?.sku}`)}
+        >
             <div className="base-info-item">
                 {info.thumbnail && (
                     <div className="base-info-item">

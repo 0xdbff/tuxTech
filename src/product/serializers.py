@@ -63,6 +63,7 @@ class BaseInfoSerializer(serializers.ModelSerializer):
             "name",
             "ref",
             "description",
+            "details",
             "category",
             "subCategory",
             "ptype",

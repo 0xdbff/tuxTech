@@ -23,6 +23,8 @@ class BaseInfo(models.Model):
     """ Product's reference."""
     description = models.TextField(null=False)
     """ Product's description."""
+    details = models.TextField(null=True, editable=True)
+    """ Product's details."""
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, related_name="base_info"
     )

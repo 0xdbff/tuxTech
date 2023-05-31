@@ -37,6 +37,10 @@
   margin-right: 10px;
 }
 
+.s2:hover {
+  color: var(--color-blue);
+}
+
 .s1 {
   color: var(--color-blue);
   margin-left: 10px;
