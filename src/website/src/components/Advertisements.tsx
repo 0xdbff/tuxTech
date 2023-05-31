@@ -68,7 +68,6 @@ const Advertisements: React.FC<AdvertisementsProps> = ({ startingIndex }) => {
                         <AiFillLeftCircle />
                     </button>
                     <img
-                        className="advertisement-image"
                         src={ads[currentAdIndex].advertisement_image}
                         alt={ads[currentAdIndex].ad_text}
                     />
