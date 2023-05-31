@@ -13,8 +13,8 @@ from django.urls import reverse
 class BrandListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Brand.objects.create(name="Intel", logo_type="png", logo="logos/logo512.png")
-        Brand.objects.create(name="AMD", logo_type="png", logo="logos/logo512.png")
+        Brand.objects.create(name="Intel", logo_type="png", logo="logos/logo.png")
+        Brand.objects.create(name="AMD", logo_type="png", logo="logos/logo.png")
         TuxTechUser.objects.create_user("testuser", "test@test.com", "testpassword")
 
     # CLIENT !TODO needs auth headers!
