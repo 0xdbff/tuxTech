@@ -22,7 +22,7 @@ class Variant(models.Model):
     A variant of a product ex Phone with a color.
     """
 
-    ean = models.CharField(max_length=14, unique=True, editable=False)
+    ean = models.CharField(max_length=14, unique=False, editable=True)
     """ """
     sku = models.UUIDField(
         primary_key=True, editable=False, default=generate_unique_sku()

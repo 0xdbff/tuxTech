@@ -8,7 +8,6 @@ from .models import AdvertisementContract
 from .serializers import AdvertisementContractSerializer
 
 
-
 class PromotionApplicationList(APIView):
     """
     API View for PromotionApplication model.
@@ -54,6 +53,7 @@ class PromotionApplicationList(APIView):
             instance.notify_clients()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class AdvertisementContractView(generics.ListAPIView):
     queryset = AdvertisementContract.objects.all()

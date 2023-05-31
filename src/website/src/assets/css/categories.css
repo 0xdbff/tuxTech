@@ -41,6 +41,7 @@
 .categoryContainer img {
   width: 92px;
   height: 92px;
+  margin-bottom: 4px;
   width: auto;
   object-fit: contain;
   display: flex;

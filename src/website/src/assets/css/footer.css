@@ -1,17 +1,26 @@
 @import "./variables.css";
 
 .footer {
-  display: block;
-  position: relative;
-  z-index: 101;
-  background-color: var(--color-gray-14);
-  color: var(--color-fg);
-  text-align: center;
-  padding: 1rem;
-  pointer-events: none;
+  display: flex;
+  min-width: 100vw;
+  background-color: var(--color-gray-02);
+  /* color: #fff; */
+  padding: 20px 0;
 }
 
-/* .footer-visible { */
-/*   opacity: 1; */
-/*   pointer-events: auto; */
-/* } */
+.footer-content {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.social-links a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.social-links a:hover {
+  color: #007bff;
+}
