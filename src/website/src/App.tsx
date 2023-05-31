@@ -24,7 +24,7 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={<AuthenticatedHome />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/product-info/:uuid" element={<ProductInfoPage />} />
+                    <Route path="/product/:uuid" element={<ProductInfoPage />} />
                     <Route path="/products/*" element={<ProductsPage />} />
                 </Routes>
             </ThemeProvider>

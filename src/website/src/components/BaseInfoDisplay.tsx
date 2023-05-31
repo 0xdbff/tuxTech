@@ -26,6 +26,7 @@ export interface BaseInfo {
     name: string;
     ref: string;
     description: string;
+    details: string;
     category: string;
     subCategory: string;
     ptype: string;
@@ -44,13 +45,6 @@ interface BaseInfoDisplayProps {
 const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
     const [deliveryDate, setDeliveryDate] = useState("");
     const navigate = useNavigate();
-
-    console.log(info?.subCategory);
-    console.log(info?.name);
-    console.log(info?.ref);
-    console.log(info?.category);
-    console.log(info?.ptype);
-    console.log(info?.description);
 
     useEffect(() => {
         const today = new Date();
