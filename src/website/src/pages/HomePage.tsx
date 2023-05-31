@@ -90,13 +90,7 @@ const HomeContent: React.FC = () => {
                     <h2> </h2>
                 </div>
                 <div className="banner">
-                    <div
-                        className="non-blurred-background"
-                        style={{
-                            backgroundImage: `url(${banner2Src})`,
-                        }}
-                    ></div>
-                    <img src={banner2Src} alt="Your ad image" />
+                    <Advertisements startingIndex={1} />
                 </div>
                 <div className="subtitle-container">
                     <h2>|Top vendas</h2>

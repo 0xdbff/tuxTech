@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getWebsiteUrl } from "../utils/path";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 
 interface AdvertisementsProps {
     startingIndex: number;
@@ -57,17 +58,27 @@ const Advertisements: React.FC<AdvertisementsProps> = ({ startingIndex }) => {
     };
 
     return (
-        <div>
+        <div className="banner">
             {ads.length > 0 && currentAdIndex < ads.length ? (
-                <div>
-                    <button onClick={prevAd}>Previous</button>
+                <>
+                    <button
+                        className="scroll-button scroll-button--left"
+                        onClick={prevAd}
+                    >
+                        <AiFillLeftCircle />
+                    </button>
                     <img
+                        className="advertisement-image"
                         src={ads[currentAdIndex].advertisement_image}
                         alt={ads[currentAdIndex].ad_text}
                     />
-                    <p>{ads[currentAdIndex].ad_text}</p>
-                    <button onClick={nextAd}>Next</button>
-                </div>
+                    <button
+                        className="scroll-button scroll-button--right"
+                        onClick={nextAd}
+                    >
+                        <AiFillRightCircle />
+                    </button>
+                </>
             ) : (
                 <p>No advertisements available</p>
             )}
