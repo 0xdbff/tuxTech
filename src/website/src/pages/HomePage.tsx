@@ -13,13 +13,13 @@ import { getWebsiteUrl } from "../utils/path";
 import getAuthHeaders from "../utils/getAuthHeaders";
 import BrandList from "../components/ListBrands";
 import Advertisements from "../components/Advertisements";
-import withAuth from "../utils/getAuthHeaders";
 
 import "../assets/css/brands.css";
 
 import axios from "axios";
 
 const HomeContent: React.FC = () => {
+    const authHeaders = getAuthHeaders();
     const handleContextMenu = (event: React.MouseEvent) => {
         event.preventDefault();
     };
@@ -29,7 +29,7 @@ const HomeContent: React.FC = () => {
         try {
             const response = await axios.get(
                 getWebsiteUrl() + "products/api/base_info/",
-                { headers: getAuthHeaders() }
+                { headers: authHeaders }
             );
             setBaseInfos(response.data);
         } catch (error) {
@@ -82,9 +82,6 @@ const HomeContent: React.FC = () => {
                                 <BaseInfoDisplay key={index} info={info} />
                             ))}
                     </div>
-                </div>
-                <div className="subtitle-container">
-                    <h2> </h2>
                 </div>
                 <div className="banner">
                     <Advertisements startingIndex={1} />

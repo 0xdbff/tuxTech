@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, mixins
 from .models import Order
 from .serializers import OrderSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class OrderListView(generics.GenericAPIView, mixins.ListModelMixin):
@@ -14,6 +15,7 @@ class OrderListView(generics.GenericAPIView, mixins.ListModelMixin):
         get_queryset: Filters the orders related to the authenticated user.
         get: Handles the GET requests.
     """
+    permission_classes = [IsAuthenticated]
 
     serializer_class = OrderSerializer
 
@@ -42,6 +44,8 @@ class OrderListView(generics.GenericAPIView, mixins.ListModelMixin):
 class OrderCreateUpdateView(
     generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin
 ):
+    permission_classes = [IsAuthenticated]
+
     """Handles requests for creating and updating orders.
 
     Attributes:

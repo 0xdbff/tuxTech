@@ -6,9 +6,12 @@ from .models import PromotionApplication
 from .serializers import PromotionApplicationSerializer
 from .models import AdvertisementContract
 from .serializers import AdvertisementContractSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class PromotionApplicationList(APIView):
+    permission_classes = [IsAuthenticated]
+
     """
     API View for PromotionApplication model.
     Handles GET and POST requests.
@@ -56,5 +59,7 @@ class PromotionApplicationList(APIView):
 
 
 class AdvertisementContractView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+
     queryset = AdvertisementContract.objects.all()
     serializer_class = AdvertisementContractSerializer

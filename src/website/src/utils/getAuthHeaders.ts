@@ -1,5 +1,7 @@
+import getAccessToken from "./tokenManager";
+
 const getAuthHeaders = () => {
-    const accessToken = localStorage.getItem("access");
+    const accessToken = getAccessToken();
     return {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,

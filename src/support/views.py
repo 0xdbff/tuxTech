@@ -1,6 +1,7 @@
 from rest_framework import generics
 from .models import Support
 from .serializers import SupportSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class SupportListView(generics.ListCreateAPIView):
@@ -10,6 +11,7 @@ class SupportListView(generics.ListCreateAPIView):
     get: Return a list of all the existing support tickets related to the logged-in client.
     post: Create a new support ticket.
     """
+    permission_classes = [IsAuthenticated]
 
     serializer_class = SupportSerializer
 
@@ -27,6 +29,7 @@ class SupportDetailView(generics.RetrieveUpdateDestroyAPIView):
     patch: Partially update a specific support ticket.
     delete: Delete a specific support ticket.
     """
+    permission_classes = [IsAuthenticated]
 
     queryset = Support.objects.all()
     serializer_class = SupportSerializer

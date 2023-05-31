@@ -26,12 +26,11 @@ const getAccessToken = async (): Promise<string | null> => {
 
     try {
         const response = await axios.post(
-            getWebsiteUrl()+"users/api/refresh_token/",
+            getWebsiteUrl() + "users/api/refresh_token/",
             {
                 refresh: refreshToken,
             }
         );
-
         const newAccessToken = response.data.access;
         localStorage.setItem("access", newAccessToken);
         return newAccessToken;

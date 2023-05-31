@@ -14,6 +14,7 @@ from .serializers import (
 )
 from cities.models import Country, City
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 
 class LoginView(APIView):
@@ -51,6 +52,8 @@ class ClientView(generics.RetrieveUpdateAPIView):
     A view for retrieving and updating client information.
     """
 
+    permission_classes = [IsAuthenticated]
+
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     lookup_field = "id"
@@ -61,6 +64,8 @@ class AddressCreateView(generics.CreateAPIView):
     A view for creating new addresses.
     """
 
+    permission_classes = [IsAuthenticated]
+
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
@@ -69,6 +74,8 @@ class AddressView(generics.RetrieveUpdateAPIView):
     """
     A view for retrieving and updating addresses.
     """
+
+    permission_classes = [IsAuthenticated]
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
@@ -80,6 +87,8 @@ class AddressDeleteView(generics.DestroyAPIView):
     A view for deleting addresses.
     """
 
+    permission_classes = [IsAuthenticated]
+
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
     lookup_field = "id"
@@ -90,6 +99,8 @@ class ListCountriesView(generics.ListAPIView):
     A view for listing countries.
     """
 
+    permission_classes = [IsAuthenticated]
+
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 
@@ -98,6 +109,8 @@ class ListCitiesView(generics.ListAPIView):
     """
     A view for listing cities.
     """
+
+    permission_classes = [IsAuthenticated]
 
     queryset = City.objects.all()
     serializer_class = CitySerializer
@@ -120,6 +133,8 @@ class CreditCardCreateView(generics.CreateAPIView):
     A view for creating new credit cards.
     """
 
+    permission_classes = [IsAuthenticated]
+
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
 
@@ -128,6 +143,8 @@ class CreditCardView(generics.RetrieveUpdateAPIView):
     """
     A view for retrieving and updating credit card information.
     """
+
+    permission_classes = [IsAuthenticated]
 
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
@@ -138,6 +155,8 @@ class CreditDeleteView(generics.DestroyAPIView):
     """
     A view for deleting credit cards.
     """
+
+    permission_classes = [IsAuthenticated]
 
     queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer

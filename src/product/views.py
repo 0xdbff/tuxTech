@@ -24,6 +24,7 @@ class CategoryList(generics.ListAPIView):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
     permission_classes = [IsAuthenticated]
 
 

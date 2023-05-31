@@ -6,7 +6,6 @@ import getAuthHeaders from "../utils/getAuthHeaders";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import StoreHeader from "../components/Header";
-
 import "../assets/css/productInfo.css";
 
 import { BaseInfo, DefaultVariant, Media } from "../components/BaseInfoDisplay";
