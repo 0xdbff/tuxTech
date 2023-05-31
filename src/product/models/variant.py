@@ -12,7 +12,7 @@ def generate_unique_sku():
 class VariantManager(models.Manager):
     def set_default_variant(self, variant):
         with transaction.atomic():
-            self.filter(is_default=True).update(is_default=False)
+            self.filter(info=variant.info, is_default=True).update(is_default=False)
             variant.is_default = True
             variant.save()
 
@@ -54,12 +54,12 @@ class Variant(models.Model):
     """ """
 
     def save(self, *args, **kwargs):
-        """ """
         self._calculate_altered_specifications()
 
-        if self.is_default:
-            Variant.objects.exclude(pk=self.pk).update(is_default=False)
         super().save(*args, **kwargs)
+
+        if self.is_default:
+            Variant.objects.set_default_variant(self)
 
     @property
     def stock(self):
