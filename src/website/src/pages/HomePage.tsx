@@ -82,6 +82,7 @@ const HomeContent: React.FC = () => {
                             ))}
                     </div>
                 </div>
+                <div style={{ height: "20px" }}></div>
                 <div className="banner">
                     <Advertisements startingIndex={1} />
                 </div>

@@ -14,7 +14,6 @@ const ProductInfo: React.FC = () => {
     const navigate = useNavigate();
     const { uuid } = useParams<{ uuid?: string }>();
 
-    console.log(uuid);
     const [productInfo, setProductInfo] = useState<BaseInfo | null>(null);
 
     const fetchData = async (sku: string) => {
@@ -49,9 +48,9 @@ const ProductInfo: React.FC = () => {
         const lines = details.split("\n").filter(Boolean);
         return lines.map((line: string, index: number) => {
             if (line === line.toUpperCase()) {
-                return <h3 key={index}>{line}</h3>;
+                return <div className="s2-2">{line}</div>;
             } else {
-                return line.trim();
+                return <div style={{ lineHeight: "1.2" }}>{line.trim()}</div>;
             }
         });
     };
@@ -94,11 +93,16 @@ const ProductInfo: React.FC = () => {
                     </a>
                 </div>
                 <div className="productInfoHeader">Header</div>
-                <h2>{productInfo.name}</h2>
-                {thumbnailUrl && <img src={thumbnailUrl} alt={productInfo.name} />}
-                <p>{productInfo.description}</p>
-                {price && <p>Price: {price}€</p>}
-                {processDetails(productInfo.details)}
+                <div className="productInfoInnerContainer">
+                    <div className="productInfoDescription">
+                        <div className="s1">{productInfo.name}</div>
+                        {thumbnailUrl && <img src={thumbnailUrl} alt={productInfo.name} />}
+                        <p>{productInfo.description}</p>
+                        {price && <p>Price: {price}€</p>}
+                        {processDetails(productInfo.details)}
+                    </div>
+                    <div className="productInfoBuy">hi</div>
+                </div>
             </div>
         </div>
     );
