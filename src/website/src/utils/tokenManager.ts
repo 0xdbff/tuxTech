@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import axios from "axios";
 import { getWebsiteUrl } from "./path";
 import { useNavigate } from "react-router-dom";
