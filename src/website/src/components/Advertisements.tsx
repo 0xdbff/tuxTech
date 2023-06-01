@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getWebsiteUrl } from "../utils/path";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import getAuthHeaders from "../utils/getAuthHeaders";
 
 interface AdvertisementsProps {
     startingIndex: number;
@@ -24,7 +25,8 @@ const Advertisements: React.FC<AdvertisementsProps> = ({ startingIndex }) => {
         const fetchAds = async () => {
             try {
                 const response = await axios.get(
-                    getWebsiteUrl() + "store/api/advertisements/"
+                    getWebsiteUrl() + "store/api/advertisements/",
+                    { headers: await getAuthHeaders() }
                 );
                 setAds(response.data);
             } catch (error) {

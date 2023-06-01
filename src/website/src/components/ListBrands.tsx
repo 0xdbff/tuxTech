@@ -3,6 +3,7 @@ import { useInterval } from "react-use";
 import axios from "axios";
 import { getWebsiteUrl } from "../utils/path";
 import { useNavigate } from "react-router-dom";
+import getAuthHeaders from "../utils/getAuthHeaders";
 
 export interface Brand {
     name: string;
@@ -20,7 +21,10 @@ const BrandList: React.FC = () => {
 
     const fetchBrands = async () => {
         try {
-            const response = await axios.get(getWebsiteUrl() + "products/api/brands");
+            const response = await axios.get(
+                getWebsiteUrl() + "products/api/brands",
+                { headers: await getAuthHeaders() }
+            );
             setBrands(response.data);
         } catch (error) {
             console.log(error);
