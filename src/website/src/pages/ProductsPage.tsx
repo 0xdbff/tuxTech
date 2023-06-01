@@ -22,15 +22,13 @@ const ProductsPage: React.FC = () => {
                     console.error("Unauthorized!");
                     return;
                 }
-                const authHeaders = getAuthHeaders();
-
                 let url = getWebsiteUrl() + "products/api/products/";
                 if (categories) {
                     url += `?categories=${categories}`;
                 }
 
                 const response = await axios.get<Product[]>(url, {
-                    headers: authHeaders,
+                    headers: await getAuthHeaders(),
                 });
                 setProducts(response.data);
             } catch (error) {
@@ -43,8 +41,8 @@ const ProductsPage: React.FC = () => {
 
     return (
         <div className="products">
-        <h1>Products</h1>
-        
+            <h1>Products</h1>
+
             {products.map((product, index) => (
                 <div key={index}>{/* Render your product data here */}</div>
             ))}

@@ -30,7 +30,7 @@ const Categories: React.FC = () => {
 
                 const response = await axios.get<Category[]>(
                     getWebsiteUrl() + "products/api/categories/",
-                    { headers: authHeaders }
+                    { headers: await getAuthHeaders() }
                 );
                 if (response && response.data && Array.isArray(response.data)) {
                     setCategories(response.data);

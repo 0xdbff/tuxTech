@@ -19,7 +19,6 @@ import "../assets/css/brands.css";
 import axios from "axios";
 
 const HomeContent: React.FC = () => {
-    const authHeaders = getAuthHeaders();
     const handleContextMenu = (event: React.MouseEvent) => {
         event.preventDefault();
     };
@@ -29,7 +28,7 @@ const HomeContent: React.FC = () => {
         try {
             const response = await axios.get(
                 getWebsiteUrl() + "products/api/base_info/",
-                { headers: authHeaders }
+                { headers: await getAuthHeaders() }
             );
             setBaseInfos(response.data);
         } catch (error) {

@@ -23,7 +23,7 @@ const ProductInfo: React.FC = () => {
         try {
             const response = await axios.get(
                 `${getWebsiteUrl()}products/api/${sku}/`,
-                { headers: getAuthHeaders() }
+                { headers: await getAuthHeaders() }
             );
             console.log(response);
             setProductInfo(response.data);
