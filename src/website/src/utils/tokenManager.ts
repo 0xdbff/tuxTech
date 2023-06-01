@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getWebsiteUrl } from "./path";
+import { useNavigate } from "react-router-dom";
 
 const isTokenExpired = (token: string): boolean => {
     try {
@@ -13,10 +14,12 @@ const isTokenExpired = (token: string): boolean => {
 };
 
 const getAccessToken = async (): Promise<string | null> => {
+    const navigate = useNavigate();
     const refreshToken = localStorage.getItem("refresh");
     const accessToken = localStorage.getItem("access");
 
     if (!accessToken || !refreshToken) {
+        navigate("/login");
         return null;
     }
 

@@ -79,11 +79,11 @@ const BaseInfoDisplay: React.FC<BaseInfoDisplayProps> = ({ info }) => {
     var briefName = info.name;
     var briefsku = info.default_variant?.sku;
 
-    if (briefDescription.length > 102) {
-        var briefDescription = info.description.substring(0, 101) + "...";
+    if (briefDescription.length > 94) {
+        var briefDescription = info.description.substring(0, 93) + "...";
     }
-    if (info.name.length > 57) {
-        briefName = info.name.substring(0, 56) + "...";
+    if (info.name.length > 51) {
+        briefName = info.name.substring(0, 50) + "...";
     }
 
     if (briefsku && briefsku?.length > 16) {
